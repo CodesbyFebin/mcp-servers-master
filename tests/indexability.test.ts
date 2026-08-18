@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { isPublicIndexable } from "@/src/lib/indexability"
+import { isPublicIndexable } from "../src/lib/indexability"
 
 describe("isPublicIndexable", () => {
   const evidence = [{
