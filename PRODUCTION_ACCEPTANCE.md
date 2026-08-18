@@ -1,32 +1,37 @@
 # MCPserver.in — Production Acceptance
 
-Status: **HOLD — production candidate is gate-backed, release is not yet frozen**
+Status: **RELEASE-READY / DOMAIN CUTOVER PENDING**
 
 ## Source identity
 
 - Repository: `CodesbyFebin/mcp-servers-master`
 - Branch: `feat/consolidation-foundation`
-- Candidate commit: `fdbfd45061e506ae607643275f8b00186615aab3`
+- Verified implementation baseline: `a537626f11284b363c7d1f4db2562ba24c562ec3`
 - Pull request: `#1`
+- Dependency lockfile: committed (`package-lock.json`, lockfile v3)
+- CI install mode: `npm ci`
+
+The commit containing this report is documentation-only relative to the verified implementation baseline. A final merge must still require the same production gate to remain green.
 
 ## Deployment identity
 
 - Vercel project: `projects555/mcp-servers-master`
 - Vercel project id: `prj_SsBgiKdLvyavXiTY6pxCfj2wOUDi`
-- Candidate deployment id: `dpl_FKXVbWZ5aHVvUNM7q9NkVSDC9gEg`
-- Candidate deployment URL: `https://mcp-servers-master-bqopnoflj-projects555.vercel.app`
+- Verified baseline deployment id: `dpl_7LhXaBQqTLRreDGe2JhNQUzWjzbT`
+- Verified baseline deployment URL: `https://mcp-servers-master-5nsumimjz-projects555.vercel.app`
 - Deployment state: `READY`
 - Deployment target: preview (`target: null`), not production
 
 ## Gate evidence
 
-Vercel cloned commit `fdbfd45` and executed the configured build command:
+GitHub Actions executed the lockfile-backed workflow on the verified baseline and completed successfully:
 
 ```text
+npm ci
 npm run production:gate
 ```
 
-The gate executed:
+The production gate executes:
 
 ```text
 npm run verify:preflight
@@ -35,7 +40,7 @@ npm test
 npm run build
 ```
 
-Observed results:
+Observed results across the gate-backed candidate lineage:
 
 - `PRODUCTION PREFLIGHT: PASS`
 - Canonical origin: `https://www.mcpserver.in`
@@ -44,17 +49,13 @@ Observed results:
 - Vitest: 5 tests PASS
 - Next.js production compilation: PASS
 - Static generation: 20/20 pages PASS
-- Deployment: completed
+- Vercel deployment: READY
 
-Observed Vercel build versions:
-
-- Next.js: `16.3.1`
-- Vitest: `4.1.11`
-- Turbopack build
+The lockfile freezes dependency resolution for reproducible `npm ci` installs. Node is pinned to major version 24 in `package.json` and GitHub Actions.
 
 ## Generated public route surface
 
-The gate-backed build emitted:
+The gate-backed build emits:
 
 - `/`
 - `/docs`
@@ -110,34 +111,23 @@ The same predicate drives the server directory, server static params, sitemap en
 
 The first 8 public records were migrated from the existing `MCP-SERVER` Official MCP Registry snapshot dated `2026-08-15`. Each migrated record carries an explicit registry evidence record. This acceptance report does **not** claim that those sources were freshly re-fetched during this consolidation run.
 
-## Release blockers
+## Remaining external release work
 
-### B1 — Dependency lockfile not committed
+### R1 — Production domain cutover
 
-`package-lock.json` is not yet committed. The Vercel build resolved semver ranges to Next.js `16.3.1` and Vitest `4.1.11`, demonstrating that dependency resolution is not frozen by the repository alone.
-
-Exit criteria:
-
-- generate `package-lock.json` from the candidate `package.json`
-- commit it
-- change CI install to `npm ci`
-- run the full production gate again against that exact lockfile-backed SHA
-
-### B2 — Production domain cutover not executed
-
-This deployment is a preview (`target: null`). This report does not claim that `www.mcpserver.in` is currently served by this repository or deployment.
+The verified deployment is a preview (`target: null`). This report does not claim that `www.mcpserver.in` is currently served by this repository or deployment.
 
 Exit criteria:
 
 - merge the final green PR to `main`
-- deploy the exact lockfile-backed merge SHA to the production Vercel project
-- bind `www.mcpserver.in` as the primary domain
+- allow Vercel to deploy the exact merge result as production
+- bind or confirm `www.mcpserver.in` as the primary production domain
 - ensure `mcpserver.in` redirects in one hop to the matching `https://www.mcpserver.in` path
-- validate the public origin after DNS/domain stabilization
+- validate the public origin after domain/DNS stabilization
 
-### B3 — Protected preview prevents direct unauthenticated sitemap-body acceptance
+### R2 — Public-origin sitemap acceptance
 
-The protected Vercel preview can be fetched through authenticated tooling for HTML validation, but direct sitemap requests encountered the Vercel SSO protection layer. The build proves `/sitemap.xml` is generated; production cutover acceptance must additionally fetch and validate its actual body from the public production origin.
+The protected preview proves `/sitemap.xml` is generated at build time, but direct unauthenticated sitemap-body requests can be intercepted by Vercel preview protection. After cutover, fetch the public production sitemap and verify every URL is a 200, self-canonical, indexable `www.mcpserver.in` URL.
 
 ## Explicitly not claimed
 
@@ -153,7 +143,7 @@ This report does not claim:
 - formal security certification
 - DPDP/RBI/SOC 2 compliance
 - uptime or latency guarantees
-- production-domain cutover
+- completed production-domain cutover
 
 ## Current gate summary
 
@@ -162,21 +152,22 @@ This report does not claim:
 | Source branch identity | PASS |
 | Canonical architecture | PASS |
 | Evidence/indexability contract | PASS |
+| Dependency lockfile | PASS |
+| Exact reproducible install (`npm ci`) | PASS |
 | Preflight | PASS |
 | TypeScript | PASS |
 | Unit tests | PASS |
 | Next.js build | PASS |
+| GitHub Actions production gate | PASS |
 | Vercel preview deployment | PASS |
 | Preview noindex | PASS |
 | Raw HTML crawlability | PASS |
 | Security header baseline | PASS |
-| Dependency lockfile | **FAIL / BLOCKER** |
-| Exact reproducible install (`npm ci`) | **FAIL / BLOCKER** |
-| Production domain cutover | **NOT EXECUTED** |
+| Production domain cutover | **PENDING** |
 | Public production sitemap body verification | **PENDING CUTOVER** |
 
 ## Overall
 
-**HOLD — not yet 100/100 implementation readiness.**
+**RELEASE-READY — repository and preview gates pass. Production certification remains pending domain cutover and public-origin acceptance.**
 
-The candidate is technically coherent and gate-backed. Release certification requires a committed lockfile followed by a fresh green gate on that exact SHA, then production-domain cutover and public-origin acceptance.
+This is an implementation-readiness statement only. It is not a ranking, indexing, performance, compliance, or AI-citation guarantee.
