@@ -17,7 +17,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 24
-      - name: Install dependencies
-        run: npm install
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci
       - name: Run production gate
         run: npm run production:gate
