@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { canonicalUrl, isCanonicalProductionUrl, normalizePath, SITE } from "@/src/config/site"
+import { canonicalUrl, isCanonicalProductionUrl, normalizePath, SITE } from "../src/config/site"
 
 describe("canonical URL contract", () => {
   it("locks the canonical production origin", () => {
