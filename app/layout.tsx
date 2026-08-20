@@ -51,15 +51,29 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           <nav className="container" aria-label="Primary navigation">
             <Link className="brand" href="/">MCPserver.in</Link>
             <Link href="/servers">Servers</Link>
+            <Link href="/categories">Categories</Link>
+            <Link href="/capabilities">Capabilities</Link>
             <Link href="/docs">Docs</Link>
             <Link href="/learn">Learn</Link>
-            <Link href="/methodology">Methodology</Link>
             <Link href="/evidence">Evidence</Link>
           </nav>
         </header>
         <main id="main" className="container">{children}</main>
         <footer>
-          <div className="container">Evidence first. Unknown remains unknown.</div>
+          <div className="container">
+            <p>Evidence first. Unknown remains unknown.</p>
+            <nav aria-label="Trust and policy navigation">
+              <Link href="/methodology">Methodology</Link>{" · "}
+              <Link href="/editorial-policy">Editorial policy</Link>{" · "}
+              <Link href="/security">Security</Link>{" · "}
+              <Link href="/about">About</Link>
+            </nav>
+            <p>
+              <a href="/registry.json">Public registry JSON</a>{" · "}
+              <a href="/llms.txt">llms.txt</a>{" · "}
+              <a href="/llms-full.txt">llms-full.txt</a>
+            </p>
+          </div>
         </footer>
         <script
           type="application/ld+json"
