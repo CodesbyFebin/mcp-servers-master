@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import Link from "next/link"
 
 export const metadata: Metadata = {
   title: "Verification Methodology",
@@ -21,9 +22,14 @@ export default function MethodologyPage() {
       <h2>3. Verify</h2>
       <p>Evidence records capture the source type, status, capture date, and the fact being supported. Unsupported fields remain unknown.</p>
       <h2>4. Publish</h2>
-      <p>Only records that satisfy the shared indexability predicate can appear in public server listings, server profiles, the sitemap, and machine-readable discovery routes.</p>
+      <p>Only records for which <code>isServerIndexable()</code> returns true can appear in the public registry cohort. That cohort feeds visible server profiles, aggregate discovery, static params, sitemap entity entries, and machine-readable resources.</p>
       <h2>5. Review and retire</h2>
       <p>When evidence becomes stale, contradictory, unavailable, or superseded, the record can be moved back to review or retired rather than silently retaining a claim.</p>
+
+      <h2>Public graph consistency</h2>
+      <p>The sitemap, <a href="/registry.json">public registry JSON</a>, <a href="/llms.txt">llms.txt</a>, and <a href="/llms-full.txt">llms-full.txt</a> must not independently decide which server entities are public.</p>
+
+      <p><Link href="/evidence">Read the evidence policy</Link> · <Link href="/editorial-policy">Read the editorial policy</Link></p>
     </>
   )
 }
