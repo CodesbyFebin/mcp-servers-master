@@ -1,0 +1,6 @@
+FROM node:24-alpine
+WORKDIR /srv
+COPY infra/health-service.mjs ./health-service.mjs
+USER node
+EXPOSE 3000
+CMD ["node", "health-service.mjs"]
