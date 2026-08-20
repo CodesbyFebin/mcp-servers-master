@@ -2,9 +2,9 @@ name: Production Gate
 
 on:
   pull_request:
-    branches: [main]
-  push:
     branches: [main, feat/consolidation-foundation]
+  push:
+    branches: [main, feat/**]
 
 permissions:
   contents: read
