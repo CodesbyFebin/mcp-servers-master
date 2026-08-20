@@ -3,22 +3,24 @@ import Link from "next/link"
 import "./globals.css"
 import { SITE } from "@/src/config/site"
 
+const siteTitle = "MCPserver.in — Evidence-backed MCP knowledge graph"
+const siteDescription =
+  "Discover Model Context Protocol servers through a public knowledge graph with explicit provenance, verification state, and evidence-backed technical details."
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.origin),
   title: {
-    default: "MCPserver.in — Evidence-backed MCP server directory",
+    default: siteTitle,
     template: "%s | MCPserver.in",
   },
-  description:
-    "Discover Model Context Protocol servers with explicit provenance, verification state, and evidence-backed technical details.",
+  description: siteDescription,
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     siteName: SITE.name,
     url: SITE.origin,
-    title: "MCPserver.in — Evidence-backed MCP server directory",
-    description:
-      "Discover Model Context Protocol servers with explicit provenance, verification state, and evidence-backed technical details.",
+    title: siteTitle,
+    description: siteDescription,
   },
   robots: { index: true, follow: true },
 }
@@ -37,6 +39,7 @@ const organization = {
       "@id": `${SITE.origin}/#website`,
       url: `${SITE.origin}/`,
       name: SITE.name,
+      description: siteDescription,
       publisher: { "@id": `${SITE.origin}/#organization` },
     },
   ],
