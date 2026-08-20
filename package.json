@@ -1,0 +1,28 @@
+{
+  "name": "mcp-servers-master",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": "24.x"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "verify:preflight": "node scripts/production-gate.mjs",
+    "build": "next build",
+    "production:gate": "npm run verify:preflight && npm run typecheck && npm test && npm run build"
+  },
+  "dependencies": {
+    "next": "^16.2.10",
+    "react": "^19.0.1",
+    "react-dom": "^19.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.14.0",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "typescript": "~5.8.2",
+    "vitest": "^4.1.10"
+  }
+}

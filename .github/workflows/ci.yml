@@ -1,0 +1,24 @@
+name: Production Gate
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main, feat/consolidation-foundation]
+
+permissions:
+  contents: read
+
+jobs:
+  production-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci
+      - name: Run production gate
+        run: npm run production:gate
