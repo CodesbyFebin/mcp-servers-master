@@ -1,5 +1,5 @@
 import { serverRecords, type ServerRecord } from "../data/servers"
-import { isPublicIndexable } from "./indexability"
+import { isPublicIndexable, ledgerCounts } from "./indexability"
 
 export type RegistrySnapshot = readonly ServerRecord[]
 
@@ -20,6 +20,10 @@ export function getPublicServerBySlug(slug: string): ServerRecord | null {
 
 export function getPublicServerSlugs(): string[] {
   return getPublicServers().map((server) => server.slug)
+}
+
+export function getRegistryLedgerCounts() {
+  return ledgerCounts(serverRecords)
 }
 
 export function getPublicServerCategories(): Array<{ name: string; count: number }> {
