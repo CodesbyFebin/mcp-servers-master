@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { isPublicIndexable } from "../src/lib/indexability"
+import { isServerIndexable } from "../src/lib/indexability"
 import {
   STATIC_PUBLIC_NODES,
   getPublicGraphNodes,
@@ -26,7 +26,7 @@ describe("public knowledge graph manifest", () => {
 
   it("never emits a non-indexable server node", () => {
     expect(
-      getPublicServerNodes().every((node) => node.server && isPublicIndexable(node.server)),
+      getPublicServerNodes().every((node) => node.server && isServerIndexable(node.server)),
     ).toBe(true)
   })
 
