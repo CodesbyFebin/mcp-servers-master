@@ -18,6 +18,9 @@ export const STATIC_PUBLIC_NODES: readonly PublicGraphNode[] = [
   { kind: "page", path: "/learn", label: "Learn" },
   { kind: "page", path: "/methodology", label: "Methodology" },
   { kind: "page", path: "/evidence", label: "Evidence policy" },
+  { kind: "page", path: "/editorial-policy", label: "Editorial policy" },
+  { kind: "page", path: "/security", label: "Security baseline" },
+  { kind: "page", path: "/about", label: "About" },
 ]
 
 export function getPublicServerNodes(): PublicGraphNode[] {
