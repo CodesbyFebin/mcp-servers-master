@@ -12,6 +12,14 @@ export function proxy(request: NextRequest) {
     return NextResponse.redirect(target, 308)
   }
 
+  if (host === "app.mcpserver.in") {
+    const response = NextResponse.redirect(new URL("/", SITE.origin), 307)
+    response.headers.set("X-Robots-Tag", "noindex, nofollow")
+    response.headers.set("X-MCP-App-Status", "foundation")
+    response.headers.set("Cache-Control", "no-store")
+    return response
+  }
+
   const response = NextResponse.next()
 
   if (host.endsWith(".vercel.app")) {
