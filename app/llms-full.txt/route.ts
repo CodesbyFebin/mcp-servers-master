@@ -1,9 +1,8 @@
 import { SITE, canonicalUrl } from "@/src/config/site"
-import { serverRecords } from "@/src/data/servers"
-import { isPublicIndexable } from "@/src/lib/indexability"
+import { getPublicServers } from "@/src/lib/registry"
 
 export function GET() {
-  const servers = serverRecords.filter(isPublicIndexable)
+  const servers = getPublicServers()
   const lines = [
     `# ${SITE.name} — Published MCP Server Evidence`,
     "",
