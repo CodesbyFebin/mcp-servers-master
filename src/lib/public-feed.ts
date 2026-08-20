@@ -10,7 +10,7 @@ export function buildPublicRegistrySnapshot() {
     schemaVersion: PUBLIC_REGISTRY_SCHEMA_VERSION,
     canonicalOrigin: SITE.origin,
     publicationPolicy: {
-      authority: "isPublicIndexable",
+      authority: "isServerIndexable",
       failClosed: true,
       rule: "published + verified + qualifying evidence + !noindex",
     },
