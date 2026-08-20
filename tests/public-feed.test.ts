@@ -17,7 +17,7 @@ describe("public registry JSON snapshot", () => {
     const snapshot = buildPublicRegistrySnapshot() as Record<string, unknown>
     expect("generatedAt" in snapshot).toBe(false)
     expect(snapshot.publicationPolicy).toEqual({
-      authority: "isPublicIndexable",
+      authority: "isServerIndexable",
       failClosed: true,
       rule: "published + verified + qualifying evidence + !noindex",
     })
