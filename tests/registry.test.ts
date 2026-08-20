@@ -2,6 +2,8 @@ import { describe, expect, it } from "vitest"
 import { serverRecords } from "../src/data/servers"
 import { isPublicIndexable } from "../src/lib/indexability"
 import {
+  getPublicCapabilityFacets,
+  getPublicCategoryFacets,
   getPublicServerCategories,
   getPublicServerBySlug,
   getPublicServers,
@@ -47,5 +49,16 @@ describe("canonical public registry", () => {
   it("derives category counts from the public cohort", () => {
     const total = getPublicServerCategories().reduce((sum, category) => sum + category.count, 0)
     expect(total).toBe(getPublicServers().length)
+  })
+
+  it("keeps category and capability facet references inside the public cohort", () => {
+    const publicSlugs = new Set(getPublicServers().map((server) => server.slug))
+    const referencedSlugs = [
+      ...getPublicCategoryFacets(),
+      ...getPublicCapabilityFacets(),
+    ].flatMap((facet) => facet.servers.map((server) => server.slug))
+
+    expect(referencedSlugs.length).toBeGreaterThan(0)
+    expect(referencedSlugs.every((slug) => publicSlugs.has(slug))).toBe(true)
   })
 })
