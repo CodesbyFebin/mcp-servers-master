@@ -12,6 +12,8 @@ export type PublicGraphNode = {
 export const STATIC_PUBLIC_NODES: readonly PublicGraphNode[] = [
   { kind: "page", path: "/", label: "Home" },
   { kind: "page", path: "/servers", label: "Servers" },
+  { kind: "page", path: "/categories", label: "Categories" },
+  { kind: "page", path: "/capabilities", label: "Capabilities" },
   { kind: "page", path: "/docs", label: "Docs" },
   { kind: "page", path: "/learn", label: "Learn" },
   { kind: "page", path: "/methodology", label: "Methodology" },
