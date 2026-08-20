@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest"
 import { serverRecords } from "../src/data/servers"
-import { isPublicIndexable } from "../src/lib/indexability"
+import { isServerIndexable } from "../src/lib/indexability"
 import {
   getPublicCapabilityFacets,
   getPublicCategoryFacets,
@@ -25,7 +25,7 @@ describe("canonical public registry", () => {
     const selected = selectPublicServers(records)
     expect(selected).toHaveLength(1)
     expect(selected[0]?.slug).toBe(base.slug)
-    expect(selected.every(isPublicIndexable)).toBe(true)
+    expect(selected.every(isServerIndexable)).toBe(true)
   })
 
   it("keeps public identities unique", () => {
