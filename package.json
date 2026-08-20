@@ -7,11 +7,13 @@
   },
   "scripts": {
     "dev": "next dev",
+    "start": "next start",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "verify:preflight": "node scripts/production-gate.mjs",
+    "verify:infra": "node scripts/infra-gate.mjs",
     "build": "next build",
-    "production:gate": "npm run verify:preflight && npm run typecheck && npm test && npm run build"
+    "production:gate": "npm run verify:preflight && npm run verify:infra && npm run typecheck && npm test && npm run build"
   },
   "dependencies": {
     "next": "^16.2.10",

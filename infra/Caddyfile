@@ -1,0 +1,35 @@
+{
+  auto_https disable_redirects
+}
+
+www.mcpserver.in {
+  encode zstd gzip
+  reverse_proxy web:3000
+}
+
+mcpserver.in {
+  redir https://www.mcpserver.in{uri} permanent
+}
+
+app.mcpserver.in {
+  encode zstd gzip
+  reverse_proxy app:3000
+}
+
+api.mcpserver.in {
+  encode zstd gzip
+  reverse_proxy api:3000
+}
+
+mcp.mcpserver.in {
+  encode zstd gzip
+  handle /.well-known/mcp* {
+    reverse_proxy mcp-server:3000
+  }
+  reverse_proxy mcp-server:3000
+}
+
+gateway.mcpserver.in {
+  encode zstd gzip
+  reverse_proxy gateway:3000
+}

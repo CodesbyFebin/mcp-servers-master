@@ -1,0 +1,8 @@
+{
+  "orphanAllowlist": [
+    "/clients",
+    "/glossary",
+    "/integrations"
+  ],
+  "claimEvidencePaths": []
+}
