@@ -58,6 +58,7 @@ export default function ServersPage() {
       <section aria-labelledby="registry-summary">
         <h2 id="registry-summary">Registry summary</h2>
         <p>{servers.length} public server profiles across {categories.length} evidence-backed categories.</p>
+        <p><Link href="/categories">Browse the category map</Link> · <Link href="/capabilities">Browse capability coverage</Link></p>
         <ul>
           {categories.map((category) => (
             <li key={category.name}>{category.name}: {category.count}</li>
