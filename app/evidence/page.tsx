@@ -19,6 +19,15 @@ export default function EvidencePage() {
         <dt>Unverified</dt><dd>A candidate claim exists but is not cleared for publication as fact.</dd>
         <dt>Unknown</dt><dd>No reliable source currently establishes the value.</dd>
       </dl>
+
+      <h2>Publication authority</h2>
+      <p><code>isServerIndexable()</code> is the single public publication gate. A server must be published, verified, not explicitly marked noindex, and carry at least one verified or measured evidence record.</p>
+
+      <h2>Machine-readable evidence</h2>
+      <p>
+        The public cohort is available as <a href="/registry.json">registry.json</a>. A text representation with attached evidence references is available in <a href="/llms-full.txt">llms-full.txt</a>. Both are generated from the same registry cohort used by the visible server pages.
+      </p>
+
       <h2>What verification does not mean</h2>
       <p>Verification is not a blanket security certification, endorsement, availability guarantee, regulatory certification, or performance promise.</p>
       <h2>Corrections</h2>

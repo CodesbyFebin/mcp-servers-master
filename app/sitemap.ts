@@ -1,21 +1,10 @@
 import type { MetadataRoute } from "next"
 import { canonicalUrl } from "@/src/config/site"
-import { serverRecords } from "@/src/data/servers"
-import { isPublicIndexable } from "@/src/lib/indexability"
-
-const STATIC_PATHS = ["/", "/servers", "/docs", "/learn", "/methodology", "/evidence"] as const
+import { getPublicGraphNodes } from "@/src/lib/public-graph"
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticEntries: MetadataRoute.Sitemap = STATIC_PATHS.map((path) => ({
-    url: canonicalUrl(path),
+  return getPublicGraphNodes().map((node) => ({
+    url: canonicalUrl(node.path),
+    ...(node.lastModified ? { lastModified: node.lastModified } : {}),
   }))
-
-  const serverEntries: MetadataRoute.Sitemap = serverRecords
-    .filter(isPublicIndexable)
-    .map((server) => ({
-      url: canonicalUrl(`/servers/${server.slug}`),
-      ...(server.updatedAt ? { lastModified: server.updatedAt } : {}),
-    }))
-
-  return [...staticEntries, ...serverEntries]
 }

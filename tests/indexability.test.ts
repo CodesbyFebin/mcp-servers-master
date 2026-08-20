@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest"
-import { isPublicIndexable } from "../src/lib/indexability"
+import { isPublicIndexable, isServerIndexable } from "../src/lib/indexability"
 
-describe("isPublicIndexable", () => {
+describe("isServerIndexable", () => {
   const evidence = [{
     sourceUrl: "https://example.test/source",
     sourceType: "official" as const,
@@ -10,7 +10,7 @@ describe("isPublicIndexable", () => {
   }]
 
   it("publishes only verified records with evidence", () => {
-    expect(isPublicIndexable({
+    expect(isServerIndexable({
       publicationStatus: "published",
       verificationStatus: "verified",
       evidence,
@@ -18,21 +18,25 @@ describe("isPublicIndexable", () => {
   })
 
   it("rejects unverified, noindex, and evidence-free records", () => {
-    expect(isPublicIndexable({
+    expect(isServerIndexable({
       publicationStatus: "published",
       verificationStatus: "unverified",
       evidence,
     })).toBe(false)
-    expect(isPublicIndexable({
+    expect(isServerIndexable({
       publicationStatus: "published",
       verificationStatus: "verified",
       evidence,
       noindex: true,
     })).toBe(false)
-    expect(isPublicIndexable({
+    expect(isServerIndexable({
       publicationStatus: "published",
       verificationStatus: "verified",
       evidence: [],
     })).toBe(false)
+  })
+
+  it("keeps the Phase 1 compatibility alias bound to the same function", () => {
+    expect(isPublicIndexable).toBe(isServerIndexable)
   })
 })

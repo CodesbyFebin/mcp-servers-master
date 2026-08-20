@@ -3,22 +3,24 @@ import Link from "next/link"
 import "./globals.css"
 import { SITE } from "@/src/config/site"
 
+const siteTitle = "MCPserver.in — Evidence-backed MCP knowledge graph"
+const siteDescription =
+  "Discover Model Context Protocol servers through a public knowledge graph with explicit provenance, verification state, and evidence-backed technical details."
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.origin),
   title: {
-    default: "MCPserver.in — Evidence-backed MCP server directory",
+    default: siteTitle,
     template: "%s | MCPserver.in",
   },
-  description:
-    "Discover Model Context Protocol servers with explicit provenance, verification state, and evidence-backed technical details.",
+  description: siteDescription,
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     siteName: SITE.name,
     url: SITE.origin,
-    title: "MCPserver.in — Evidence-backed MCP server directory",
-    description:
-      "Discover Model Context Protocol servers with explicit provenance, verification state, and evidence-backed technical details.",
+    title: siteTitle,
+    description: siteDescription,
   },
   robots: { index: true, follow: true },
 }
@@ -37,6 +39,7 @@ const organization = {
       "@id": `${SITE.origin}/#website`,
       url: `${SITE.origin}/`,
       name: SITE.name,
+      description: siteDescription,
       publisher: { "@id": `${SITE.origin}/#organization` },
     },
   ],
@@ -51,15 +54,29 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           <nav className="container" aria-label="Primary navigation">
             <Link className="brand" href="/">MCPserver.in</Link>
             <Link href="/servers">Servers</Link>
+            <Link href="/categories">Categories</Link>
+            <Link href="/capabilities">Capabilities</Link>
             <Link href="/docs">Docs</Link>
             <Link href="/learn">Learn</Link>
-            <Link href="/methodology">Methodology</Link>
             <Link href="/evidence">Evidence</Link>
           </nav>
         </header>
         <main id="main" className="container">{children}</main>
         <footer>
-          <div className="container">Evidence first. Unknown remains unknown.</div>
+          <div className="container">
+            <p>Evidence first. Unknown remains unknown.</p>
+            <nav aria-label="Trust and policy navigation">
+              <Link href="/methodology">Methodology</Link>{" · "}
+              <Link href="/editorial-policy">Editorial policy</Link>{" · "}
+              <Link href="/security">Security</Link>{" · "}
+              <Link href="/about">About</Link>
+            </nav>
+            <p>
+              <a href="/registry.json">Public registry JSON</a>{" · "}
+              <a href="/llms.txt">llms.txt</a>{" · "}
+              <a href="/llms-full.txt">llms-full.txt</a>
+            </p>
+          </div>
         </footer>
         <script
           type="application/ld+json"
