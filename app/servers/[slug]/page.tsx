@@ -2,16 +2,15 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { canonicalUrl, SITE } from "@/src/config/site"
-import { serverRecords } from "@/src/data/servers"
-import { isPublicIndexable } from "@/src/lib/indexability"
+import { getPublicServerBySlug, getPublicServerSlugs } from "@/src/lib/registry"
 
 export function generateStaticParams() {
-  return serverRecords.filter(isPublicIndexable).map((server) => ({ slug: server.slug }))
+  return getPublicServerSlugs().map((slug) => ({ slug }))
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params
-  const server = serverRecords.find((item) => item.slug === slug && isPublicIndexable(item))
+  const server = getPublicServerBySlug(slug)
   if (!server) return {}
 
   const path = `/servers/${server.slug}`
@@ -30,7 +29,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function ServerPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const server = serverRecords.find((item) => item.slug === slug && isPublicIndexable(item))
+  const server = getPublicServerBySlug(slug)
   if (!server) notFound()
 
   const url = canonicalUrl(`/servers/${server.slug}`)
@@ -52,14 +51,14 @@ export default async function ServerPage({ params }: { params: Promise<{ slug: s
         description: server.description,
         applicationCategory: "DeveloperApplication",
         url: server.websiteUrl ?? url,
-        softwareVersion: server.latestVerifiedVersion ?? undefined,
+        ...(server.latestVerifiedVersion ? { softwareVersion: server.latestVerifiedVersion } : {}),
       },
       {
         "@type": "BreadcrumbList",
         "@id": `${url}#breadcrumbs`,
         itemListElement: [
           { "@type": "ListItem", position: 1, name: "Home", item: `${SITE.origin}/` },
-          { "@type": "ListItem", position: 2, name: "Servers", item: `${SITE.origin}/servers` },
+          { "@type": "ListItem", position: 2, name: "Servers", item: canonicalUrl("/servers") },
           { "@type": "ListItem", position: 3, name: server.title, item: url },
         ],
       },
