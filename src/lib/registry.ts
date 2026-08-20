@@ -26,16 +26,52 @@ export function getRegistryLedgerCounts() {
   return ledgerCounts(serverRecords)
 }
 
-export function getPublicServerCategories(): Array<{ name: string; count: number }> {
-  const counts = new Map<string, number>()
+export type PublicFacetServer = {
+  slug: string
+  title: string
+}
+
+export type PublicServerFacet = {
+  name: string
+  count: number
+  servers: PublicFacetServer[]
+}
+
+function buildPublicFacets(valuesFor: (server: ServerRecord) => readonly string[]): PublicServerFacet[] {
+  const facets = new Map<string, PublicFacetServer[]>()
 
   for (const server of getPublicServers()) {
-    counts.set(server.category, (counts.get(server.category) ?? 0) + 1)
+    for (const rawValue of valuesFor(server)) {
+      const value = rawValue.trim()
+      if (!value) continue
+
+      const servers = facets.get(value) ?? []
+      if (!servers.some((item) => item.slug === server.slug)) {
+        servers.push({ slug: server.slug, title: server.title })
+      }
+      facets.set(value, servers)
+    }
   }
 
-  return [...counts.entries()]
-    .map(([name, count]) => ({ name, count }))
+  return [...facets.entries()]
+    .map(([name, servers]) => ({
+      name,
+      count: servers.length,
+      servers: servers.slice().sort((a, b) => a.title.localeCompare(b.title)),
+    }))
     .sort((a, b) => b.count - a.count || a.name.localeCompare(b.name))
+}
+
+export function getPublicCategoryFacets(): PublicServerFacet[] {
+  return buildPublicFacets((server) => [server.category])
+}
+
+export function getPublicCapabilityFacets(): PublicServerFacet[] {
+  return buildPublicFacets((server) => server.capabilities)
+}
+
+export function getPublicServerCategories(): Array<{ name: string; count: number }> {
+  return getPublicCategoryFacets().map(({ name, count }) => ({ name, count }))
 }
 
 export type RegistryIntegrityIssue = {
