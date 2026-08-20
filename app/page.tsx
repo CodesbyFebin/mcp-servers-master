@@ -1,10 +1,9 @@
 import Link from "next/link"
-import { serverRecords } from "@/src/data/servers"
-import { isPublicIndexable, ledgerCounts } from "@/src/lib/indexability"
+import { getPublicServers, getRegistryLedgerCounts } from "@/src/lib/registry"
 
 export default function HomePage() {
-  const counts = ledgerCounts(serverRecords)
-  const published = serverRecords.filter(isPublicIndexable)
+  const counts = getRegistryLedgerCounts()
+  const published = getPublicServers()
 
   return (
     <>
