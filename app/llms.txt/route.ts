@@ -1,24 +1,19 @@
 import { SITE, canonicalUrl } from "@/src/config/site"
-import { serverRecords } from "@/src/data/servers"
-import { isPublicIndexable } from "@/src/lib/indexability"
+import { STATIC_PUBLIC_NODES, getPublicServerNodes } from "@/src/lib/public-graph"
 
 export function GET() {
-  const servers = serverRecords.filter(isPublicIndexable)
+  const staticNodes = STATIC_PUBLIC_NODES
+  const serverNodes = getPublicServerNodes()
   const lines = [
     `# ${SITE.name}`,
     "",
     "Evidence-backed Model Context Protocol directory and documentation.",
     "",
     "## Core pages",
-    `- Home: ${canonicalUrl("/")}`,
-    `- Servers: ${canonicalUrl("/servers")}`,
-    `- Docs: ${canonicalUrl("/docs")}`,
-    `- Learn: ${canonicalUrl("/learn")}`,
-    `- Methodology: ${canonicalUrl("/methodology")}`,
-    `- Evidence policy: ${canonicalUrl("/evidence")}`,
+    ...staticNodes.map((node) => `- ${node.label}: ${canonicalUrl(node.path)}`),
     "",
     "## Published server profiles",
-    ...servers.map((server) => `- ${server.title}: ${canonicalUrl(`/servers/${server.slug}`)}`),
+    ...serverNodes.map((node) => `- ${node.label}: ${canonicalUrl(node.path)}`),
     "",
     "Only records that pass the shared publication and evidence gate are listed here.",
   ]
