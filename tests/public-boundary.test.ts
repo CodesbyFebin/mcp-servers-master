@@ -18,7 +18,10 @@ function walk(dir: string, files: string[] = []): string[] {
 describe("public application boundary", () => {
   it("does not import the raw server seed directly", () => {
     const violations = walk(APP_ROOT)
-      .filter((file) => /from\s+["']@\/src\/data\/servers["']/.test(fs.readFileSync(file, "utf8")))
+      .filter((file) => {
+        const source = fs.readFileSync(file, "utf8")
+        return /(?:@\/|\.\.\/|\.\/)?src\/data\/servers/.test(source)
+      })
       .map((file) => path.relative(ROOT, file))
 
     expect(violations).toEqual([])
