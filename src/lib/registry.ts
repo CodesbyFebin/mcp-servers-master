@@ -1,11 +1,11 @@
 import { serverRecords, type ServerRecord } from "../data/servers"
-import { isPublicIndexable, ledgerCounts } from "./indexability"
+import { isServerIndexable, ledgerCounts } from "./indexability"
 
 export type RegistrySnapshot = readonly ServerRecord[]
 
 export function selectPublicServers(records: RegistrySnapshot = serverRecords): ServerRecord[] {
   return records
-    .filter(isPublicIndexable)
+    .filter(isServerIndexable)
     .slice()
     .sort((a, b) => a.title.localeCompare(b.title) || a.canonicalName.localeCompare(b.canonicalName))
 }
