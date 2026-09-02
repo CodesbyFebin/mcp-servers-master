@@ -1,0 +1,236 @@
+name: Build Final Consolidated ZIP
+
+on:
+  push:
+    branches:
+      - build/final-consolidated-zip
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout canonical production snapshot
+        uses: actions/checkout@v4
+        with:
+          repository: CodesbyFebin/mcp-servers-master
+          ref: c0a6531f364873e42be3c716aaf8fe2c0ad2385c
+          path: canonical
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Checkout legacy MCP-SERVERS snapshot
+        uses: actions/checkout@v4
+        with:
+          repository: CodesbyFebin/MCP-SERVERS
+          ref: e3f22d31d1c554f1d4ddc4a3d6accbff3b8c7ec8
+          path: legacy-mcp-servers
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Checkout satellite MCP-SERVER snapshot
+        uses: actions/checkout@v4
+        with:
+          repository: CodesbyFebin/MCP-SERVER
+          ref: d587e1a48067217e8b1135cbba570a4d07a605fb
+          path: satellite-mcp-server
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Build consolidated source tree
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROOT="$GITHUB_WORKSPACE/MCPserver.in-FINAL"
+          mkdir -p "$ROOT"
+
+          # Active production root: exact c0a6531 source, cleaned of generated/duplicate trees.
+          rsync -a canonical/ "$ROOT/" \
+            --exclude='.git/' \
+            --exclude='.next/' \
+            --exclude='node_modules/' \
+            --exclude='.DS_Store' \
+            --exclude='app-mcpserver-in/' \
+            --exclude='.zcode/'
+
+          mkdir -p "$ROOT/legacy-extracts"
+
+          # Preserve the pre-flattened monorepo/backend services without allowing it to become deploy root.
+          if [ -d canonical/app-mcpserver-in ]; then
+            mkdir -p "$ROOT/legacy-extracts/canonical-preflattened-monorepo"
+            rsync -a canonical/app-mcpserver-in/ "$ROOT/legacy-extracts/canonical-preflattened-monorepo/" \
+              --exclude='.git/' \
+              --exclude='.next/' \
+              --exclude='node_modules/' \
+              --exclude='.DS_Store'
+          fi
+
+          mkdir -p "$ROOT/legacy-extracts/MCP-SERVERS-e3f22d3"
+          rsync -a legacy-mcp-servers/ "$ROOT/legacy-extracts/MCP-SERVERS-e3f22d3/" \
+            --exclude='.git/' \
+            --exclude='.next/' \
+            --exclude='node_modules/' \
+            --exclude='.DS_Store' \
+            --exclude='dist/' \
+            --exclude='build/'
+
+          mkdir -p "$ROOT/legacy-extracts/MCP-SERVER-d587e1a"
+          rsync -a satellite-mcp-server/ "$ROOT/legacy-extracts/MCP-SERVER-d587e1a/" \
+            --exclude='.git/' \
+            --exclude='.next/' \
+            --exclude='node_modules/' \
+            --exclude='.DS_Store' \
+            --exclude='build-src.tgz'
+
+          # Curated import candidates copied separately for easy review; never auto-wired into production.
+          mkdir -p "$ROOT/candidate-imports/MCP-SERVER" "$ROOT/candidate-imports/MCP-SERVERS"
+          for f in \
+            mcpserver_ingest.py \
+            requirements-mcp-ingest.txt \
+            docs/prompts/legacy-sitemap-canonical-migration.md \
+            scripts/redirect-rules.mjs \
+            scripts/extract-old-urls.mjs \
+            src/data/SAFE_DEEP_REPORT.json; do
+            if [ -f "satellite-mcp-server/$f" ]; then
+              mkdir -p "$ROOT/candidate-imports/MCP-SERVER/$(dirname "$f")"
+              cp "satellite-mcp-server/$f" "$ROOT/candidate-imports/MCP-SERVER/$f"
+            fi
+          done
+
+          for f in \
+            ARCHITECTURE.md \
+            API_REFERENCE.md \
+            CONTENT_PIPELINE.md \
+            CANONICAL_REGISTRY.json \
+            CONTENT_INVENTORY.json \
+            CONTENT_BATCHES.json; do
+            if [ -f "legacy-mcp-servers/$f" ]; then
+              cp "legacy-mcp-servers/$f" "$ROOT/candidate-imports/MCP-SERVERS/$f"
+            fi
+          done
+
+          cat > "$ROOT/SOURCE_LOCK.json" <<'JSON'
+          {
+            "canonical": {
+              "repo": "CodesbyFebin/mcp-servers-master",
+              "branch": "deployment/flattened-root",
+              "sha": "c0a6531f364873e42be3c716aaf8fe2c0ad2385c",
+              "domain": "https://www.mcpserver.in",
+              "role": "ACTIVE_PRODUCTION_SOURCE"
+            },
+            "sources": [
+              {
+                "repo": "CodesbyFebin/MCP-SERVERS",
+                "ref": "master",
+                "sha": "e3f22d31d1c554f1d4ddc4a3d6accbff3b8c7ec8",
+                "role": "LEGACY_SOURCE_ARCHIVE"
+              },
+              {
+                "repo": "CodesbyFebin/MCP-SERVER",
+                "ref": "main",
+                "sha": "d587e1a48067217e8b1135cbba570a4d07a605fb",
+                "role": "SATELLITE_SOURCE_ARCHIVE"
+              }
+            ],
+            "publicationAuthorities": {
+              "editorial": "isContentIndexable()",
+              "servers": "isServerIndexable()"
+            }
+          }
+          JSON
+
+          cat > "$ROOT/CANONICAL_SOURCE.md" <<'MD'
+          # MCPserver.in — Canonical Source Lock
+
+          **Active production source**
+
+          - Repository: `CodesbyFebin/mcp-servers-master`
+          - Branch: `deployment/flattened-root`
+          - SHA: `c0a6531f364873e42be3c716aaf8fe2c0ad2385c`
+          - Canonical domain: `https://www.mcpserver.in`
+
+          The ZIP root is copied from that exact production commit.
+
+          ## Noncanonical repositories
+
+          `CodesbyFebin/MCP-SERVERS` and `CodesbyFebin/MCP-SERVER` are preserved under `legacy-extracts/` for archaeology, migration data, ingestion logic, redirect tooling, and reusable evidence assets. They are **not deploy roots**.
+
+          No file inside `legacy-extracts/` or `candidate-imports/` should become public production behavior without explicit review and migration into the canonical root.
+
+          ## Publication authority
+
+          - Editorial pages: `isContentIndexable()`
+          - Server entities: `isServerIndexable()`
+          MD
+
+          cat > "$ROOT/legacy-extracts/DO-NOT-DEPLOY.md" <<'MD'
+          # DO NOT DEPLOY THIS DIRECTORY
+
+          These trees are preserved snapshots from noncanonical or pre-flattened repositories. They may contain stale routing, historical SEO experiments, generated content, deprecated claims, or old deployment assumptions.
+
+          Use them only as source material. Import individual assets into the canonical root after evidence and regression review.
+          MD
+
+          cat > "$ROOT/MERGE_MANIFEST.md" <<'MD'
+          # MCPserver.in Final Consolidation Manifest
+
+          This package extracts all three known MCPserver.in GitHub codebases while keeping exactly one active production root.
+
+          ## Active root
+
+          `CodesbyFebin/mcp-servers-master@c0a6531f364873e42be3c716aaf8fe2c0ad2385c`
+
+          Generated build/cache material was removed (`.next`, `node_modules`, `.DS_Store`). The pre-flattened `app-mcpserver-in/` tree is moved to `legacy-extracts/canonical-preflattened-monorepo/` so it cannot compete with the active flattened app root.
+
+          ## Extracted legacy snapshots
+
+          - `legacy-extracts/MCP-SERVERS-e3f22d3/` — `CodesbyFebin/MCP-SERVERS@e3f22d31d1c554f1d4ddc4a3d6accbff3b8c7ec8`
+          - `legacy-extracts/MCP-SERVER-d587e1a/` — `CodesbyFebin/MCP-SERVER@d587e1a48067217e8b1135cbba570a4d07a605fb`
+          - `legacy-extracts/canonical-preflattened-monorepo/` — cleaned copy of the canonical repo's earlier monorepo/services tree
+
+          ## Candidate imports
+
+          `candidate-imports/` contains a small curated set of ingestion, redirect, migration, evidence, architecture and registry assets duplicated from legacy trees for easier review. These files are not wired into production automatically.
+
+          ## Safety rule
+
+          Never mass-copy old route/content trees into the active `app/` or `src/`. The current production publication predicates, canonical-host rules, sitemap/LLMS cohorts and evidence ledger remain authoritative.
+          MD
+
+          # Ensure excluded generated directories did not leak.
+          if find "$ROOT" -type d \( -name node_modules -o -name .next \) -print -quit | grep -q .; then
+            echo "Generated directory leak detected" >&2
+            exit 1
+          fi
+
+          test -f "$ROOT/package.json"
+          test -f "$ROOT/middleware.ts"
+          test -f "$ROOT/app/page.tsx"
+          test -f "$ROOT/SOURCE_LOCK.json"
+
+          find "$ROOT" -type f | sort > "$ROOT/FILE_MANIFEST.txt"
+          printf 'Total files: ' > "$ROOT/PACKAGE_STATS.txt"
+          find "$ROOT" -type f | wc -l >> "$ROOT/PACKAGE_STATS.txt"
+          printf 'Total size bytes: ' >> "$ROOT/PACKAGE_STATS.txt"
+          du -sb "$ROOT" | awk '{print $1}' >> "$ROOT/PACKAGE_STATS.txt"
+
+      - name: Create final ZIP and checksum
+        shell: bash
+        run: |
+          set -euo pipefail
+          zip -qr MCPserver.in-FINAL-CONSOLIDATED.zip MCPserver.in-FINAL
+          sha256sum MCPserver.in-FINAL-CONSOLIDATED.zip > MCPserver.in-FINAL-CONSOLIDATED.zip.sha256
+          ls -lh MCPserver.in-FINAL-CONSOLIDATED.zip MCPserver.in-FINAL-CONSOLIDATED.zip.sha256
+
+      - name: Upload consolidated package
+        uses: actions/upload-artifact@v4
+        with:
+          name: mcpserver-final-consolidated
+          path: |
+            MCPserver.in-FINAL-CONSOLIDATED.zip
+            MCPserver.in-FINAL-CONSOLIDATED.zip.sha256
+          if-no-files-found: error
+          retention-days: 7
