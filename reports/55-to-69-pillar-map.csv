@@ -1,0 +1,70 @@
+pillar_id,target_group,target_display_name,proposed_path,current_55_match,current_path,match_type,historical_clicks,historical_impressions,existing_canonical_owner,decision,final_canonical,publication_status,notes
+P01,core-protocol,MCP Protocol Overview,/learn/model-context-protocol,/learn/model-context-protocol,/learn/model-context-protocol,EXACT,0,0,/learn/model-context-protocol,KEEP_EXISTING_CANONICAL,/learn/model-context-protocol,published,
+P02,core-protocol,MCP Server Directory,/servers,/servers,/servers,AGGREGATE,0,0,/servers,KEEP_EXISTING_CANONICAL,/servers,published,
+P03,core-protocol,MCP Client Implementations,/clients,/clients,/clients,EXACT,0,82,/clients,KEEP_EXISTING_CANONICAL,/clients,published,
+P04,core-protocol,MCP Stdio Transport,/learn/mcp-stdio,/learn/mcp-stdio,/learn/mcp-stdio,EXACT,0,0,/learn/mcp-stdio,KEEP_EXISTING_CANONICAL,/learn/mcp-stdio,published,
+P05,core-protocol,MCP Streamable HTTP Transport,/learn/mcp-streamable-http,/learn/mcp-streamable-http,/learn/mcp-streamable-http,EXACT,0,0,/learn/mcp-streamable-http,KEEP_EXISTING_CANONICAL,/learn/mcp-streamable-http,published,Modern MCP uses Streamable HTTP. The proposed clean path /transport-http is kept as umbrella alias but the existing /learn/mcp-streamable-http retains equity.
+P06,core-protocol,MCP Tool Definitions,/learn/mcp-tools,/learn/mcp-tools,/learn/mcp-tools,EXACT,0,0,/learn/mcp-tools,KEEP_EXISTING_CANONICAL,/learn/mcp-tools,published,
+P07,core-protocol,MCP Resource Templates,/learn/mcp-resources,/learn/mcp-resources,/learn/mcp-resources,EXACT,0,0,/learn/mcp-resources,KEEP_EXISTING_CANONICAL,/learn/mcp-resources,published,
+P08,core-protocol,MCP Prompts & Interactions,/learn/mcp-prompts,/learn/mcp-prompts,/learn/mcp-prompts,EXACT,0,0,/learn/mcp-prompts,KEEP_EXISTING_CANONICAL,/learn/mcp-prompts,published,
+P09,core-protocol,MCP Sampling & LLM Calls,/learn/mcp-architecture,/learn/mcp-architecture,/learn/mcp-architecture,EXACT,0,0,/learn/mcp-architecture,KEEP_EXISTING_CANONICAL,/learn/mcp-architecture,published,Sampling is a server-side concept covered under architecture; no dedicated pillar currently exists.
+P10,core-protocol,MCP Authentication,/security/authentication,/security/authentication,/security/authentication,EXACT,0,0,/security/authentication,KEEP_EXISTING_CANONICAL,/security/authentication,published,
+P11,data-integrations,MCP Database Servers,/guides/mcp-servers-for-databases,/guides/mcp-servers-for-databases,/guides/mcp-servers-for-databases,EXACT,0,0,/guides/mcp-servers-for-databases,KEEP_EXISTING_CANONICAL,/guides/mcp-servers-for-databases,published,
+P12,data-integrations,MCP File System Servers,/filesystem-servers,,,NEW,3,96,,EVIDENCE_REVIEW,/filesystem-servers,review,No published pillar currently exists for file-system servers. Awaiting editorial content.
+P13,data-integrations,MCP Git & Repository Servers,/guides/best-mcp-server-for-github,/guides/best-mcp-server-for-github,/guides/best-mcp-server-for-github,EXACT,0,0,/guides/best-mcp-server-for-github,KEEP_EXISTING_CANONICAL,/guides/best-mcp-server-for-github,published,
+P14,data-integrations,MCP API & REST Servers,/api-servers,,,NEW,3,96,,EVIDENCE_REVIEW,/api-servers,review,No published pillar currently exists for API & REST servers. Awaiting editorial content.
+P15,data-integrations,MCP Cloud Infrastructure Servers,/guides/mcp-devops,/guides/mcp-devops,/guides/mcp-devops,EXACT,0,0,/guides/mcp-devops,KEEP_EXISTING_CANONICAL,/guides/mcp-devops,published,
+P16,data-integrations,MCP Knowledge Base & RAG Servers,/rag-servers,,,NEW,3,96,,EVIDENCE_REVIEW,/rag-servers,review,RAG servers are emerging; no dedicated pillar yet. Awaiting editorial content.
+P17,data-integrations,MCP Spreadsheet & Data Servers,/spreadsheet-servers,,,NEW,3,96,,EVIDENCE_REVIEW,/spreadsheet-servers,review,No published pillar yet. Awaiting editorial content.
+P18,data-integrations,MCP Communication Servers,/communication-servers,,,NEW,3,96,,EVIDENCE_REVIEW,/communication-servers,review,No published pillar yet. Awaiting editorial content.
+P19,data-integrations,MCP Calendar & Scheduling Servers,/calendar-servers,,,NEW,3,96,,EVIDENCE_REVIEW,/calendar-servers,review,No published pillar yet. Awaiting editorial content.
+P20,data-integrations,MCP CRM & Business Servers,/crm-servers,,,NEW,3,96,,EVIDENCE_REVIEW,/crm-servers,review,No published pillar yet. Awaiting editorial content.
+P21,developer-tools,MCP SDK & Libraries,/build/mcp-server,/build/mcp-server,/build/mcp-server,EXACT,0,0,/build/mcp-server,KEEP_EXISTING_CANONICAL,/build/mcp-server,published,
+P22,developer-tools,MCP Server Boilerplates,/boilerplates,,,NEW,3,96,,EVIDENCE_REVIEW,/boilerplates,review,No published pillar yet. Awaiting editorial content.
+P23,developer-tools,MCP Testing & Debugging,/testing-debugging,,,NEW,3,96,,EVIDENCE_REVIEW,/testing-debugging,review,No published pillar yet. Awaiting editorial content.
+P24,developer-tools,MCP Schema Validators,/schema-validators,,,NEW,3,96,,EVIDENCE_REVIEW,/schema-validators,review,No published pillar yet. Awaiting editorial content.
+P25,developer-tools,MCP Registry & Discovery,/guides/mcp-marketplaces,/guides/mcp-marketplaces,/guides/mcp-marketplaces,EXACT,0,0,/guides/mcp-marketplaces,KEEP_EXISTING_CANONICAL,/guides/mcp-marketplaces,published,
+P26,developer-tools,MCP CLI Tools,/cli-tools,,,NEW,3,96,,EVIDENCE_REVIEW,/cli-tools,review,No published pillar yet. Awaiting editorial content.
+P27,developer-tools,MCP IDE Integrations,/clients/cursor,/clients/cursor,/clients/cursor,EXACT,0,0,/clients/cursor,KEEP_EXISTING_CANONICAL,/clients/cursor,published,Authority pillar is served by the /clients collection; cursor page is the canonical first-party example.
+P28,developer-tools,MCP Proxy & Gateway,/proxy-gateway,,,NEW,3,96,,EVIDENCE_REVIEW,/proxy-gateway,review,No published pillar yet. Awaiting editorial content.
+P29,developer-tools,MCP Observability & Monitoring,/observability,,,NEW,3,96,,EVIDENCE_REVIEW,/observability,review,No published pillar yet. Awaiting editorial content.
+P30,developer-tools,MCP Deployment & Hosting,/deployment,,,NEW,3,96,,EVIDENCE_REVIEW,/deployment,review,"GSC equity exists on child routes (/deployment/aws, etc.) but no /deployment collection page exists. Requires editorial decision: create /deployment page or map to closest existing content."
+P31,security-governance,MCP Security Best Practices,/security/mcp-security,/security/mcp-security,/security/mcp-security,EXACT,0,0,/security/mcp-security,KEEP_EXISTING_CANONICAL,/security/mcp-security,published,
+P32,security-governance,MCP Permissions & Scoping,/security/tool-security,/security/tool-security,/security/tool-security,EXACT,0,0,/security/tool-security,KEEP_EXISTING_CANONICAL,/security/tool-security,published,
+P33,security-governance,MCP Secret Management,/secret-management,,,NEW,3,96,,EVIDENCE_REVIEW,/secret-management,review,No published pillar yet. Awaiting editorial content.
+P34,security-governance,MCP Audit Logging,/audit-logging,,,NEW,3,96,,EVIDENCE_REVIEW,/audit-logging,review,No published pillar yet. Awaiting editorial content.
+P35,security-governance,MCP Sandboxing & Isolation,/sandboxing,,,NEW,3,96,,EVIDENCE_REVIEW,/sandboxing,review,No published pillar yet. Awaiting editorial content.
+P36,security-governance,MCP Compliance & Governance,/compliance,,,NEW,3,96,,EVIDENCE_REVIEW,/compliance,review,No published pillar yet. Awaiting editorial content.
+P37,security-governance,MCP Threat Modeling,/threat-modeling,,,NEW,3,96,,EVIDENCE_REVIEW,/threat-modeling,review,No published pillar yet. Awaiting editorial content.
+P38,security-governance,MCP Rate Limiting & Quotas,/rate-limiting,,,NEW,3,96,,EVIDENCE_REVIEW,/rate-limiting,review,No published pillar yet. Awaiting editorial content.
+P39,security-governance,MCP Identity & Access Management,/identity-access,,,NEW,3,96,,EVIDENCE_REVIEW,/identity-access,review,No published pillar yet. Awaiting editorial content.
+P40,security-governance,MCP Vulnerability Scanning,/vulnerability-scanning,,,NEW,3,96,,EVIDENCE_REVIEW,/vulnerability-scanning,review,No published pillar yet. Awaiting editorial content.
+P41,ai-agentic,MCP Agentic Workflows,/agentic-workflows,,,NEW,3,96,,EVIDENCE_REVIEW,/agentic-workflows,review,No published pillar yet. Awaiting editorial content.
+P42,ai-agentic,MCP Multi-Agent Systems,/multi-agent-systems,,,NEW,3,96,,EVIDENCE_REVIEW,/multi-agent-systems,review,No published pillar yet. Awaiting editorial content.
+P43,ai-agentic,MCP Tool Calling Optimization,/tool-calling,,,NEW,3,96,,EVIDENCE_REVIEW,/tool-calling,review,No published pillar yet. Awaiting editorial content.
+P44,ai-agentic,MCP Context Management,/context-management,,,NEW,3,96,,EVIDENCE_REVIEW,/context-management,review,No published pillar yet. Awaiting editorial content.
+P45,ai-agentic,MCP Evaluation & Benchmarking,/evaluation,,,NEW,3,96,,EVIDENCE_REVIEW,/evaluation,review,No published pillar yet. Awaiting editorial content.
+P46,ai-agentic,MCP Orchestration Frameworks,/orchestration,,,NEW,3,96,,EVIDENCE_REVIEW,/orchestration,review,No published pillar yet. Awaiting editorial content.
+P47,ai-agentic,MCP Memory & State Management,/memory-state,,,NEW,3,96,,EVIDENCE_REVIEW,/memory-state,review,No published pillar yet. Awaiting editorial content.
+P48,ai-agentic,MCP Human-in-the-Loop,/human-in-the-loop,,,NEW,3,96,,EVIDENCE_REVIEW,/human-in-the-loop,review,No published pillar yet. Awaiting editorial content.
+P49,ai-agentic,MCP Autonomous Agents,/autonomous-agents,,,NEW,3,96,,EVIDENCE_REVIEW,/autonomous-agents,review,No published pillar yet. Awaiting editorial content.
+P50,ai-agentic,MCP AI Safety & Alignment,/ai-safety,,,NEW,3,96,,EVIDENCE_REVIEW,/ai-safety,review,No published pillar yet. Awaiting editorial content.
+P51,industry-use-cases,MCP for Software Engineering,/guides/mcp-servers-for-developers,/guides/mcp-servers-for-developers,/guides/mcp-servers-for-developers,EXACT,0,0,/guides/mcp-servers-for-developers,KEEP_EXISTING_CANONICAL,/guides/mcp-servers-for-developers,published,
+P52,industry-use-cases,MCP for Data Science,/use-case-data-science,,,NEW,3,96,,EVIDENCE_REVIEW,/use-case-data-science,review,No published pillar yet. Awaiting editorial content.
+P53,industry-use-cases,MCP for DevOps & SRE,/use-case-devops,,,NEW,3,96,,EVIDENCE_REVIEW,/use-case-devops,review,No published pillar yet. Awaiting editorial content.
+P54,industry-use-cases,MCP for Customer Support,/use-case-support,,,NEW,3,96,,EVIDENCE_REVIEW,/use-case-support,review,No published pillar yet. Awaiting editorial content.
+P55,industry-use-cases,MCP for Legal & Compliance,/use-case-legal,,,NEW,3,96,,EVIDENCE_REVIEW,/use-case-legal,review,No published pillar yet. Awaiting editorial content.
+P56,industry-use-cases,MCP for Healthcare,/use-case-healthcare,,,NEW,3,96,,EVIDENCE_REVIEW,/use-case-healthcare,review,No published pillar yet. Awaiting editorial content.
+P57,industry-use-cases,MCP for Finance & Trading,/use-case-finance,,,NEW,3,96,,EVIDENCE_REVIEW,/use-case-finance,review,No published pillar yet. Awaiting editorial content.
+P58,industry-use-cases,MCP for Education & Research,/use-case-education,,,NEW,3,96,,EVIDENCE_REVIEW,/use-case-education,review,No published pillar yet. Awaiting editorial content.
+P59,industry-use-cases,MCP for Marketing & SEO,/use-case-marketing,,,NEW,3,96,,EVIDENCE_REVIEW,/use-case-marketing,review,No published pillar yet. Awaiting editorial content.
+P60,industry-use-cases,MCP for Personal Productivity,/guides/mcp-productivity,/guides/mcp-productivity,/guides/mcp-productivity,EXACT,0,0,/guides/mcp-productivity,KEEP_EXISTING_CANONICAL,/guides/mcp-productivity,published,
+P61,authority-system,MCP Server Compare,/compare,/compare,/compare,EXACT,0,0,/compare,KEEP_EXISTING_CANONICAL,/compare,published,
+P62,authority-system,MCP Categories,/categories,/categories,/categories,AGGREGATE,0,0,/categories,KEEP_EXISTING_CANONICAL,/categories,published,
+P63,authority-system,MCP Capabilities,/capabilities,/capabilities,/capabilities,AGGREGATE,0,0,/capabilities,KEEP_EXISTING_CANONICAL,/capabilities,published,
+P64,authority-system,MCP How It Works,/learn/how-mcp-works,/learn/how-mcp-works,/learn/how-mcp-works,EXACT,0,0,/learn/how-mcp-works,KEEP_EXISTING_CANONICAL,/learn/how-mcp-works,published,
+P65,authority-system,MCP Use Cases,/learn/mcp-use-cases,/learn/mcp-use-cases,/learn/mcp-use-cases,EXACT,0,0,/learn/mcp-use-cases,KEEP_EXISTING_CANONICAL,/learn/mcp-use-cases,published,
+P66,authority-system,MCP Documentation,/docs,/docs,/docs,AGGREGATE,1,13,/docs,KEEP_EXISTING_CANONICAL,/docs,published,
+P67,authority-system,MCP Guides,/guides,/guides,/guides,EXACT,0,0,/guides,KEEP_EXISTING_CANONICAL,/guides,published,
+P68,authority-system,MCP Blog,/blog,/blog,/blog,AGGREGATE,0,1,,EVIDENCE_REVIEW,/blog,review,GSC has 163+159+141+134 clicks on individual /blog/* children. /blog collection page not yet created. Create /blog index or map to nearest existing collection.
+P69,authority-system,MCP Pillar Directory,/pillars,/pillars,/pillars,AGGREGATE,0,0,,KEEP_EXISTING_CANONICAL,/pillars,published,New route — generates from this registry.

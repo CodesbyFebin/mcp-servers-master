@@ -75,7 +75,7 @@ migration into the canonical repository.**
 ## BRANCH STRATEGY
 
 | Branch | Purpose | Protected? |
-|--------|--------|-----------|
+|--------|---------|-----------|
 | `main` | Legacy archive (remote main history); read-only | No |
 | `deployment/flattened-root` | Active development / staging | No |
 | `production` | **Canonical production source** | **Yes — required** |
@@ -107,4 +107,4 @@ git push origin production
 
 ## LAST UPDATED
 
-`c0a6531` — `fix(seo): enforce canonical host and homepage authority`
+`production` branch SHA `5332733` — `docs: add CANONICAL_SOURCE.md`

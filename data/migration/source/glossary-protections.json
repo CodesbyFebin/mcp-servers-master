@@ -1,0 +1,21 @@
+{
+  "schema": "glossary-protections",
+  "version": "2026-09-03",
+  "purpose": "Editorial gaps that must NOT be collapsed to /glossary/. These terms appear in the GSC inventory but lack a published editorial owner. They are reserved for future editorial content at the same path.",
+  "protectedTerms": [
+    {
+      "source": "/glossary/mcp-soc-2",
+      "intent": "Compliance vocabulary: SOC 2 attestation context for MCP servers.",
+      "status": "PROTECTED — pending editorial",
+      "canonicalDestination": "/glossary/mcp-soc-2",
+      "redirectedInHandoff": false
+    },
+    {
+      "source": "/glossary/mcp-iso-27001",
+      "intent": "Compliance vocabulary: ISO 27001 information security management context for MCP servers.",
+      "status": "PROTECTED — pending editorial",
+      "canonicalDestination": "/glossary/mcp-iso-27001",
+      "redirectedInHandoff": false
+    }
+  ]
+}

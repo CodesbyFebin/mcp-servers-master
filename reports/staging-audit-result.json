@@ -1,0 +1,60 @@
+{
+  "timestamp": "2026-09-06T14:14:47.889Z",
+  "stagingUrl": "http://127.0.0.1:3100",
+  "expectedSha": "96951c2e9041c4bba47aba11f0167632e4446154",
+  "shaMatch": true,
+  "redirects": {
+    "pass": 24,
+    "fail": 0,
+    "details": [
+      "PASS /glossary/mcp-auth-provider-18 -> /glossary (308)",
+      "PASS /glossary/mcp-batch-processing-34 -> /glossary (308)",
+      "PASS /glossary/mcp-websocket-server-86 -> /glossary (308)",
+      "PASS /glossary/mcp-sse-gateway-85 -> /glossary (308)",
+      "PASS /glossary/mcp-disaster-recovery-57 -> /glossary (308)",
+      "PASS /glossary/mcp-stream-aggregator-64 -> /glossary (308)",
+      "PASS /glossary/mcp-webhook-receiver-73 -> /glossary (308)",
+      "PASS /glossary/mcp-auto-scaling-0 -> /glossary (308)",
+      "PASS /glossary/mcp-polling-service-88 -> /glossary (308)",
+      "PASS /glossary/mcp-load-balancer-15 -> /glossary (308)",
+      "PASS /glossary/mcp-process-monitor-97 -> /glossary (308)",
+      "PASS /glossary/mcp-ssl-terminator-49 -> /glossary (308)",
+      "PASS /glossary/mcp-rule-engine-110 -> /glossary (308)",
+      "PASS /glossary/mcp-pubsub-system-90 -> /glossary (308)",
+      "PASS /glossary/streamable-http -> /learn/mcp-streamable-http (308)",
+      "PASS /glossary/stdio -> /learn/mcp-stdio (308)",
+      "PASS /glossary/mcp-capability-negotiation -> /glossary/capability-negotiation (308)",
+      "PASS /glossary/mcp-vscode -> /clients/vscode (308)",
+      "PASS /glossary/mcp-server -> /learn/mcp-server (308)",
+      "PASS /glossary/mcp-client -> /learn/mcp-client (308)",
+      "PASS /servers/postgres-mcp-server -> /guides/postgres-mcp-server (308)",
+      "PASS /docs/protocol/tools -> /learn/mcp-tools (308)",
+      "PASS /docs/protocol -> /learn/mcp-protocol (308)",
+      "PASS /docs/servers/postgres-mcp-server -> /guides/postgres-mcp-server (308)"
+    ]
+  },
+  "g8": {
+    "pass": 4,
+    "fail": 0
+  },
+  "canonicals": {
+    "pass": 4,
+    "fail": 0
+  },
+  "noindex": {
+    "pass": 1,
+    "fail": 0
+  },
+  "surfaces": {
+    "pass": 8,
+    "fail": 0
+  },
+  "lighthouse": {
+    "performance": 96,
+    "accessibility": 92,
+    "best-practices": 96,
+    "seo": 100
+  },
+  "lighthouseStatus": "MEASURED",
+  "verdict": "PASSED"
+}

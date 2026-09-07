@@ -1,0 +1,57 @@
+{
+  "timestamp": "2026-09-07T07:15:57.527687Z",
+  "target": "http://127.0.0.1:3100",
+  "results": {
+    "robots.txt": true,
+    "llms.txt": true,
+    "ai.txt": true,
+    "sitemap.xml": true
+  },
+  "score": {
+    "passed": 10,
+    "total": 10
+  },
+  "findings": [
+    {
+      "name": "robots: private surfaces blocked",
+      "ok": true
+    },
+    {
+      "name": "robots: sitemap pointer",
+      "ok": true
+    },
+    {
+      "name": "robots: AI agents allowed (GEO)",
+      "ok": true
+    },
+    {
+      "name": "llms: manifest valid (H1 + text)",
+      "ok": true
+    },
+    {
+      "name": "llms: core/resource links present",
+      "ok": true
+    },
+    {
+      "name": "llms: all link targets resolve live",
+      "ok": true
+    },
+    {
+      "name": "ai.txt: reachable + machine-source pointers",
+      "ok": true
+    },
+    {
+      "name": "ai.txt: .well-known mirror",
+      "ok": true
+    },
+    {
+      "name": "sitemap: zero leaks",
+      "ok": true
+    },
+    {
+      "name": "sitemap: cohort covered + hubs",
+      "ok": true
+    }
+  ],
+  "verdict": "PASSED"
+}

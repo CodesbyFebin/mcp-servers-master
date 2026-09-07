@@ -1,0 +1,72 @@
+# MCPserver.in — Caddy reverse proxy + TLS termination
+#
+# Product doctrine:
+#   www.mcpserver.in — public search / evidence / knowledge authority
+#   app.mcpserver.in — application/workspace surface (not yet deployed; 308 to www)
+#   mcpserver.in     — apex; 308 to www
+#
+# The Next.js app exposes a middleware that ALSO enforces the same redirects;
+# doing it here as well means an external hit is short-circuited at the edge
+# and never reaches Node.
+
+{
+    # Global options
+    email {$ACME_EMAIL:security@mcpserver.in}
+    admin off
+    # auto_https: default (enabled). ACME via Let's Encrypt for all site blocks.
+}
+
+# --- Apex → www (308, preserve path and query) -------------------------------
+mcpserver.in {
+    redir https://www.mcpserver.in{uri} 308
+}
+
+# --- app → www (308) ----------------------------------------------------------
+app.mcpserver.in {
+    redir https://www.mcpserver.in{uri} 308
+}
+
+# --- www: primary public surface ----------------------------------------------
+www.mcpserver.in {
+    encode zstd gzip
+
+    # HSTS — pinned for one year, including subdomains, eligible for preload.
+    header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+
+    # Don't send a Server header.
+    header -Server
+
+    # /.well-known/* is served by the Next.js app directly (RFC 9116 security.txt,
+    # ai.txt). Pass through to the upstream so the route handler responds.
+    handle /.well-known/* {
+        reverse_proxy web:3000
+    }
+
+    # Everything else: reverse proxy to the Next.js app on the internal network.
+    reverse_proxy web:3000 {
+        # Trust the incoming X-Forwarded-* headers from Caddy.
+        header_up X-Real-IP {remote_host}
+        header_up X-Forwarded-For {remote_host}
+        header_up X-Forwarded-Proto {scheme}
+        header_up X-Forwarded-Host {host}
+
+        # Increase timeouts slightly for slow LLM-agent callers.
+        transport http {
+            dial_timeout 10s
+            response_header_timeout 30s
+            read_timeout 60s
+        }
+    }
+
+    # Healthcheck endpoint (used by Docker and external uptime checks).
+    @health path /api/health
+    handle @health {
+        reverse_proxy web:3000
+    }
+
+    # Access log in JSON for downstream ingestion.
+    log {
+        output stdout
+        format json
+    }
+}

@@ -1,0 +1,72 @@
+# MCPserver.in — local + single-host production stack
+#
+# Services:
+#   web   — Next.js standalone (port 3000, internal only)
+#   caddy — reverse proxy + TLS termination (ports 80, 443)
+#
+# Usage:
+#   APP_VERSION="$NEW_SHA" docker compose up --build
+#
+# For production, set the following environment variables in a .env file (NOT
+# committed to source control):
+#   APP_VERSION — build-time commit SHA exposed at /api/health
+#                  (the health route prefers APP_VERSION > VERCEL_GIT_COMMIT_SHA > "dev")
+#   ACME_EMAIL — email for Let's Encrypt registration
+#   SENTRY_DSN, NEXT_PUBLIC_SENTRY_DSN — Sentry project DSN
+#   SENTRY_AUTH_TOKEN — Sentry release auth token (build time only)
+#   SENTRY_ORG, SENTRY_PROJECT — Sentry org + project
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        APP_VERSION: ${APP_VERSION:-dev}
+    image: mcpserver-in/web:${APP_VERSION:-local}
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: "3000"
+      HOSTNAME: "0.0.0.0"
+      NEXT_TELEMETRY_DISABLED: "1"
+      # APP_VERSION is the primary identity signal in /api/health.
+      # Single contract end-to-end: Dockerfile ARG → build-arg → runtime ENV.
+      APP_VERSION: ${APP_VERSION:-dev}
+      # Sentry — populated from .env, never baked into the image
+      SENTRY_DSN: ${SENTRY_DSN:-}
+      NEXT_PUBLIC_SENTRY_DSN: ${NEXT_PUBLIC_SENTRY_DSN:-}
+    expose:
+      - "3000"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:3000/api/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+    networks:
+      - internal
+
+  caddy:
+    image: caddy:2
+    restart: unless-stopped
+    depends_on:
+      web:
+        condition: service_healthy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      - internal
+
+volumes:
+  caddy_data:
+  caddy_config:
+
+networks:
+  internal:
+    driver: bridge

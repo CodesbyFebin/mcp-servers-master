@@ -1,0 +1,30 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    # Patch + minor only — major bumps require a human review of breaking changes.
+    # The Next.js, React, and Sentry majors all carry migration work; do not auto-merge them.
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+      - "npm"
+    # Group minor + patch into a single PR per package to reduce noise.
+    groups:
+      npm-minor-and-patch:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 3
+    labels:
+      - "dependencies"
+      - "github-actions"

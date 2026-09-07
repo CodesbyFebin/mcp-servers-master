@@ -1,7 +1,7 @@
 import "./globals.css";
-import Link from "next/link";
 import type { Metadata } from "next";
 import { CANONICAL_ORIGIN } from "@/src/seo/breadcrumbs";
+import { SiteHeader } from "@/src/components/layout/SiteHeader";
 
 export const metadata: Metadata = {
   metadataBase: new URL(CANONICAL_ORIGIN),
@@ -27,19 +27,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <div className="min-h-screen bg-slate-50 dark:bg-slate-950">
-          <header className="border-b border-slate-200 dark:border-slate-800">
-            <div className="container mx-auto py-4 flex items-center justify-between">
-              <Link
-                href="/"
-                className="text-2xl font-bold text-slate-900 dark:text-slate-100 no-underline"
-              >
-                MCPserver.in
-              </Link>
-              <p className="text-sm text-slate-500 dark:text-slate-400">
-                Public authority for MCP server discovery
-              </p>
-            </div>
-          </header>
+          <SiteHeader />
           <main className="container mx-auto py-8">
             {children}
           </main>

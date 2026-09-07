@@ -1,0 +1,28 @@
+# MCPserver.in CODEOWNERS
+# Every file in this repo requires a code owner review before merge.
+# Update this file when ownership changes.
+
+# Default owner for everything.
+*       @CodesbyFebin
+
+# Pillar registry + content registries — publication authority surface.
+# These files govern what is indexable; require a second reviewer to change them.
+/src/content/pillar-registry.ts          @CodesbyFebin
+/src/content/content-registry.ts         @CodesbyFebin
+/src/content/server-registry.ts          @CodesbyFebin
+/src/content/route-helpers.ts            @CodesbyFebin
+/src/seo/                                @CodesbyFebin
+
+# Migration data — the source of truth for redirect maps.
+/data/migration/                         @CodesbyFebin
+/scripts/generate-migration-ledger.ts     @CodesbyFebin
+/scripts/audit-reconciliation.ts         @CodesbyFebin
+/reports/                                @CodesbyFebin
+
+# Infrastructure (CI, Docker, Caddy).
+/Dockerfile                              @CodesbyFebin
+/docker-compose.yml                      @CodesbyFebin
+/Caddyfile                               @CodesbyFebin
+/.github/                                @CodesbyFebin
+/middleware.ts                           @CodesbyFebin
+/next.config.mjs                         @CodesbyFebin

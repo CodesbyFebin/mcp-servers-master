@@ -3,5 +3,482 @@
   "framework": "nextjs",
   "buildCommand": "npm run build",
   "installCommand": "npm install --legacy-peer-deps",
-  "devCommand": "npm run dev"
+  "devCommand": "npm run dev",
+  "redirects": [
+    {
+      "source": "/glossary/mcp-auth-provider-18",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-batch-processing-34",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-websocket-server-86",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-sse-gateway-85",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-disaster-recovery-57",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-stream-aggregator-64",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-webhook-receiver-73",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-auto-scaling-0",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-polling-service-88",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-load-balancer-15",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-process-monitor-97",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-ssl-terminator-49",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-rule-engine-110",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-pubsub-system-90",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-callback-handler-74",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-stream-processing-33",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-schema-validator-118",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-container-registry-1",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-socket-adapter-87",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-schema-registry-61",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-cdn-service-4",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-message-broker-5",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-vulnerability-scan-106",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-object-store-21",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-http-cache-50",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-push-notification-72",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-nosql-db-24",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-license-checker-108",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-sync-engine-59",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-event-bus-6",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-data-pipeline-31",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-health-check-43",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-thread-pool-95",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-logging-service-13",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-vector-store-29",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-data-migrator-60",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-message-router-62",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-task-runner-93",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-cache-layer-9",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-compliance-checker-104",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-notification-service-69",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-certificate-manager-48",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-hyperparameter-tune-38",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-replication-service-58",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-policy-engine-109",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-sms-gateway-71",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-api-client-78",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-traffic-manager-16",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-worker-pool-94",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-workflow-engine-8",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-graphql-gateway-79",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-log-aggregator-65",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-liveness-probe-45",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-task-queue-7",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-config-map-46",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-process-restart-98",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-security-scanner-105",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-dns-provider-3",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-metric-collector-66",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-secret-management-2",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-subscription-manager-89",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-identity-service-19",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-log-rotation-99",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-email-service-70",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-experiment-tracker-37",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-api-gateway-14",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-analytics-platform-11",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-graph-database-27",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-trace-collector-67",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-canary-deploy-40",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-monitoring-tool-12",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-search-engine-10",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-event-processor-63",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-audit-logger-103",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-web-scraper-77",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-readiness-probe-44",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-trace-export-102",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-ml-model-serving-30",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-file-storage-20",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-alert-manager-68",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-function-orchestrator-53",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-dependency-check-107",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-metric-export-101",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-block-storage-22",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-serverless-func-52",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-data-validator-117",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-key-value-store-26",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-database-service-23",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-soc-2",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-udp-proxy-83",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-file-watcher-75",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/glossary/mcp-iso-27001",
+      "destination": "/glossary/",
+      "permanent": true
+    },
+    {
+      "source": "/mcp-server-directory",
+      "destination": "/servers",
+      "permanent": true
+    },
+    {
+      "source": "/directory",
+      "destination": "/servers",
+      "permanent": true
+    },
+    {
+      "source": "/directory/",
+      "destination": "/servers",
+      "permanent": true
+    }
+  ]
 }

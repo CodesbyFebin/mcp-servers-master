@@ -1,0 +1,4734 @@
+[
+  {
+    "url": "https://www.mcpserver.in/",
+    "path": "/",
+    "bucket": "home",
+    "clicks": 3,
+    "impressions": 96
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-p95-latency/",
+    "path": "/glossary/mcp-p95-latency/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 106
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/agent/",
+    "path": "/glossary/agent/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 86
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/cve-management/",
+    "path": "/glossary/cve-management/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 70
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/model-serving/",
+    "path": "/glossary/model-serving/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 67
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/streamable-http/",
+    "path": "/glossary/streamable-http/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 55
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/",
+    "path": "/glossary/",
+    "bucket": "glossary",
+    "clicks": 1,
+    "impressions": 49
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/hnsw/",
+    "path": "/glossary/hnsw/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 49
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-auth-provider-18/",
+    "path": "/glossary/mcp-auth-provider-18/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 41
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-elicitation/",
+    "path": "/glossary/mcp-elicitation/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 38
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-freshdesk/",
+    "path": "/glossary/mcp-freshdesk/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 34
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-timeout/",
+    "path": "/glossary/mcp-timeout/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 34
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-india-ecommerce/",
+    "path": "/glossary/mcp-india-ecommerce/",
+    "bucket": "glossary",
+    "clicks": 2,
+    "impressions": 26
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/guardrails/",
+    "path": "/glossary/guardrails/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 24
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-batch-processing-34/",
+    "path": "/glossary/mcp-batch-processing-34/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 23
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-cursor-editor/",
+    "path": "/glossary/mcp-cursor-editor/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 22
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-websocket-server-86/",
+    "path": "/glossary/mcp-websocket-server-86/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 18
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/gateway/",
+    "path": "/glossary/gateway/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 18
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/tool-calling/",
+    "path": "/glossary/tool-calling/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 18
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-sse-gateway-85/",
+    "path": "/glossary/mcp-sse-gateway-85/",
+    "bucket": "glossary",
+    "clicks": 1,
+    "impressions": 18
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-disaster-recovery-57/",
+    "path": "/glossary/mcp-disaster-recovery-57/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 16
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-stream-aggregator-64/",
+    "path": "/glossary/mcp-stream-aggregator-64/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 16
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-tool-input-schema/",
+    "path": "/glossary/mcp-tool-input-schema/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 14
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-webhook-receiver-73/",
+    "path": "/glossary/mcp-webhook-receiver-73/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 13
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-progress/",
+    "path": "/glossary/mcp-progress/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 13
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-auto-scaling-0/",
+    "path": "/glossary/mcp-auto-scaling-0/",
+    "bucket": "glossary",
+    "clicks": 1,
+    "impressions": 13
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-rbi-guidelines/",
+    "path": "/glossary/mcp-rbi-guidelines/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 12
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/bpe/",
+    "path": "/glossary/bpe/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 12
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-uri-scheme/",
+    "path": "/glossary/mcp-uri-scheme/",
+    "bucket": "glossary",
+    "clicks": 1,
+    "impressions": 12
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/system-prompt/",
+    "path": "/glossary/system-prompt/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 12
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-polling-service-88/",
+    "path": "/glossary/mcp-polling-service-88/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 12
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-tool-output-schema/",
+    "path": "/glossary/mcp-tool-output-schema/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 12
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-bengali-support/",
+    "path": "/glossary/mcp-bengali-support/",
+    "bucket": "glossary",
+    "clicks": 1,
+    "impressions": 11
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-load-balancer-15/",
+    "path": "/glossary/mcp-load-balancer-15/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 11
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/chain-of-thought/",
+    "path": "/glossary/chain-of-thought/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 10
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/whisper/",
+    "path": "/glossary/whisper/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 10
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-india-education/",
+    "path": "/glossary/mcp-india-education/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 9
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-process-monitor-97/",
+    "path": "/glossary/mcp-process-monitor-97/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 9
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-ssl-terminator-49/",
+    "path": "/glossary/mcp-ssl-terminator-49/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 9
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/vision-language-model/",
+    "path": "/glossary/vision-language-model/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 9
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-rule-engine-110/",
+    "path": "/glossary/mcp-rule-engine-110/",
+    "bucket": "glossary",
+    "clicks": 1,
+    "impressions": 9
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-india-banking/",
+    "path": "/glossary/mcp-india-banking/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 9
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-systemd-service/",
+    "path": "/glossary/mcp-systemd-service/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 8
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-pubsub-system-90/",
+    "path": "/glossary/mcp-pubsub-system-90/",
+    "bucket": "glossary",
+    "clicks": 1,
+    "impressions": 8
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-callback-handler-74/",
+    "path": "/glossary/mcp-callback-handler-74/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 8
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/rlhf/",
+    "path": "/glossary/rlhf/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 8
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/stdio/",
+    "path": "/glossary/stdio/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 8
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/temperature/",
+    "path": "/glossary/temperature/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 7
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/pinecone-mcp/",
+    "path": "/glossary/pinecone-mcp/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 7
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/vector-database/",
+    "path": "/glossary/vector-database/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 6
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-stream-processing-33/",
+    "path": "/glossary/mcp-stream-processing-33/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 6
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-schema-validator-118/",
+    "path": "/glossary/mcp-schema-validator-118/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 6
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-container-registry-1/",
+    "path": "/glossary/mcp-container-registry-1/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 6
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-socket-adapter-87/",
+    "path": "/glossary/mcp-socket-adapter-87/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 6
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-agent-orchestration/",
+    "path": "/glossary/mcp-agent-orchestration/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 5
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-reddit-api/",
+    "path": "/glossary/mcp-reddit-api/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 5
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/lm-studio-mcp/",
+    "path": "/glossary/lm-studio-mcp/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 5
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/new-relic-mcp/",
+    "path": "/glossary/new-relic-mcp/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 5
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-telugu-support/",
+    "path": "/glossary/mcp-telugu-support/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 4
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-schema-registry-61/",
+    "path": "/glossary/mcp-schema-registry-61/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 4
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-cdn-service-4/",
+    "path": "/glossary/mcp-cdn-service-4/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 4
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-pinecone/",
+    "path": "/glossary/mcp-pinecone/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 4
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/semantic-search/",
+    "path": "/glossary/semantic-search/",
+    "bucket": "glossary",
+    "clicks": 1,
+    "impressions": 4
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/inference/",
+    "path": "/glossary/inference/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 4
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/asr/",
+    "path": "/glossary/asr/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 4
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-message-broker-5/",
+    "path": "/glossary/mcp-message-broker-5/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 4
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-graceful-shutdown/",
+    "path": "/glossary/mcp-graceful-shutdown/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 4
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-key-rotation/",
+    "path": "/glossary/mcp-key-rotation/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 4
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-vulnerability-scan-106/",
+    "path": "/glossary/mcp-vulnerability-scan-106/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 4
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-roots/",
+    "path": "/glossary/mcp-roots/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 4
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-object-store-21/",
+    "path": "/glossary/mcp-object-store-21/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 4
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/lora/",
+    "path": "/glossary/lora/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 4
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/rag/",
+    "path": "/glossary/rag/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 4
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-http-cache-50/",
+    "path": "/glossary/mcp-http-cache-50/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 3
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-retry-logic/",
+    "path": "/glossary/mcp-retry-logic/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 3
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-json-schema/",
+    "path": "/glossary/mcp-json-schema/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 3
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-push-notification-72/",
+    "path": "/glossary/mcp-push-notification-72/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 3
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/hallucination/",
+    "path": "/glossary/hallucination/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 3
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-gitlab/",
+    "path": "/glossary/mcp-gitlab/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 3
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-cancel/",
+    "path": "/glossary/mcp-cancel/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 3
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/prompt-engineering/",
+    "path": "/glossary/prompt-engineering/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 3
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-nosql-db-24/",
+    "path": "/glossary/mcp-nosql-db-24/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 3
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-license-checker-108/",
+    "path": "/glossary/mcp-license-checker-108/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 3
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-tool-list-changed/",
+    "path": "/glossary/mcp-tool-list-changed/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 3
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-sync-engine-59/",
+    "path": "/glossary/mcp-sync-engine-59/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 3
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/react/",
+    "path": "/glossary/react/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 3
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/oauth/",
+    "path": "/glossary/oauth/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 3
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-sebi-compliance/",
+    "path": "/glossary/mcp-sebi-compliance/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 3
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-zed-editor/",
+    "path": "/glossary/mcp-zed-editor/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 3
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-pm2-process-manager/",
+    "path": "/glossary/mcp-pm2-process-manager/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-india-healthcare/",
+    "path": "/glossary/mcp-india-healthcare/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/sla-monitoring/",
+    "path": "/glossary/sla-monitoring/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-event-bus-6/",
+    "path": "/glossary/mcp-event-bus-6/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-data-pipeline-31/",
+    "path": "/glossary/mcp-data-pipeline-31/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/clickhouse-mcp/",
+    "path": "/glossary/clickhouse-mcp/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-capability-negotiation/",
+    "path": "/glossary/mcp-capability-negotiation/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-health-check-43/",
+    "path": "/glossary/mcp-health-check-43/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-thread-pool-95/",
+    "path": "/glossary/mcp-thread-pool-95/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-logging-service-13/",
+    "path": "/glossary/mcp-logging-service-13/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-request-id/",
+    "path": "/glossary/mcp-request-id/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/context-window/",
+    "path": "/glossary/context-window/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-prompt-list-changed/",
+    "path": "/glossary/mcp-prompt-list-changed/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-autogen/",
+    "path": "/glossary/mcp-autogen/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-vector-store-29/",
+    "path": "/glossary/mcp-vector-store-29/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-data-migrator-60/",
+    "path": "/glossary/mcp-data-migrator-60/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/docker-mcp/",
+    "path": "/glossary/docker-mcp/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-message-router-62/",
+    "path": "/glossary/mcp-message-router-62/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/few-shot-learning/",
+    "path": "/glossary/few-shot-learning/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/llm-ops/",
+    "path": "/glossary/llm-ops/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-task-runner-93/",
+    "path": "/glossary/mcp-task-runner-93/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-cache-layer-9/",
+    "path": "/glossary/mcp-cache-layer-9/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-vscode/",
+    "path": "/glossary/mcp-vscode/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-compliance-checker-104/",
+    "path": "/glossary/mcp-compliance-checker-104/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-prometheus/",
+    "path": "/glossary/mcp-prometheus/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/ros/",
+    "path": "/glossary/ros/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/github-actions-mcp/",
+    "path": "/glossary/github-actions-mcp/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-notification-service-69/",
+    "path": "/glossary/mcp-notification-service-69/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-agent-delegation/",
+    "path": "/glossary/mcp-agent-delegation/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-indian-languages/",
+    "path": "/glossary/mcp-indian-languages/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-certificate-manager-48/",
+    "path": "/glossary/mcp-certificate-manager-48/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-hyperparameter-tune-38/",
+    "path": "/glossary/mcp-hyperparameter-tune-38/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-grafana-dashboards/",
+    "path": "/glossary/mcp-grafana-dashboards/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-replication-service-58/",
+    "path": "/glossary/mcp-replication-service-58/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-hindi-support/",
+    "path": "/glossary/mcp-hindi-support/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-intercom/",
+    "path": "/glossary/mcp-intercom/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-tool-error/",
+    "path": "/glossary/mcp-tool-error/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-agent-collaboration/",
+    "path": "/glossary/mcp-agent-collaboration/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/simulation-mcp/",
+    "path": "/glossary/simulation-mcp/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-qdrant/",
+    "path": "/glossary/mcp-qdrant/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-excel/",
+    "path": "/glossary/mcp-excel/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-reddit-pipeline/",
+    "path": "/glossary/mcp-reddit-pipeline/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-autogpt/",
+    "path": "/glossary/mcp-autogpt/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-policy-engine-109/",
+    "path": "/glossary/mcp-policy-engine-109/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/splunk-mcp/",
+    "path": "/glossary/splunk-mcp/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/bigquery-mcp/",
+    "path": "/glossary/bigquery-mcp/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/encryption-in-transit/",
+    "path": "/glossary/encryption-in-transit/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-resource-template/",
+    "path": "/glossary/mcp-resource-template/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-sms-gateway-71/",
+    "path": "/glossary/mcp-sms-gateway-71/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-agent-memory/",
+    "path": "/glossary/mcp-agent-memory/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-api-client-78/",
+    "path": "/glossary/mcp-api-client-78/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-reddit-sentiment/",
+    "path": "/glossary/mcp-reddit-sentiment/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-traffic-manager-16/",
+    "path": "/glossary/mcp-traffic-manager-16/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-on-premise/",
+    "path": "/glossary/mcp-on-premise/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-worker-pool-94/",
+    "path": "/glossary/mcp-worker-pool-94/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-workflow-engine-8/",
+    "path": "/glossary/mcp-workflow-engine-8/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-graphql-gateway-79/",
+    "path": "/glossary/mcp-graphql-gateway-79/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/snowflake-mcp/",
+    "path": "/glossary/snowflake-mcp/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-log-aggregator-65/",
+    "path": "/glossary/mcp-log-aggregator-65/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-liveness-probe-45/",
+    "path": "/glossary/mcp-liveness-probe-45/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/chromadb-mcp/",
+    "path": "/glossary/chromadb-mcp/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-task-queue-7/",
+    "path": "/glossary/mcp-task-queue-7/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-config-map-46/",
+    "path": "/glossary/mcp-config-map-46/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/kv-cache/",
+    "path": "/glossary/kv-cache/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-process-restart-98/",
+    "path": "/glossary/mcp-process-restart-98/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-security-scanner-105/",
+    "path": "/glossary/mcp-security-scanner-105/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/embedding/",
+    "path": "/glossary/embedding/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/llamaindex-mcp/",
+    "path": "/glossary/llamaindex-mcp/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/dpdp/",
+    "path": "/glossary/dpdp/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-dns-provider-3/",
+    "path": "/glossary/mcp-dns-provider-3/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-milvus/",
+    "path": "/glossary/mcp-milvus/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-teams/",
+    "path": "/glossary/mcp-teams/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-metric-collector-66/",
+    "path": "/glossary/mcp-metric-collector-66/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/large-language-model/",
+    "path": "/glossary/large-language-model/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/cosine-similarity/",
+    "path": "/glossary/cosine-similarity/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/supabase-mcp/",
+    "path": "/glossary/supabase-mcp/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-secret-management-2/",
+    "path": "/glossary/mcp-secret-management-2/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-subscription-manager-89/",
+    "path": "/glossary/mcp-subscription-manager-89/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-gdpr/",
+    "path": "/glossary/mcp-gdpr/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/qdrant-mcp/",
+    "path": "/glossary/qdrant-mcp/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-resource-contents/",
+    "path": "/glossary/mcp-resource-contents/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-secrets-manager/",
+    "path": "/glossary/mcp-secrets-manager/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-resource-list-changed/",
+    "path": "/glossary/mcp-resource-list-changed/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/hardware-abstraction-mcp/",
+    "path": "/glossary/hardware-abstraction-mcp/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-resource-updated/",
+    "path": "/glossary/mcp-resource-updated/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-identity-service-19/",
+    "path": "/glossary/mcp-identity-service-19/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-log-rotation-99/",
+    "path": "/glossary/mcp-log-rotation-99/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/prometheus-mcp/",
+    "path": "/glossary/prometheus-mcp/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-datadog/",
+    "path": "/glossary/mcp-datadog/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-newrelic/",
+    "path": "/glossary/mcp-newrelic/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-dynamodb/",
+    "path": "/glossary/mcp-dynamodb/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-email-service-70/",
+    "path": "/glossary/mcp-email-service-70/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-inspector/",
+    "path": "/glossary/mcp-inspector/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/datadog-mcp/",
+    "path": "/glossary/datadog-mcp/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-alerting/",
+    "path": "/glossary/mcp-alerting/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/terraform-mcp/",
+    "path": "/glossary/terraform-mcp/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-experiment-tracker-37/",
+    "path": "/glossary/mcp-experiment-tracker-37/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-initialization/",
+    "path": "/glossary/mcp-initialization/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-client-capabilities/",
+    "path": "/glossary/mcp-client-capabilities/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/weaviate-mcp/",
+    "path": "/glossary/weaviate-mcp/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-api-gateway-14/",
+    "path": "/glossary/mcp-api-gateway-14/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-reddit-trends/",
+    "path": "/glossary/mcp-reddit-trends/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-analytics-platform-11/",
+    "path": "/glossary/mcp-analytics-platform-11/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/alignment/",
+    "path": "/glossary/alignment/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-graph-database-27/",
+    "path": "/glossary/mcp-graph-database-27/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-trace-collector-67/",
+    "path": "/glossary/mcp-trace-collector-67/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-self-hosted/",
+    "path": "/glossary/mcp-self-hosted/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-private-cloud/",
+    "path": "/glossary/mcp-private-cloud/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-canary-deploy-40/",
+    "path": "/glossary/mcp-canary-deploy-40/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-params/",
+    "path": "/glossary/mcp-params/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-monitoring-tool-12/",
+    "path": "/glossary/mcp-monitoring-tool-12/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-server/",
+    "path": "/glossary/mcp-server/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/tokenizer/",
+    "path": "/glossary/tokenizer/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-search-engine-10/",
+    "path": "/glossary/mcp-search-engine-10/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-event-processor-63/",
+    "path": "/glossary/mcp-event-processor-63/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-audit-logger-103/",
+    "path": "/glossary/mcp-audit-logger-103/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-client/",
+    "path": "/glossary/mcp-client/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-web-scraper-77/",
+    "path": "/glossary/mcp-web-scraper-77/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-tool-result/",
+    "path": "/glossary/mcp-tool-result/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-readiness-probe-44/",
+    "path": "/glossary/mcp-readiness-probe-44/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-prompt-argument/",
+    "path": "/glossary/mcp-prompt-argument/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-trace-export-102/",
+    "path": "/glossary/mcp-trace-export-102/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/dynamodb-mcp/",
+    "path": "/glossary/dynamodb-mcp/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/elasticsearch-mcp/",
+    "path": "/glossary/elasticsearch-mcp/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-ml-model-serving-30/",
+    "path": "/glossary/mcp-ml-model-serving-30/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-file-storage-20/",
+    "path": "/glossary/mcp-file-storage-20/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-discovery/",
+    "path": "/glossary/mcp-discovery/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/top-p-nucleus-sampling/",
+    "path": "/glossary/top-p-nucleus-sampling/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-alert-manager-68/",
+    "path": "/glossary/mcp-alert-manager-68/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-function-orchestrator-53/",
+    "path": "/glossary/mcp-function-orchestrator-53/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-dependency-check-107/",
+    "path": "/glossary/mcp-dependency-check-107/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/crewai-mcp/",
+    "path": "/glossary/crewai-mcp/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-india-latency/",
+    "path": "/glossary/mcp-india-latency/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-data-localization/",
+    "path": "/glossary/mcp-data-localization/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-metric-export-101/",
+    "path": "/glossary/mcp-metric-export-101/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-block-storage-22/",
+    "path": "/glossary/mcp-block-storage-22/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-serverless-func-52/",
+    "path": "/glossary/mcp-serverless-func-52/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-data-validator-117/",
+    "path": "/glossary/mcp-data-validator-117/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-key-value-store-26/",
+    "path": "/glossary/mcp-key-value-store-26/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-agent-tools/",
+    "path": "/glossary/mcp-agent-tools/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-database-service-23/",
+    "path": "/glossary/mcp-database-service-23/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-babyagi/",
+    "path": "/glossary/mcp-babyagi/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/milvus-mcp/",
+    "path": "/glossary/milvus-mcp/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-soc-2/",
+    "path": "/glossary/mcp-soc-2/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-agent-planning/",
+    "path": "/glossary/mcp-agent-planning/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-result/",
+    "path": "/glossary/mcp-result/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-udp-proxy-83/",
+    "path": "/glossary/mcp-udp-proxy-83/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-file-watcher-75/",
+    "path": "/glossary/mcp-file-watcher-75/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-iso-27001/",
+    "path": "/glossary/mcp-iso-27001/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/glossary/mcp-bigcommerce/",
+    "path": "/glossary/mcp-bigcommerce/",
+    "bucket": "glossary",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/swiggy-mcp-india/",
+    "path": "/blog/swiggy-mcp-india/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 163
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/zerodha-mcp-server-trading-ai/",
+    "path": "/blog/zerodha-mcp-server-trading-ai/",
+    "bucket": "blog",
+    "clicks": 1,
+    "impressions": 159
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/dhan-mcp-fo-trading/",
+    "path": "/blog/dhan-mcp-fo-trading/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 141
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-transport-methods/",
+    "path": "/blog/mcp-transport-methods/",
+    "bucket": "blog",
+    "clicks": 1,
+    "impressions": 134
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/screener-mcp-india/",
+    "path": "/blog/screener-mcp-india/",
+    "bucket": "blog",
+    "clicks": 2,
+    "impressions": 48
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/upstox-mcp-trading/",
+    "path": "/blog/upstox-mcp-trading/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 40
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-video-tutorials-youtube/",
+    "path": "/blog/mcp-server-video-tutorials-youtube/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 40
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-video-courses-ranked/",
+    "path": "/blog/mcp-video-courses-ranked/",
+    "bucket": "blog",
+    "clicks": 1,
+    "impressions": 38
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-for-hubspot/",
+    "path": "/blog/mcp-server-for-hubspot/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 33
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/groww-mcp-investments/",
+    "path": "/blog/groww-mcp-investments/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 32
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-role-based-access-control/",
+    "path": "/blog/mcp-role-based-access-control/",
+    "bucket": "blog",
+    "clicks": 1,
+    "impressions": 29
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/zoho-desk-mcp-india/",
+    "path": "/blog/zoho-desk-mcp-india/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 25
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/icici-bank-mcp-india/",
+    "path": "/blog/icici-bank-mcp-india/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 21
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/moneycontrol-mcp-india/",
+    "path": "/blog/moneycontrol-mcp-india/",
+    "bucket": "blog",
+    "clicks": 2,
+    "impressions": 21
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-for-slack/",
+    "path": "/blog/mcp-server-for-slack/",
+    "bucket": "blog",
+    "clicks": 1,
+    "impressions": 20
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/indian-railways-mcp-india/",
+    "path": "/blog/indian-railways-mcp-india/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 18
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/amazon-india-mcp/",
+    "path": "/blog/amazon-india-mcp/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 17
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/paytm-mcp-server-india-payments/",
+    "path": "/blog/paytm-mcp-server-india-payments/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 17
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/fivepaisa-mcp-india/",
+    "path": "/blog/fivepaisa-mcp-india/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 16
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-design-patterns-production/",
+    "path": "/blog/mcp-design-patterns-production/",
+    "bucket": "blog",
+    "clicks": 1,
+    "impressions": 16
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/sbi-mcp-server-india-banking/",
+    "path": "/blog/sbi-mcp-server-india-banking/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 16
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-for-onedrive/",
+    "path": "/blog/mcp-server-for-onedrive/",
+    "bucket": "blog",
+    "clicks": 1,
+    "impressions": 15
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/delhivery-mcp-india/",
+    "path": "/blog/delhivery-mcp-india/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 15
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/flipkart-mcp-india/",
+    "path": "/blog/flipkart-mcp-india/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 14
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/matlab-mcp-server-integration-guide/",
+    "path": "/blog/matlab-mcp-server-integration-guide/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 14
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/irctc-mcp-india/",
+    "path": "/blog/irctc-mcp-india/",
+    "bucket": "blog",
+    "clicks": 1,
+    "impressions": 14
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/google-pay-mcp-india/",
+    "path": "/blog/google-pay-mcp-india/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 13
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-for-jira/",
+    "path": "/blog/mcp-server-for-jira/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 13
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-policy-as-code/",
+    "path": "/blog/mcp-policy-as-code/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 13
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/hdfc-bank-mcp-india/",
+    "path": "/blog/hdfc-bank-mcp-india/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 12
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/axis-bank-mcp-india/",
+    "path": "/blog/axis-bank-mcp-india/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 12
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-for-event-driven-architecture/",
+    "path": "/blog/mcp-server-for-event-driven-architecture/",
+    "bucket": "blog",
+    "clicks": 1,
+    "impressions": 12
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-microservices-architecture/",
+    "path": "/blog/mcp-microservices-architecture/",
+    "bucket": "blog",
+    "clicks": 1,
+    "impressions": 12
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-cloud-deployment-comparison/",
+    "path": "/blog/mcp-cloud-deployment-comparison/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 11
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-for-gitlab-devops/",
+    "path": "/blog/mcp-server-for-gitlab-devops/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 10
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/zoho-inventory-mcp-india/",
+    "path": "/blog/zoho-inventory-mcp-india/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 10
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/canara-bank-mcp-india/",
+    "path": "/blog/canara-bank-mcp-india/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 10
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/makemytrip-mcp-india/",
+    "path": "/blog/makemytrip-mcp-india/",
+    "bucket": "blog",
+    "clicks": 1,
+    "impressions": 9
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/aubank-mcp-india/",
+    "path": "/blog/aubank-mcp-india/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 9
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/hdfc-ergo-mcp/",
+    "path": "/blog/hdfc-ergo-mcp/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 8
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-comparison-side-by-side/",
+    "path": "/blog/mcp-server-comparison-side-by-side/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 7
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/yes-bank-mcp-india/",
+    "path": "/blog/yes-bank-mcp-india/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 7
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/shadowfax-mcp-india/",
+    "path": "/blog/shadowfax-mcp-india/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 7
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/jio-mcp-india/",
+    "path": "/blog/jio-mcp-india/",
+    "bucket": "blog",
+    "clicks": 1,
+    "impressions": 6
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/phonepe-mcp-server-india/",
+    "path": "/blog/phonepe-mcp-server-india/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 6
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/angel-broking-mcp-india/",
+    "path": "/blog/angel-broking-mcp-india/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 6
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-gitlab-ci-integration/",
+    "path": "/blog/mcp-gitlab-ci-integration/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 5
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/urbancompany-mcp-india/",
+    "path": "/blog/urbancompany-mcp-india/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 5
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/tcs-mcp-india/",
+    "path": "/blog/tcs-mcp-india/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 5
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/cluster/integrations-tools/",
+    "path": "/blog/cluster/integrations-tools/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 5
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/federal-bank-mcp-kerala/",
+    "path": "/blog/federal-bank-mcp-kerala/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 5
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-for-crisp/",
+    "path": "/blog/mcp-server-for-crisp/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 5
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/axis-bank-mcp-server/",
+    "path": "/blog/axis-bank-mcp-server/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 4
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/redbus-mcp-india/",
+    "path": "/blog/redbus-mcp-india/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 4
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/goibibo-mcp-india/",
+    "path": "/blog/goibibo-mcp-india/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 4
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/fedex-india-mcp/",
+    "path": "/blog/fedex-india-mcp/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 4
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/zoho-projects-mcp-india/",
+    "path": "/blog/zoho-projects-mcp-india/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 4
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-for-google-sheets/",
+    "path": "/blog/mcp-server-for-google-sheets/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 4
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-future-trends-workshop/",
+    "path": "/blog/mcp-server-future-trends-workshop/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 3
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/uber-india-mcp/",
+    "path": "/blog/uber-india-mcp/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 3
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-code-snippets-community-library/",
+    "path": "/blog/mcp-server-code-snippets-community-library/",
+    "bucket": "blog",
+    "clicks": 1,
+    "impressions": 3
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/hcl-mcp-india/",
+    "path": "/blog/hcl-mcp-india/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 3
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-translation-initiative/",
+    "path": "/blog/mcp-server-translation-initiative/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 3
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/dhl-india-mcp/",
+    "path": "/blog/dhl-india-mcp/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 3
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/hotstar-mcp-india/",
+    "path": "/blog/hotstar-mcp-india/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 3
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-for-ifttt/",
+    "path": "/blog/mcp-server-for-ifttt/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 3
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-cross-platform-compatibility/",
+    "path": "/blog/mcp-cross-platform-compatibility/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 3
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-kubernetes-deployment/",
+    "path": "/blog/mcp-server-kubernetes-deployment/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 3
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-serverless-architecture/",
+    "path": "/blog/mcp-serverless-architecture/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 3
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-database-connection-pooling/",
+    "path": "/blog/mcp-database-connection-pooling/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 3
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/reliance-mcp-india/",
+    "path": "/blog/reliance-mcp-india/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-json-rpc-deep-dive/",
+    "path": "/blog/mcp-json-rpc-deep-dive/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/airtel-mcp-india/",
+    "path": "/blog/airtel-mcp-india/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/dunzo-mcp-india/",
+    "path": "/blog/dunzo-mcp-india/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-future-predictions-expert-roundup/",
+    "path": "/blog/mcp-future-predictions-expert-roundup/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-for-google-drive/",
+    "path": "/blog/mcp-server-for-google-drive/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mybillbook-mcp-india/",
+    "path": "/blog/mybillbook-mcp-india/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/vi-mcp-india/",
+    "path": "/blog/vi-mcp-india/",
+    "bucket": "blog",
+    "clicks": 1,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-configuration-files/",
+    "path": "/blog/mcp-server-configuration-files/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/rapido-mcp-india/",
+    "path": "/blog/rapido-mcp-india/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/billdesk-mcp-india/",
+    "path": "/blog/billdesk-mcp-india/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-diversity-inclusion/",
+    "path": "/blog/mcp-server-diversity-inclusion/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/best-mcp-server-tutorials/",
+    "path": "/blog/best-mcp-server-tutorials/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/nse-mcp-server-india/",
+    "path": "/blog/nse-mcp-server-india/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/indusind-mcp-india/",
+    "path": "/blog/indusind-mcp-india/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-cli-tools-guide/",
+    "path": "/blog/mcp-cli-tools-guide/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/fortis-mcp-india/",
+    "path": "/blog/fortis-mcp-india/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/manipal-mcp-india/",
+    "path": "/blog/manipal-mcp-india/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/sebi-mcp-server-india/",
+    "path": "/blog/sebi-mcp-server-india/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/aiims-mcp-india/",
+    "path": "/blog/aiims-mcp-india/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-coding-standards-style-guides/",
+    "path": "/blog/mcp-coding-standards-style-guides/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-api-key-authentication/",
+    "path": "/blog/mcp-api-key-authentication/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-books-essentials/",
+    "path": "/blog/mcp-books-essentials/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-for-salesforce/",
+    "path": "/blog/mcp-server-for-salesforce/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-pricing-cost-comparison/",
+    "path": "/blog/mcp-pricing-cost-comparison/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-startup-guide-budget/",
+    "path": "/blog/mcp-startup-guide-budget/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/cluster/ugc-community-hub/",
+    "path": "/blog/cluster/ugc-community-hub/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/idfc-first-mcp-india/",
+    "path": "/blog/idfc-first-mcp-india/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/",
+    "path": "/blog/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-ci-cd-with-github-actions/",
+    "path": "/blog/mcp-server-ci-cd-with-github-actions/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-performance-optimization/",
+    "path": "/blog/mcp-server-performance-optimization/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-ci-cd-pipeline-setup/",
+    "path": "/blog/mcp-ci-cd-pipeline-setup/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-innovations-latest-research/",
+    "path": "/blog/mcp-innovations-latest-research/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-cheat-sheets/",
+    "path": "/blog/mcp-server-cheat-sheets/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-for-monday/",
+    "path": "/blog/mcp-server-for-monday/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-for-razorpay/",
+    "path": "/blog/mcp-server-for-razorpay/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/blinkit-mcp-india/",
+    "path": "/blog/blinkit-mcp-india/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/oyo-mcp-india/",
+    "path": "/blog/oyo-mcp-india/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-for-workato/",
+    "path": "/blog/mcp-server-for-workato/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/infosys-mcp-india/",
+    "path": "/blog/infosys-mcp-india/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/aajtak-mcp-india/",
+    "path": "/blog/aajtak-mcp-india/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-step-by-step-guides-wiki/",
+    "path": "/blog/mcp-server-step-by-step-guides-wiki/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/ola-mcp-india/",
+    "path": "/blog/ola-mcp-india/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/zomato-mcp-india/",
+    "path": "/blog/zomato-mcp-india/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/wipro-mcp-india/",
+    "path": "/blog/wipro-mcp-india/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/yes-bank-mcp-server/",
+    "path": "/blog/yes-bank-mcp-server/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-client-libraries/",
+    "path": "/blog/mcp-client-libraries/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-alternatives-options-compared/",
+    "path": "/blog/mcp-server-alternatives-options-compared/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-directory-complete-list/",
+    "path": "/blog/mcp-server-directory-complete-list/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/khatabook-mcp-india/",
+    "path": "/blog/khatabook-mcp-india/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-reviews-user-ratings/",
+    "path": "/blog/mcp-server-reviews-user-ratings/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/razorpayx-mcp-india/",
+    "path": "/blog/razorpayx-mcp-india/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/apollo-mcp-india/",
+    "path": "/blog/apollo-mcp-india/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-for-shopify/",
+    "path": "/blog/mcp-server-for-shopify/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-for-zapier/",
+    "path": "/blog/mcp-server-for-zapier/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/ecom-express-mcp-india/",
+    "path": "/blog/ecom-express-mcp-india/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-for-zoom/",
+    "path": "/blog/mcp-server-for-zoom/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/union-bank-mcp-india/",
+    "path": "/blog/union-bank-mcp-india/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-for-zendesk/",
+    "path": "/blog/mcp-server-for-zendesk/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-for-freshsales/",
+    "path": "/blog/mcp-server-for-freshsales/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-authentication-methods-comparison/",
+    "path": "/blog/mcp-authentication-methods-comparison/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/cluster/security-production/",
+    "path": "/blog/cluster/security-production/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-debates-hot-topics/",
+    "path": "/blog/mcp-server-debates-hot-topics/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-testing-strategies/",
+    "path": "/blog/mcp-server-testing-strategies/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-compliance-gdpr-soc2/",
+    "path": "/blog/mcp-compliance-gdpr-soc2/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-community-join-the-conversation/",
+    "path": "/blog/mcp-server-community-join-the-conversation/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-for-twilio/",
+    "path": "/blog/mcp-server-for-twilio/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-cursor-ide-integration/",
+    "path": "/blog/mcp-cursor-ide-integration/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-for-mongodb/",
+    "path": "/blog/mcp-server-for-mongodb/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-for-websocket-scale/",
+    "path": "/blog/mcp-server-for-websocket-scale/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-for-kafka/",
+    "path": "/blog/mcp-server-for-kafka/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-workflow-automation/",
+    "path": "/blog/mcp-workflow-automation/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/how-to-deploy-mcp-server-to-production/",
+    "path": "/blog/how-to-deploy-mcp-server-to-production/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-orchestration-managing-multiple-servers/",
+    "path": "/blog/mcp-orchestration-managing-multiple-servers/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-beyond-2026-long-term-vision/",
+    "path": "/blog/mcp-beyond-2026-long-term-vision/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-documentation-resources/",
+    "path": "/blog/mcp-documentation-resources/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-beginner-tutorial-series/",
+    "path": "/blog/mcp-server-beginner-tutorial-series/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-templates-download-and-customize/",
+    "path": "/blog/mcp-server-templates-download-and-customize/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-resources-curated-links/",
+    "path": "/blog/mcp-server-resources-curated-links/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-advanced-techniques-guide/",
+    "path": "/blog/mcp-server-advanced-techniques-guide/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-updates-changelog-tracker/",
+    "path": "/blog/mcp-server-updates-changelog-tracker/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-contributing-to-open-source-mcp/",
+    "path": "/blog/mcp-server-contributing-to-open-source-mcp/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-trends-what-s-exploding/",
+    "path": "/blog/mcp-trends-what-s-exploding/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-discord-live-chat-community/",
+    "path": "/blog/mcp-server-discord-live-chat-community/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-online-workshop-guide/",
+    "path": "/blog/mcp-server-online-workshop-guide/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-python-sdk-tutorial/",
+    "path": "/blog/mcp-python-sdk-tutorial/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-faq-community-answered/",
+    "path": "/blog/mcp-server-faq-community-answered/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-2026-roadmap/",
+    "path": "/blog/mcp-2026-roadmap/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-of-the-month-community-voting/",
+    "path": "/blog/mcp-server-of-the-month-community-voting/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-tools-community-recommended/",
+    "path": "/blog/mcp-server-tools-community-recommended/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-troubleshooting-guide-community-solutions/",
+    "path": "/blog/mcp-troubleshooting-guide-community-solutions/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-community-forums/",
+    "path": "/blog/mcp-community-forums/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-starter-kits-community-favorites/",
+    "path": "/blog/mcp-server-starter-kits-community-favorites/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-local-meetup-guide/",
+    "path": "/blog/mcp-server-local-meetup-guide/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-migration-stories-from-api-to-mcp/",
+    "path": "/blog/mcp-migration-stories-from-api-to-mcp/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-testing-before-deployment/",
+    "path": "/blog/mcp-testing-before-deployment/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-production-deployment-checklist/",
+    "path": "/blog/mcp-server-production-deployment-checklist/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-vs-langchain/",
+    "path": "/blog/mcp-vs-langchain/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-documentation-community-wiki/",
+    "path": "/blog/mcp-server-documentation-community-wiki/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-documentation-sprint/",
+    "path": "/blog/mcp-server-documentation-sprint/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-devops-automating-server-management/",
+    "path": "/blog/mcp-devops-automating-server-management/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-mentorship-program/",
+    "path": "/blog/mcp-server-mentorship-program/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-code-review-best-practices/",
+    "path": "/blog/mcp-server-code-review-best-practices/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-predictions-community-forecasts/",
+    "path": "/blog/mcp-server-predictions-community-forecasts/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-showcase-community-projects/",
+    "path": "/blog/mcp-server-showcase-community-projects/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-support-where-to-find-help/",
+    "path": "/blog/mcp-server-support-where-to-find-help/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-controversies-addressing-concerns/",
+    "path": "/blog/mcp-server-controversies-addressing-concerns/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-on-reddit/",
+    "path": "/blog/mcp-on-reddit/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-for-asana/",
+    "path": "/blog/mcp-server-for-asana/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-beginner-questions-no-question-too-small/",
+    "path": "/blog/mcp-beginner-questions-no-question-too-small/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-challenges-community-competitions/",
+    "path": "/blog/mcp-server-challenges-community-competitions/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-accessibility-guide/",
+    "path": "/blog/mcp-server-accessibility-guide/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-boilerplates-quick-start-collection/",
+    "path": "/blog/mcp-server-boilerplates-quick-start-collection/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-questions-unanswered-and-answered/",
+    "path": "/blog/mcp-server-questions-unanswered-and-answered/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-forum-discussion-board/",
+    "path": "/blog/mcp-server-forum-discussion-board/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/profit-books-mcp-india/",
+    "path": "/blog/profit-books-mcp-india/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-contributors-hall-of-fame/",
+    "path": "/blog/mcp-server-contributors-hall-of-fame/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/ndtv-mcp-india/",
+    "path": "/blog/ndtv-mcp-india/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/install-configure-first-mcp-server/",
+    "path": "/blog/install-configure-first-mcp-server/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/how-to-create-mcp-server-for-github/",
+    "path": "/blog/how-to-create-mcp-server-for-github/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-ethics-guide/",
+    "path": "/blog/mcp-server-ethics-guide/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-advanced-questions-expert-challenges/",
+    "path": "/blog/mcp-advanced-questions-expert-challenges/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-sustainability-guide/",
+    "path": "/blog/mcp-server-sustainability-guide/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-opinions-community-perspectives/",
+    "path": "/blog/mcp-server-opinions-community-perspectives/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-hackathon-guide/",
+    "path": "/blog/mcp-server-hackathon-guide/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-conferences-event-calendar/",
+    "path": "/blog/mcp-server-conferences-event-calendar/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-examples-real-world-implementations/",
+    "path": "/blog/mcp-server-examples-real-world-implementations/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-news-weekly-roundup/",
+    "path": "/blog/mcp-server-news-weekly-roundup/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-checklists-deployment-setup/",
+    "path": "/blog/mcp-server-checklists-deployment-setup/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-career-guide/",
+    "path": "/blog/mcp-server-career-guide/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-help-center-getting-assistance/",
+    "path": "/blog/mcp-server-help-center-getting-assistance/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-failures-lessons-learned/",
+    "path": "/blog/mcp-server-failures-lessons-learned/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/bigbasket-mcp-india/",
+    "path": "/blog/bigbasket-mcp-india/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/kmc-mcp-india/",
+    "path": "/blog/kmc-mcp-india/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-free-servers-open-source-list/",
+    "path": "/blog/mcp-free-servers-open-source-list/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-for-outlook/",
+    "path": "/blog/mcp-server-for-outlook/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-github-repositories/",
+    "path": "/blog/mcp-github-repositories/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-for-box/",
+    "path": "/blog/mcp-server-for-box/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/tamil-maharaja-mcp-tn/",
+    "path": "/blog/tamil-maharaja-mcp-tn/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/instamojo-mcp-india/",
+    "path": "/blog/instamojo-mcp-india/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-threat-model/",
+    "path": "/blog/mcp-threat-model/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-security-risk-assessment/",
+    "path": "/blog/mcp-security-risk-assessment/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/pnb-mcp-india/",
+    "path": "/blog/pnb-mcp-india/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-for-intercom/",
+    "path": "/blog/mcp-server-for-intercom/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/chromadb-mcp-server-open-source/",
+    "path": "/blog/chromadb-mcp-server-open-source/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-automation-strategies/",
+    "path": "/blog/mcp-automation-strategies/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-tutorial-build-your-first-mcp-server/",
+    "path": "/blog/mcp-tutorial-build-your-first-mcp-server/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/cluster/getting-started/",
+    "path": "/blog/cluster/getting-started/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-webinars-recording-archive/",
+    "path": "/blog/mcp-server-webinars-recording-archive/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-for-freshdesk/",
+    "path": "/blog/mcp-server-for-freshdesk/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-meetups-local-events/",
+    "path": "/blog/mcp-server-meetups-local-events/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-for-apache-pulsar-geo/",
+    "path": "/blog/mcp-server-for-apache-pulsar-geo/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-debugging-techniques/",
+    "path": "/blog/mcp-server-debugging-techniques/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-for-sendgrid/",
+    "path": "/blog/mcp-server-for-sendgrid/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-agent-squad/",
+    "path": "/blog/mcp-agent-squad/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-nodejs-implementation/",
+    "path": "/blog/mcp-nodejs-implementation/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-multi-agent-systems/",
+    "path": "/blog/mcp-multi-agent-systems/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-for-dropbox/",
+    "path": "/blog/mcp-server-for-dropbox/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-for-nats/",
+    "path": "/blog/mcp-server-for-nats/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-for-redis-streams/",
+    "path": "/blog/mcp-server-for-redis-streams/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-for-woocommerce/",
+    "path": "/blog/mcp-server-for-woocommerce/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-for-rabbitmq/",
+    "path": "/blog/mcp-server-for-rabbitmq/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-for-msteams/",
+    "path": "/blog/mcp-server-for-msteams/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-enterprise-large-scale-deployment/",
+    "path": "/blog/mcp-enterprise-large-scale-deployment/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-for-amazon-kinesis/",
+    "path": "/blog/mcp-server-for-amazon-kinesis/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-for-airtable/",
+    "path": "/blog/mcp-server-for-airtable/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-development-best-practices/",
+    "path": "/blog/mcp-development-best-practices/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-for-discord/",
+    "path": "/blog/mcp-server-for-discord/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-saas-platforms-deployment/",
+    "path": "/blog/mcp-saas-platforms-deployment/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-for-grpc-streaming/",
+    "path": "/blog/mcp-server-for-grpc-streaming/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-advanced-typescript-patterns/",
+    "path": "/blog/mcp-advanced-typescript-patterns/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-on-macos/",
+    "path": "/blog/mcp-server-on-macos/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/how-to-build-mcp-server-for-elasticsearch/",
+    "path": "/blog/how-to-build-mcp-server-for-elasticsearch/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-for-make-com/",
+    "path": "/blog/mcp-server-for-make-com/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-performance-benchmarking/",
+    "path": "/blog/mcp-server-performance-benchmarking/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-for-pulsar/",
+    "path": "/blog/mcp-server-for-pulsar/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/how-to-build-mcp-server-for-postgresql/",
+    "path": "/blog/how-to-build-mcp-server-for-postgresql/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/mcp-server-for-pipedrive/",
+    "path": "/blog/mcp-server-for-pipedrive/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/blog/model-context-protocol-beginner-guide/",
+    "path": "/blog/model-context-protocol-beginner-guide/",
+    "bucket": "blog",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/servers/azure-mcp-server/",
+    "path": "/servers/azure-mcp-server/",
+    "bucket": "servers",
+    "clicks": 0,
+    "impressions": 12
+  },
+  {
+    "url": "https://www.mcpserver.in/servers/google-calendar-mcp-server/",
+    "path": "/servers/google-calendar-mcp-server/",
+    "bucket": "servers",
+    "clicks": 0,
+    "impressions": 10
+  },
+  {
+    "url": "https://www.mcpserver.in/servers/docker-mcp-server/",
+    "path": "/servers/docker-mcp-server/",
+    "bucket": "servers",
+    "clicks": 0,
+    "impressions": 7
+  },
+  {
+    "url": "https://www.mcpserver.in/servers/pinecone-mcp-server/",
+    "path": "/servers/pinecone-mcp-server/",
+    "bucket": "servers",
+    "clicks": 0,
+    "impressions": 5
+  },
+  {
+    "url": "https://www.mcpserver.in/servers/grafana-mcp-server/",
+    "path": "/servers/grafana-mcp-server/",
+    "bucket": "servers",
+    "clicks": 0,
+    "impressions": 5
+  },
+  {
+    "url": "https://www.mcpserver.in/servers/redis-mcp-server/",
+    "path": "/servers/redis-mcp-server/",
+    "bucket": "servers",
+    "clicks": 0,
+    "impressions": 5
+  },
+  {
+    "url": "https://www.mcpserver.in/servers/slack-mcp-server/",
+    "path": "/servers/slack-mcp-server/",
+    "bucket": "servers",
+    "clicks": 0,
+    "impressions": 5
+  },
+  {
+    "url": "https://www.mcpserver.in/servers/google-gemini-mcp-server/",
+    "path": "/servers/google-gemini-mcp-server/",
+    "bucket": "servers",
+    "clicks": 0,
+    "impressions": 4
+  },
+  {
+    "url": "https://www.mcpserver.in/servers/digitalocean-mcp-server/",
+    "path": "/servers/digitalocean-mcp-server/",
+    "bucket": "servers",
+    "clicks": 0,
+    "impressions": 3
+  },
+  {
+    "url": "https://www.mcpserver.in/servers/newrelic-mcp-server/",
+    "path": "/servers/newrelic-mcp-server/",
+    "bucket": "servers",
+    "clicks": 0,
+    "impressions": 3
+  },
+  {
+    "url": "https://www.mcpserver.in/servers/gitbook-mcp-server/",
+    "path": "/servers/gitbook-mcp-server/",
+    "bucket": "servers",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/servers/discord-mcp-server/",
+    "path": "/servers/discord-mcp-server/",
+    "bucket": "servers",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/servers/github-mcp-server/",
+    "path": "/servers/github-mcp-server/",
+    "bucket": "servers",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/servers/bitbucket-mcp-server/",
+    "path": "/servers/bitbucket-mcp-server/",
+    "bucket": "servers",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/servers/asana-mcp-server/",
+    "path": "/servers/asana-mcp-server/",
+    "bucket": "servers",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/servers/swagger-mcp-server/",
+    "path": "/servers/swagger-mcp-server/",
+    "bucket": "servers",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/servers/mistral-mcp-server/",
+    "path": "/servers/mistral-mcp-server/",
+    "bucket": "servers",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/servers/jenkins-mcp-server/",
+    "path": "/servers/jenkins-mcp-server/",
+    "bucket": "servers",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/servers/razorpay-mcp-server/",
+    "path": "/servers/razorpay-mcp-server/",
+    "bucket": "servers",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/servers/jira-mcp-server/",
+    "path": "/servers/jira-mcp-server/",
+    "bucket": "servers",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/servers/postgres-mcp-server/",
+    "path": "/servers/postgres-mcp-server/",
+    "bucket": "servers",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/servers/google-cloud-mcp-server/",
+    "path": "/servers/google-cloud-mcp-server/",
+    "bucket": "servers",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/servers/google-drive-mcp-server/",
+    "path": "/servers/google-drive-mcp-server/",
+    "bucket": "servers",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/servers/supabase-mcp-server/",
+    "path": "/servers/supabase-mcp-server/",
+    "bucket": "servers",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/servers/figma-mcp-server/",
+    "path": "/servers/figma-mcp-server/",
+    "bucket": "servers",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/servers/notion-mcp-server/",
+    "path": "/servers/notion-mcp-server/",
+    "bucket": "servers",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/servers/elasticsearch-mcp-server/",
+    "path": "/servers/elasticsearch-mcp-server/",
+    "bucket": "servers",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/servers/sqlite-mcp-server/",
+    "path": "/servers/sqlite-mcp-server/",
+    "bucket": "servers",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/compare/python-vs-typescript-mcp/",
+    "path": "/compare/python-vs-typescript-mcp/",
+    "bucket": "compare",
+    "clicks": 0,
+    "impressions": 12
+  },
+  {
+    "url": "https://www.mcpserver.in/compare/stdio-vs-streamable-http/",
+    "path": "/compare/stdio-vs-streamable-http/",
+    "bucket": "compare",
+    "clicks": 0,
+    "impressions": 5
+  },
+  {
+    "url": "https://www.mcpserver.in/compare/postman-mcp-server-vs-swagger-mcp-server/",
+    "path": "/compare/postman-mcp-server-vs-swagger-mcp-server/",
+    "bucket": "compare",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/compare/redis-mcp-server-vs-mongodb-mcp-server/",
+    "path": "/compare/redis-mcp-server-vs-mongodb-mcp-server/",
+    "bucket": "compare",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/compare/mcp-vs-openapi/",
+    "path": "/compare/mcp-vs-openapi/",
+    "bucket": "compare",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/compare/jira-mcp-server-vs-linear-mcp-server/",
+    "path": "/compare/jira-mcp-server-vs-linear-mcp-server/",
+    "bucket": "compare",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/compare/vercel-mcp-server-vs-cloudflare-mcp-server/",
+    "path": "/compare/vercel-mcp-server-vs-cloudflare-mcp-server/",
+    "bucket": "compare",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/compare/",
+    "path": "/compare/",
+    "bucket": "compare",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/compare/docker-mcp-server-vs-kubernetes-mcp-server/",
+    "path": "/compare/docker-mcp-server-vs-kubernetes-mcp-server/",
+    "bucket": "compare",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/compare/sentry-mcp-server-vs-datadog-mcp-server/",
+    "path": "/compare/sentry-mcp-server-vs-datadog-mcp-server/",
+    "bucket": "compare",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/compare/local-vs-remote-mcp-server/",
+    "path": "/compare/local-vs-remote-mcp-server/",
+    "bucket": "compare",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/",
+    "path": "/docs/",
+    "bucket": "docs",
+    "clicks": 1,
+    "impressions": 13
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/protocol/tools/",
+    "path": "/docs/protocol/tools/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 12
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/development/elasticsearch-integration/",
+    "path": "/docs/development/elasticsearch-integration/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 9
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/industry/education/",
+    "path": "/docs/industry/education/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 7
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/industry/gst-integration/",
+    "path": "/docs/industry/gst-integration/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 7
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/development/supabase-integration/",
+    "path": "/docs/development/supabase-integration/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 5
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/development/bigquery-integration/",
+    "path": "/docs/development/bigquery-integration/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 5
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/development/publishing/",
+    "path": "/docs/development/publishing/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 5
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/troubleshooting/common-issues/",
+    "path": "/docs/troubleshooting/common-issues/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 4
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/servers/bitbucket-mcp-server/",
+    "path": "/docs/servers/bitbucket-mcp-server/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 3
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/servers/oracle-mcp-server/",
+    "path": "/docs/servers/oracle-mcp-server/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 3
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/deployment/kubernetes-deployment/",
+    "path": "/docs/deployment/kubernetes-deployment/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 3
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/servers/xero-mcp-server/",
+    "path": "/docs/servers/xero-mcp-server/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/servers/jenkins-mcp-server/",
+    "path": "/docs/servers/jenkins-mcp-server/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/servers/ms-teams-mcp-server/",
+    "path": "/docs/servers/ms-teams-mcp-server/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/compliance/audit-logging/",
+    "path": "/docs/compliance/audit-logging/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/servers/cohere-mcp-server/",
+    "path": "/docs/servers/cohere-mcp-server/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/servers/vercel-mcp-server/",
+    "path": "/docs/servers/vercel-mcp-server/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/industry/",
+    "path": "/docs/industry/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/monitoring/observability-best-practices/",
+    "path": "/docs/monitoring/observability-best-practices/",
+    "bucket": "docs",
+    "clicks": 1,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/servers/paddle-mcp-server/",
+    "path": "/docs/servers/paddle-mcp-server/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/internationalization/",
+    "path": "/docs/internationalization/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/servers/discord-mcp-server/",
+    "path": "/docs/servers/discord-mcp-server/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/compliance/rbi-compliance/",
+    "path": "/docs/compliance/rbi-compliance/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/development/snowflake-integration/",
+    "path": "/docs/development/snowflake-integration/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/servers/hubspot-mcp-server/",
+    "path": "/docs/servers/hubspot-mcp-server/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/servers/google-drive-mcp-server/",
+    "path": "/docs/servers/google-drive-mcp-server/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/servers/gitbook-mcp-server/",
+    "path": "/docs/servers/gitbook-mcp-server/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/servers/supabase-cloud-mcp-server/",
+    "path": "/docs/servers/supabase-cloud-mcp-server/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/servers/zoom-mcp-server/",
+    "path": "/docs/servers/zoom-mcp-server/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/servers/render-mcp-server/",
+    "path": "/docs/servers/render-mcp-server/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/performance/",
+    "path": "/docs/performance/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/servers/cassandra-mcp-server/",
+    "path": "/docs/servers/cassandra-mcp-server/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/servers/swagger-mcp-server/",
+    "path": "/docs/servers/swagger-mcp-server/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/servers/circleci-mcp-server/",
+    "path": "/docs/servers/circleci-mcp-server/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/servers/neo4j-mcp-server/",
+    "path": "/docs/servers/neo4j-mcp-server/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/servers/sentry-mcp-server/",
+    "path": "/docs/servers/sentry-mcp-server/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/servers/figma-mcp-server/",
+    "path": "/docs/servers/figma-mcp-server/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/servers/sonarqube-mcp-server/",
+    "path": "/docs/servers/sonarqube-mcp-server/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/servers/woocommerce-mcp-server/",
+    "path": "/docs/servers/woocommerce-mcp-server/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/servers/dynamodb-mcp-server/",
+    "path": "/docs/servers/dynamodb-mcp-server/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/servers/elasticsearch-mcp-server/",
+    "path": "/docs/servers/elasticsearch-mcp-server/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/servers/fly-io-mcp-server/",
+    "path": "/docs/servers/fly-io-mcp-server/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/comparisons/",
+    "path": "/docs/comparisons/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/advanced/",
+    "path": "/docs/advanced/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/troubleshooting/",
+    "path": "/docs/troubleshooting/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/servers/adyen-mcp-server/",
+    "path": "/docs/servers/adyen-mcp-server/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/servers/linode-mcp-server/",
+    "path": "/docs/servers/linode-mcp-server/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/servers/newrelic-mcp-server/",
+    "path": "/docs/servers/newrelic-mcp-server/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/getting-started/managed-edge-hosting/",
+    "path": "/docs/getting-started/managed-edge-hosting/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/protocol/",
+    "path": "/docs/protocol/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/compliance/security-best-practices/",
+    "path": "/docs/compliance/security-best-practices/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/getting-started/",
+    "path": "/docs/getting-started/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/pricing/hidden-costs/",
+    "path": "/docs/pricing/hidden-costs/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/comparisons/when-to-use-mcp/",
+    "path": "/docs/comparisons/when-to-use-mcp/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/deployment/google-cloud-run/",
+    "path": "/docs/deployment/google-cloud-run/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/servers/notion-mcp-server/",
+    "path": "/docs/servers/notion-mcp-server/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/servers/mongodb-mcp-server/",
+    "path": "/docs/servers/mongodb-mcp-server/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/servers/paypal-mcp-server/",
+    "path": "/docs/servers/paypal-mcp-server/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/servers/firebase-mcp-server/",
+    "path": "/docs/servers/firebase-mcp-server/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/servers/redis-mcp-server/",
+    "path": "/docs/servers/redis-mcp-server/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/compliance/dpdp-checklist/",
+    "path": "/docs/compliance/dpdp-checklist/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/servers/chargebee-mcp-server/",
+    "path": "/docs/servers/chargebee-mcp-server/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/servers/mysql-mcp-server/",
+    "path": "/docs/servers/mysql-mcp-server/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/servers/sqlite-mcp-server/",
+    "path": "/docs/servers/sqlite-mcp-server/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/servers/postgres-mcp-server/",
+    "path": "/docs/servers/postgres-mcp-server/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/servers/kubernetes-mcp-server/",
+    "path": "/docs/servers/kubernetes-mcp-server/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/servers/trello-mcp-server/",
+    "path": "/docs/servers/trello-mcp-server/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/docs/compliance/dpdp-compliance-guide/",
+    "path": "/docs/compliance/dpdp-compliance-guide/",
+    "bucket": "docs",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/community/",
+    "path": "/community/",
+    "bucket": "community",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/mcp-server-directory/",
+    "path": "/mcp-server-directory/",
+    "bucket": "mcp-server-directory",
+    "clicks": 1,
+    "impressions": 27
+  },
+  {
+    "url": "https://www.mcpserver.in/troubleshooting/claude-desktop-mcp-not-working/",
+    "path": "/troubleshooting/claude-desktop-mcp-not-working/",
+    "bucket": "troubleshooting",
+    "clicks": 5,
+    "impressions": 406
+  },
+  {
+    "url": "https://www.mcpserver.in/troubleshooting/mcp-server-timeout/",
+    "path": "/troubleshooting/mcp-server-timeout/",
+    "bucket": "troubleshooting",
+    "clicks": 0,
+    "impressions": 7
+  },
+  {
+    "url": "https://www.mcpserver.in/troubleshooting/cursor-mcp-not-working/",
+    "path": "/troubleshooting/cursor-mcp-not-working/",
+    "bucket": "troubleshooting",
+    "clicks": 0,
+    "impressions": 5
+  },
+  {
+    "url": "https://www.mcpserver.in/troubleshooting/mcp-authentication-failed/",
+    "path": "/troubleshooting/mcp-authentication-failed/",
+    "bucket": "troubleshooting",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/troubleshooting/mcp-tools-not-appearing/",
+    "path": "/troubleshooting/mcp-tools-not-appearing/",
+    "bucket": "troubleshooting",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/troubleshooting/mcp-stdio-error/",
+    "path": "/troubleshooting/mcp-stdio-error/",
+    "bucket": "troubleshooting",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/directory/iot/",
+    "path": "/directory/iot/",
+    "bucket": "directory",
+    "clicks": 0,
+    "impressions": 10
+  },
+  {
+    "url": "https://www.mcpserver.in/directory/databases/",
+    "path": "/directory/databases/",
+    "bucket": "directory",
+    "clicks": 0,
+    "impressions": 4
+  },
+  {
+    "url": "https://www.mcpserver.in/directory/monitoring/",
+    "path": "/directory/monitoring/",
+    "bucket": "directory",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/directory/devops/",
+    "path": "/directory/devops/",
+    "bucket": "directory",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/integrations/",
+    "path": "/integrations/",
+    "bucket": "integrations",
+    "clicks": 0,
+    "impressions": 58
+  },
+  {
+    "url": "https://www.mcpserver.in/integrations/gitlab-mcp-server/",
+    "path": "/integrations/gitlab-mcp-server/",
+    "bucket": "integrations",
+    "clicks": 0,
+    "impressions": 5
+  },
+  {
+    "url": "https://www.mcpserver.in/integrations/hubspot-mcp-server/",
+    "path": "/integrations/hubspot-mcp-server/",
+    "bucket": "integrations",
+    "clicks": 0,
+    "impressions": 4
+  },
+  {
+    "url": "https://www.mcpserver.in/integrations/confluence-mcp-server/",
+    "path": "/integrations/confluence-mcp-server/",
+    "bucket": "integrations",
+    "clicks": 0,
+    "impressions": 4
+  },
+  {
+    "url": "https://www.mcpserver.in/integrations/salesforce-mcp-server/",
+    "path": "/integrations/salesforce-mcp-server/",
+    "bucket": "integrations",
+    "clicks": 0,
+    "impressions": 4
+  },
+  {
+    "url": "https://www.mcpserver.in/integrations/shopify-mcp-server/",
+    "path": "/integrations/shopify-mcp-server/",
+    "bucket": "integrations",
+    "clicks": 0,
+    "impressions": 4
+  },
+  {
+    "url": "https://www.mcpserver.in/integrations/sentry-mcp-server/",
+    "path": "/integrations/sentry-mcp-server/",
+    "bucket": "integrations",
+    "clicks": 0,
+    "impressions": 4
+  },
+  {
+    "url": "https://www.mcpserver.in/integrations/google-drive-mcp-server/",
+    "path": "/integrations/google-drive-mcp-server/",
+    "bucket": "integrations",
+    "clicks": 0,
+    "impressions": 3
+  },
+  {
+    "url": "https://www.mcpserver.in/integrations/notion-mcp-server/",
+    "path": "/integrations/notion-mcp-server/",
+    "bucket": "integrations",
+    "clicks": 0,
+    "impressions": 3
+  },
+  {
+    "url": "https://www.mcpserver.in/integrations/wordpress-mcp-server/",
+    "path": "/integrations/wordpress-mcp-server/",
+    "bucket": "integrations",
+    "clicks": 0,
+    "impressions": 3
+  },
+  {
+    "url": "https://www.mcpserver.in/integrations/github-mcp-server/",
+    "path": "/integrations/github-mcp-server/",
+    "bucket": "integrations",
+    "clicks": 0,
+    "impressions": 3
+  },
+  {
+    "url": "https://www.mcpserver.in/integrations/n8n-mcp-server/",
+    "path": "/integrations/n8n-mcp-server/",
+    "bucket": "integrations",
+    "clicks": 0,
+    "impressions": 3
+  },
+  {
+    "url": "https://www.mcpserver.in/integrations/linear-mcp-server/",
+    "path": "/integrations/linear-mcp-server/",
+    "bucket": "integrations",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/integrations/gmail-mcp-server/",
+    "path": "/integrations/gmail-mcp-server/",
+    "bucket": "integrations",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/integrations/figma-mcp-server/",
+    "path": "/integrations/figma-mcp-server/",
+    "bucket": "integrations",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/sdk/typescript/",
+    "path": "/sdk/typescript/",
+    "bucket": "sdk",
+    "clicks": 0,
+    "impressions": 69
+  },
+  {
+    "url": "https://www.mcpserver.in/sdk/java/",
+    "path": "/sdk/java/",
+    "bucket": "sdk",
+    "clicks": 0,
+    "impressions": 49
+  },
+  {
+    "url": "https://www.mcpserver.in/sdk/python/",
+    "path": "/sdk/python/",
+    "bucket": "sdk",
+    "clicks": 0,
+    "impressions": 4
+  },
+  {
+    "url": "https://www.mcpserver.in/sdk/go/",
+    "path": "/sdk/go/",
+    "bucket": "sdk",
+    "clicks": 0,
+    "impressions": 3
+  },
+  {
+    "url": "https://www.mcpserver.in/security/",
+    "path": "/security/",
+    "bucket": "security",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/security/audit-logging/",
+    "path": "/security/audit-logging/",
+    "bucket": "security",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/security/tool-poisoning/",
+    "path": "/security/tool-poisoning/",
+    "bucket": "security",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/security/authorization/",
+    "path": "/security/authorization/",
+    "bucket": "security",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/security/oauth/",
+    "path": "/security/oauth/",
+    "bucket": "security",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/security/authentication/",
+    "path": "/security/authentication/",
+    "bucket": "security",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/security/api-keys/",
+    "path": "/security/api-keys/",
+    "bucket": "security",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/deployment/aws/",
+    "path": "/deployment/aws/",
+    "bucket": "deployment",
+    "clicks": 0,
+    "impressions": 44
+  },
+  {
+    "url": "https://www.mcpserver.in/deployment/vercel/",
+    "path": "/deployment/vercel/",
+    "bucket": "deployment",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/deployment/self-hosted/",
+    "path": "/deployment/self-hosted/",
+    "bucket": "deployment",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/deployment/google-cloud/",
+    "path": "/deployment/google-cloud/",
+    "bucket": "deployment",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/deployment/railway/",
+    "path": "/deployment/railway/",
+    "bucket": "deployment",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/deployment/kubernetes/",
+    "path": "/deployment/kubernetes/",
+    "bucket": "deployment",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/mcp-server-hosting/",
+    "path": "/mcp-server-hosting/",
+    "bucket": "mcp-server-hosting",
+    "clicks": 0,
+    "impressions": 6
+  },
+  {
+    "url": "https://www.mcpserver.in/clients/",
+    "path": "/clients/",
+    "bucket": "clients",
+    "clicks": 0,
+    "impressions": 82
+  },
+  {
+    "url": "https://www.mcpserver.in/clients/windsurf/",
+    "path": "/clients/windsurf/",
+    "bucket": "clients",
+    "clicks": 1,
+    "impressions": 3
+  },
+  {
+    "url": "https://www.mcpserver.in/clients/claude-desktop/",
+    "path": "/clients/claude-desktop/",
+    "bucket": "clients",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/clients/github-copilot/",
+    "path": "/clients/github-copilot/",
+    "bucket": "clients",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/compliance/matrix/",
+    "path": "/compliance/matrix/",
+    "bucket": "compliance",
+    "clicks": 0,
+    "impressions": 7
+  },
+  {
+    "url": "https://www.mcpserver.in/frameworks/spring-ai-mcp/",
+    "path": "/frameworks/spring-ai-mcp/",
+    "bucket": "frameworks",
+    "clicks": 0,
+    "impressions": 24
+  },
+  {
+    "url": "https://www.mcpserver.in/frameworks/fastmcp/",
+    "path": "/frameworks/fastmcp/",
+    "bucket": "frameworks",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/best/mcp-servers/",
+    "path": "/best/mcp-servers/",
+    "bucket": "best",
+    "clicks": 0,
+    "impressions": 78
+  },
+  {
+    "url": "https://www.mcpserver.in/best/mcp-servers-for-developers/",
+    "path": "/best/mcp-servers-for-developers/",
+    "bucket": "best",
+    "clicks": 0,
+    "impressions": 4
+  },
+  {
+    "url": "https://www.mcpserver.in/databases/firebase-mcp-server/",
+    "path": "/databases/firebase-mcp-server/",
+    "bucket": "databases",
+    "clicks": 0,
+    "impressions": 15
+  },
+  {
+    "url": "https://www.mcpserver.in/databases/bigquery-mcp-server/",
+    "path": "/databases/bigquery-mcp-server/",
+    "bucket": "databases",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/databases/postgresql-mcp-server/",
+    "path": "/databases/postgresql-mcp-server/",
+    "bucket": "databases",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/how-to-build-mcp-server/",
+    "path": "/how-to-build-mcp-server/",
+    "bucket": "how-to-build-mcp-server",
+    "clicks": 0,
+    "impressions": 7
+  },
+  {
+    "url": "https://www.mcpserver.in/mcp-host/",
+    "path": "/mcp-host/",
+    "bucket": "mcp-host",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/tools/mcp-sdk-workbench/",
+    "path": "/tools/mcp-sdk-workbench/",
+    "bucket": "tools",
+    "clicks": 0,
+    "impressions": 3
+  },
+  {
+    "url": "https://www.mcpserver.in/tools/mcp-config-validator/",
+    "path": "/tools/mcp-config-validator/",
+    "bucket": "tools",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/hi/",
+    "path": "/hi/",
+    "bucket": "hi",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/p99/",
+    "path": "/p99/",
+    "bucket": "p99",
+    "clicks": 0,
+    "impressions": 7
+  },
+  {
+    "url": "https://www.mcpserver.in/mcp-installation/",
+    "path": "/mcp-installation/",
+    "bucket": "mcp-installation",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/learn/indic-nlp-guide/",
+    "path": "/learn/indic-nlp-guide/",
+    "bucket": "learn",
+    "clicks": 1,
+    "impressions": 109
+  },
+  {
+    "url": "https://www.mcpserver.in/learn/",
+    "path": "/learn/",
+    "bucket": "learn",
+    "clicks": 0,
+    "impressions": 42
+  },
+  {
+    "url": "https://www.mcpserver.in/learn/dpdp-compliance-guide/",
+    "path": "/learn/dpdp-compliance-guide/",
+    "bucket": "learn",
+    "clicks": 0,
+    "impressions": 3
+  },
+  {
+    "url": "https://www.mcpserver.in/learn/mcp-production-deployment/",
+    "path": "/learn/mcp-production-deployment/",
+    "bucket": "learn",
+    "clicks": 0,
+    "impressions": 1
+  },
+  {
+    "url": "https://www.mcpserver.in/learn/india-mcp-benchmarks/",
+    "path": "/learn/india-mcp-benchmarks/",
+    "bucket": "learn",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/mcp-claude/",
+    "path": "/mcp-claude/",
+    "bucket": "mcp-claude",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/what-is-mcp/",
+    "path": "/what-is-mcp/",
+    "bucket": "what-is-mcp",
+    "clicks": 0,
+    "impressions": 8
+  },
+  {
+    "url": "https://www.mcpserver.in/state-of-mcp/",
+    "path": "/state-of-mcp/",
+    "bucket": "state-of-mcp",
+    "clicks": 1,
+    "impressions": 33
+  },
+  {
+    "url": "https://www.mcpserver.in/mcp-tools/",
+    "path": "/mcp-tools/",
+    "bucket": "mcp-tools",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/mcp-sentiment-analysis/",
+    "path": "/mcp-sentiment-analysis/",
+    "bucket": "mcp-sentiment-analysis",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/complete-guide-mcp-servers/",
+    "path": "/complete-guide-mcp-servers/",
+    "bucket": "complete-guide-mcp-servers",
+    "clicks": 0,
+    "impressions": 80
+  },
+  {
+    "url": "https://www.mcpserver.in/privacy/",
+    "path": "/privacy/",
+    "bucket": "privacy",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/mcp-server/",
+    "path": "/mcp-server/",
+    "bucket": "mcp-server",
+    "clicks": 0,
+    "impressions": 91
+  },
+  {
+    "url": "https://www.mcpserver.in/faq/",
+    "path": "/faq/",
+    "bucket": "faq",
+    "clicks": 0,
+    "impressions": 2
+  },
+  {
+    "url": "https://www.mcpserver.in/topics/azure-mcp-hosting/",
+    "path": "/topics/azure-mcp-hosting/",
+    "bucket": "topics",
+    "clicks": 0,
+    "impressions": 0
+  },
+  {
+    "url": "https://www.mcpserver.in/about/",
+    "path": "/about/",
+    "bucket": "about",
+    "clicks": 0,
+    "impressions": 40
+  }
+]

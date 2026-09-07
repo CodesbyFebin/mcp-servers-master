@@ -48,6 +48,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticUrls: MetadataRoute.Sitemap = [
     { url: baseUrl, changeFrequency: "daily" as const, priority: 1.0 },
     { url: `${baseUrl}/servers`, changeFrequency: "weekly" as const, priority: 0.9 },
+    { url: `${baseUrl}/pillars`, changeFrequency: "weekly" as const, priority: 0.8 },
+    { url: `${baseUrl}/docs`, changeFrequency: "weekly" as const, priority: 0.7 },
     { url: `${baseUrl}/categories`, changeFrequency: "weekly" as const, priority: 0.7 },
     { url: `${baseUrl}/capabilities`, changeFrequency: "weekly" as const, priority: 0.7 },
     { url: `${baseUrl}/evidence`, changeFrequency: "monthly" as const, priority: 0.5 },

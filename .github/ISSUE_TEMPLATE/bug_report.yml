@@ -1,0 +1,68 @@
+name: Bug report
+description: Report a problem with the published site, an editorial entry, or a server page.
+title: "[Bug]: "
+labels: ["bug", "needs-triage"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to file a bug. Please be specific:
+        - URL of the affected page (or `N/A` if the bug is in the app as a whole)
+        - What you expected
+        - What actually happened
+        - Screenshots / error messages, if any
+
+  - type: input
+    id: url
+    attributes:
+      label: Affected URL
+      placeholder: https://www.mcpserver.in/servers/mcp-server-postgres
+    validations:
+      required: false
+
+  - type: input
+    id: browser
+    attributes:
+      label: Browser / version
+      placeholder: Chrome 127 / Safari 18
+    validations:
+      required: false
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      options:
+        - Critical — content wrong or unsafe
+        - High — broken page or regression
+        - Medium — partial / cosmetic
+        - Low — nitpick / suggestion
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Visit ...
+        2. Click ...
+        3. See ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true

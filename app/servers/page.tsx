@@ -1,64 +1,18 @@
+import { Suspense } from "react";
 import { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumbs } from "@/src/components/content/Breadcrumbs";
 import { DirectAnswer } from "@/src/components/content/DirectAnswer";
-import { getIndexableServers, collectionFor, ServerEntry } from "@/src/content/route-helpers";
+import { getIndexableServers, collectionFor } from "@/src/content/route-helpers";
+import ServersDiscovery from "./ServersDiscovery";
+
+import { absoluteUrl } from "@/src/seo/breadcrumbs";
 
 export const metadata: Metadata = {
   title: "MCPserver.in — Server Directory",
   description: "AI-indexed directory of MCP servers with evidence verification",
+  alternates: { canonical: absoluteUrl("/servers") },
 };
-
-function ServerCard({ server }: { server: ServerEntry }) {
-  const decision = server.isVerified ? "Verified" : "Not Verified";
-  const decisionClass = server.isVerified
-    ? "bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400"
-    : "bg-amber-50 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400";
-
-  return (
-    <article className="rounded-lg border border-slate-200 dark:border-slate-800 p-5 hover:border-slate-300 dark:hover:border-slate-700 transition-colors">
-      <div className="flex flex-wrap items-start justify-between gap-2 mb-3">
-        <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100">
-          <Link href={server.indexPath} className="hover:underline">
-            {server.name}
-          </Link>
-        </h3>
-        <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${decisionClass}`}>
-          {decision}
-        </span>
-      </div>
-      <p className="text-sm text-slate-600 dark:text-slate-400 mb-3 line-clamp-2">
-        {server.description}
-      </p>
-      <div className="flex flex-wrap gap-1.5 mb-3">
-        {server.tags.slice(0, 4).map((tag) => (
-          <span
-            key={tag}
-            className="rounded bg-slate-100 dark:bg-slate-800 px-2 py-0.5 text-xs text-slate-600 dark:text-slate-400"
-          >
-            {tag}
-          </span>
-        ))}
-        {server.tags.length > 4 && (
-          <span className="rounded bg-slate-100 dark:bg-slate-800 px-2 py-0.5 text-xs text-slate-500 dark:text-slate-500">
-            +{server.tags.length - 4} more
-          </span>
-        )}
-      </div>
-      <div className="flex items-center gap-3 text-xs text-slate-500 dark:text-slate-400">
-        <span>v{server.version}</span>
-        <span aria-hidden="true">·</span>
-        <time dateTime={server.updatedAt}>
-          {new Date(server.updatedAt).toLocaleDateString("en-US", {
-            year: "numeric",
-            month: "short",
-            day: "numeric",
-          })}
-        </time>
-      </div>
-    </article>
-  );
-}
 
 export default function ServersPage() {
   const indexableServers = getIndexableServers();
@@ -153,47 +107,13 @@ export default function ServersPage() {
           </Link>
         </p>
 
-        {/* Server Grid */}
-        {indexableServers.length > 0 ? (
-          <section aria-labelledby="servers-heading" className="mb-12">
-            <h2
-              id="servers-heading"
-              className="sr-only"
-            >
-              Verified MCP Servers
-            </h2>
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-              {indexableServers.map((server) => (
-                <ServerCard key={server.indexPath} server={server} />
-              ))}
-            </div>
-          </section>
-        ) : (
-          <section aria-labelledby="empty-heading" className="mb-12">
-            <h2 id="empty-heading" className="sr-only">
-              No verified servers
-            </h2>
-            <div className="rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 p-8 text-center">
-              <p className="text-slate-700 dark:text-slate-300 mb-4">
-                No MCP servers currently satisfy the publication authority.
-                Servers must be published, have verified evidence, and pass the
-                <code className="font-mono bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 rounded">isServerIndexable()</code>
-                criteria to appear here.
-              </p>
-              <p className="text-sm text-slate-500 dark:text-slate-400">
-                Tracked servers that do not meet the criteria are documented
-                individually (e.g.,{" "}
-                <Link
-                  href="/servers/mcp-server-postgres"
-                  className="text-blue-600 dark:text-blue-400 hover:underline"
-                >
-                  mcp-server-postgres
-                </Link>
-                ) but are not listed in the public directory.
-              </p>
-            </div>
-          </section>
-        )}
+        {/* Discovery engine: search + filters + sorting + pagination (P2).
+            Suspense boundary required because the client component reads
+            useSearchParams(); the shell (H1, direct answer, JSON-LD) still
+            prerenders statically. */}
+        <Suspense fallback={<p className="text-sm text-slate-500">Loading server directory…</p>}>
+          <ServersDiscovery servers={indexableServers} />
+        </Suspense>
 
         {/* Trust routes */}
         <nav aria-label="Trust and methodology" className="border-t border-slate-200 dark:border-slate-800 pt-6">

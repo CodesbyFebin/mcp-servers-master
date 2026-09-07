@@ -1,0 +1,49 @@
+name: Feature request
+description: Propose a new pillar, a new editorial entry, or a new machine-readable surface.
+title: "[Feature]: "
+labels: ["enhancement", "needs-triage"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Before opening a feature request, please review the [Editorial Policy](https://www.mcpserver.in/editorial-policy)
+        and the [Publication Authority methodology](https://www.mcpserver.in/methodology).
+        Features that would require unverified claims, fabricated metrics, or external
+        data we cannot source under the zero-fabrication contract are out of scope.
+
+  - type: input
+    id: surface
+    attributes:
+      label: Which surface?
+      placeholder: "Pillar (P70+), editorial entry, server page, machine-readable surface, build pipeline"
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem this solves
+      placeholder: |
+        What user or reader outcome does this improve? What does the absence
+        of this feature cost today?
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed approach
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Source(s) and evidence
+      placeholder: |
+        Link to primary sources (npm, PyPI, official docs, GitHub repos). Features
+        that rest on third-party claims must cite the original source.
+    validations:
+      required: false

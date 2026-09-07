@@ -1,0 +1,50 @@
+# MCPserver.in — Docker build context filter
+#
+# Keep the build context small. Exclude everything that is not strictly required
+# for the standalone Next.js build and runtime image.
+
+# Dependency trees (re-installed inside the image)
+node_modules/
+**/node_modules/
+**/node_modules/**
+
+# Build output (regenerated inside the image)
+.next/
+out/
+build/
+dist/
+
+# Source-control and editor metadata
+.git/
+.gitignore
+.gitattributes
+.DS_Store
+.idea/
+.vscode/
+
+# Reports: small (272K). The migration ledger CSV is a BUILD-TIME input —
+# next.config.mjs derives the runtime redirect table from it, so it must
+# stay in the build context.
+coverage/
+playwright-report/
+test-results/
+.nyc_output/
+
+# Environment, secrets, and local-only files
+.env
+.env.local
+.env.*.local
+.npmrc
+.pnpm-debug.log*
+
+# ZCode session state (this assistant's working directory metadata)
+.zcode/
+
+# Documentation and human-only files (not needed by the runtime)
+*.md
+!app/**/*.md
+docs/
+
+# Internal scripts that are NOT used by the runtime (only by build-time tooling)
+scripts/audit-reconciliation.ts
+scripts/generate-canonical-map.ts

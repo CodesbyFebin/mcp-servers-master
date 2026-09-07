@@ -23,6 +23,10 @@ export function buildDynamicMeta(entry: RegistryEntry | undefined): Metadata {
     robots: indexable
       ? { index: true, follow: true }
       : { index: false, follow: true },
+    // Self-canonical for every published page (P7): dynamic editorial routes
+    // previously emitted no canonical tag at all, so redirect destinations
+    // could not prove canonical ownership.
+    alternates: { canonical: dynamicCanonical(entry) },
   };
 }
 

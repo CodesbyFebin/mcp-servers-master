@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation";
 import ContentPage from "@/src/components/content/ContentPage";
 import { buildDynamicMeta } from "@/src/seo/dynamic-meta";
 import { entryBySlug, parentLabel, siblingEntries, entriesForParent } from "@/src/content/route-helpers";
@@ -19,28 +20,34 @@ interface DynamicEntry {
 }
 
 export function makeDynamicEntry(parent: string): DynamicEntry {
+  /**
+   * Publication guard: only published, non-noindex entries may resolve.
+   * Unknown, draft, review, retired, or noindex slugs MUST 404 — rendering
+   * an empty 200 page leaks the route space and breaks the publication
+   * authority contract.
+   */
+  function publishable(slug: string) {
+    const entry = entryBySlug(parent, slug);
+    if (!entry || entry.status !== "published" || entry.noindex) return undefined;
+    return entry;
+  }
+
   function generateStaticParams() {
     return entriesForParent(parent)
       .filter((e) => e.type !== "category")
+      .filter((e) => e.status === "published" && !e.noindex)
       .map((e) => ({ slug: e.slug }));
   }
 
   function generateMetadata({ params }: PageProps) {
-    const entry = entryBySlug(parent, params.slug);
+    const entry = publishable(params.slug);
+    if (!entry) notFound();
     return buildDynamicMeta(entry);
   }
 
   async function Page({ params }: PageProps) {
-    const entry = entryBySlug(parent, params.slug);
-    if (!entry) {
-      // Next dev/preview: notFound() renders the 404. Clients see a clean 404.
-      return (
-        <ContentPage
-          entry={undefined}
-          crumbs={[{ name: parentLabel(parent), path: `/${parent}` }]}
-        />
-      );
-    }
+    const entry = publishable(params.slug);
+    if (!entry) notFound();
     return (
       <ContentPage
         entry={entry}
