@@ -6,9 +6,9 @@ Validates VPA (Virtual Payment Address) format: user@handle
 import re
 from typing import Dict, Any, Optional
 
-
 def validate_upi(vpa: str) -> Dict[str, Any]:
     """Validate a UPI VPA (Virtual Payment Address).
+    
     
     Format: user@handle
     - user: alphanumeric, can contain dots, underscores, hyphens
@@ -79,6 +79,87 @@ def validate_upi(vpa: str) -> Dict[str, Any]:
     
     result["valid"] = True
     return result
+
+
+def initiate_upi_payment(
+    vpa: str,
+    amount: float,
+    note: str = "",
+    transaction_id: Optional[str] = None
+) -> Dict[str, Any]:
+    """Initiate a UPI payment (mock).
+    
+    In a real implementation, this would integrate with actual UPI APIs or payment gateways.
+    
+    Args:
+        vpa: Virtual Payment Address of the recipient (e.g., user@okaxis)
+        amount: Amount in INR
+        note: Optional note for the transaction
+        transaction_id: Optional external transaction ID (if not provided, a UUID is generated)
+        
+    Returns:
+        Dictionary with transaction status and details
+    """
+    # Validate VPA format (simple check)
+    if not vpa or "@" not in vpa:
+        return {
+            "success": False,
+            "error": "Invalid VPA format",
+            "transaction_id": None,
+        }
+    
+    # Generate transaction ID if not provided
+    if not transaction_id:
+        transaction_id = str(uuid.uuid4())
+    
+    # Mock processing - in reality, this would call a UPI gateway or bank API
+    # For now, we simulate success or failure based on amount
+    if amount <= 0:
+        return {
+            "success": False,
+            "error": "Amount must be greater than zero",
+            "transaction_id": transaction_id,
+        }
+    
+    # Simulate occasional failure for demonstration
+    # In a real system, this would depend on actual API responses
+    import random
+    if random.random() < 0.05:  # 5% failure rate
+        return {
+            "success": False,
+            "error": "Insufficient funds or transaction declined by bank",
+            "transaction_id": transaction_id,
+            "timestamp": datetime.utcnow().isoformat() + "Z",
+        }
+    
+    # Successful transaction
+    return {
+        "success": True,
+        "transaction_id": transaction_id,
+        "vpa": vpa,
+        "amount": amount,
+        "note": note,
+        "status": "completed",
+        "timestamp": datetime.utcnow().isoformat() + "Z",
+        "fee": 0.0,  # UPI transactions are typically free
+    }
+
+
+def get_upi_transaction_status(transaction_id: str) -> Dict[str, Any]:
+    """Get the status of a UPI transaction (mock).
+    
+    Args:
+        transaction_id: The transaction ID to check
+        
+    Returns:
+        Dictionary with transaction status
+    """
+    # Mock implementation - in reality, this would query the transaction status from the bank/UPI network
+    return {
+        "transaction_id": transaction_id,
+        "status": "completed",  # or "pending", "failed"
+        "timestamp": datetime.utcnow().isoformat() + "Z",
+    }
 
 
 def validate_vpa_pattern(vpa: str, allowed_handles: list[str] | None = None) -> Dict[str, Any]:

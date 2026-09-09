@@ -20,7 +20,7 @@ sys.path.insert(0, str(Path(__file__).parent / "tools"))
 from auth.middleware import validate_bearer_token
 from gateway.router import create_router
 from tools.gst import validate_gstin
-from tools.payments import validate_upi
+from tools.payments import validate_upi, initiate_upi_payment, get_upi_transaction_status
 from tools.corporate import decode_pan, decode_cin
 from tools.banking import decode_ifsc
 from skills.web_search import search_web
@@ -55,6 +55,13 @@ async def handle_request(method: str, params: dict) -> dict:
         "server/info": handle_server_info,
         "gst.validate": lambda p: validate_gstin(p.get("gstin", "")),
         "payments.validate": lambda p: validate_upi(p.get("vpa", "")),
+        "upi.initiate": lambda p: initiate_upi_payment(
+            p.get("vpa", ""),
+            p.get("amount", 0.0),
+            p.get("note", ""),
+            p.get("transaction_id")
+        ),
+        "upi.status": lambda p: get_upi_transaction_status(p.get("transaction_id", "")),
         "corporate.decode_pan": lambda p: decode_pan(p.get("pan", "")),
         "corporate.decode_cin": lambda p: decode_cin(p.get("cin", "")),
         "banking.decode_ifsc": lambda p: decode_ifsc(p.get("ifsc", "")),
@@ -86,6 +93,8 @@ async def handle_initialize(params: dict) -> dict:
             "prompts": True,
             "gst_validation": True,
             "upi_validation": True,
+            "upi_initiation": True,
+            "upi_status": True,
             "pan_cin_decoding": True,
             "ifsc_lookup": True,
             "web_search": True,
@@ -95,6 +104,9 @@ async def handle_initialize(params: dict) -> dict:
         "serverInfo": {
             "name": "FastMCP",
             "version": "0.1.0",
+            "description": "MCP server with India enterprise tools and UPI payment capabilities",
+            "toolsCount": 12,
+            "supports": ["gst", "upi", "upi_initiation", "upi_status", "pan", "cin", "ifsc", "web_search", "doc_parse", "database", "gateway_complete", "gateway_health"],
         }
     }
 
@@ -105,8 +117,10 @@ async def handle_tools_list(params: dict) -> dict:
         "tools": [
             {"name": "gst.validate", "description": "Validate GSTIN number"},
             {"name": "payments.validate", "description": "Validate UPI VPA"},
+            {"name": "upi.initiate", "description": "Initiate UPI payment (mock)"},
+            {"name": "upi.status", "description": "Check UPI transaction status (mock)"},
             {"name": "corporate.decode_pan", "description": "Decode PAN card number"},
-            {"name": "corporate.decode_cin", "description": "Decode CIN number"},
+            {"name": "corporate.decode_cin": "description": "Decode CIN number"},
             {"name": "banking.decode_ifsc", "description": "Decode IFSC code"},
             {"name": "skills.search", "description": "Web search for live context"},
             {"name": "skills.doc_parse", "description": "Document OCR and parsing"},
