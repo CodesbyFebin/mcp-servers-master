@@ -76,31 +76,100 @@ export const organizations = pgTable("organizations", {
 });
 
 export const teams = pgTable("teams", {
-  id: serial("id").primaryKey(),
-  name: varchar("name", { length: 256 }).notNull(),
-  organizationId: integer("organization_id").notNull(),
-  role: varchar("role", { length: 50 }).default("member"),
-  createdAt: timestamp("created_at").defaultNow(),
-  updatedAt: timestamp("updated_at").defaultNow(),
-});
+   id: serial("id").primaryKey(),
+   name: varchar("name", { length: 256 }).notNull(),
+   organizationId: integer("organization_id").notNull(),
+   role: varchar("role", { length: 50 }).default("member"),
+   createdAt: timestamp("created_at").defaultNow(),
+   updatedAt: timestamp("updated_at").defaultNow(),
+   });
+   
+// ============================
+// TENANTS (CUSTOMERS/ORGANIZATIONS)
+// ============================
+export const tenants = pgTable("tenants", {
+   id: serial("id").primaryKey(),
+   name: varchar("name", { length: 256 }).notNull(),
+   slug: varchar("slug", { length: 128 }).notNull().unique(),
+   description: text("description"),
+   planType: varchar("plan_type", { length: 50 }).default("free"),
+   status: varchar("status", { length: 20 }).default("active"), // active, suspended, cancelled
+   createdAt: timestamp("created_at").defaultNow(),
+   updatedAt: timestamp("updated_at").defaultNow(),
+   });
 
+// ============================
 // MCP domain entities
+// ============================
 export const servers = pgTable("servers", {
   id: serial("id").primaryKey(),
   name: varchar("name", { length: 256 }).notNull(),
   slug: varchar("slug", { length: 128 }).notNull().unique(),
-  description: text("description"),
-  transport: varchar("transport", { length: 50 }).notNull(), // stdio | streamable-http
-  status: varchar("status", { length: 50 }).default("unknown"), // healthy | degraded | unknown
-  publisher: varchar("publisher", { length: 256 }),
-  version: varchar("version", { length: 100 }),
-  capabilities: jsonCol("capabilities").$type<string[]>().default([]),
-  tags: jsonCol("tags").$type<string[]>().default([]),
-  evidenceId: integer("evidence_id").references(() => evidence.id),
-  createdAt: timestamp("created_at").defaultNow(),
-  updatedAt: timestamp("updated_at").defaultNow(),
-});
+description: text("description"),
+   transport: varchar("transport", { length: 50 }).notNull(), // stdio | streamable-http
+   status: varchar("status", { length: 50 }).default("unknown"), // healthy | degraded | unknown
+   publisher: varchar("publisher", { length: 256 }),
+   version: varchar("version", { length: 100 }),
+   capabilities: jsonCol("capabilities").$type<string[]>().default([]),
+   tags: jsonCol("tags").$type<string[]>().default([]),
+   evidenceId: integer("evidence_id").references(() => evidence.id),
+   createdAt: timestamp("created_at").defaultNow(),
+   updatedAt: timestamp("updated_at").defaultNow(),
+   });
+   
+// ============================
+// SERVER IDENTITIES (FOR AUTH MESH)
+// ============================
+export const serverIdentities = pgTable('server_identities', {
+   id: uuid('id').primaryKey().defaultRandom(),
+   serverId: uuid('server_id').notNull().references(() => servers.id),
+   tenantId: uuid('tenant_id').notNull().references(() => tenants.id),
+   
+   // The public key used to verify signatures
+   publicKey: text('public_key').notNull(),
+   
+   // The private key (encrypted in DB) used to sign outgoing requests
+   privateKey: text('private_key').notNull(),
+   
+   // Status of the identity
+   isActive: boolean('is_active').default(true),
+   
+   expiresAt: timestamp('expires_at'), // Optional rotation
+   
+   createdAt: timestamp('created_at').defaultNow().notNull(),
+   updatedAt: timestamp('updated_at').defaultNow().notNull(),
+   });
+   
 
+// ============================
+// TRUST POLICIES (FOR AUTH MESH)
+// ============================
+export const trustPolicies = pgTable('trust_policies', {
+   id: uuid('id').primaryKey().defaultRandom(),
+   tenantId: uuid('tenant_id').notNull().references(() => tenants.id),
+   
+   // Source Server (Who wants to talk)
+   sourceServerId: uuid('server_id').notNull().references(() => servers.id),
+   
+   // Target Server (Who is being called)
+   targetServerId: uuid('server_id').notNull().references(() => servers.id),
+   
+   // Allowed Actions (e.g., "read", "write", "execute")
+   allowedActions: jsonb('allowed_actions').notNull(), // ["read_db", "write_logs"]
+   
+   // Trust Level
+   trustLevel: varchar('trust_level').notNull().default('limited'), // untrusted, limited, full
+   
+   // Rate Limit (requests per minute)
+   rateLimit: integer('rate_limit').default(100),
+   
+   createdAt: timestamp('created_at').defaultNow().notNull(),
+   updatedAt: timestamp('updated_at').defaultNow().notNull(),
+   });
+
+// ============================
+// TOOLS
+// ============================
 export const tools = pgTable("tools", {
   id: serial("id").primaryKey(),
   name: varchar("name", { length: 256 }).notNull(),
@@ -350,37 +419,110 @@ export const indiaAiVouchers = pgTable('india_ai_vouchers', {
   rejectionReason: text('rejection_reason'),
   internalNotes: text('internal_notes'),
   
-  createdAt: timestamp('created_at').defaultNow().notNull(),
-  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+createdAt: timestamp('created_at').defaultNow().notNull(),
+   updatedAt: timestamp("updated_at").defaultNow().notNull(),
+   });
 });
 
+// ============================
+// SERVER IDENTITIES (FOR AUTH MESH)
+// ============================
+export const serverIdentities = pgTable('server_identities', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  serverId: uuid('server_id').notNull().references(() => servers.id),
+  tenantId: uuid('tenant_id').notNull().references(() => tenants.id),
+  
+  // The public key used to verify signatures
+  publicKey: text('public_key').notNull(),
+  
+  // The private key (encrypted in DB) used to sign outgoing requests
+  privateKey: text('private_key').notNull(),
+  
+  // Status of the identity
+  isActive: boolean('is_active').default(true),
+  
+  expiresAt: timestamp('expires_at'), // Optional rotation
+  
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+  updatedAt: timestamp('updated_at').defaultNow().notNull(),
+});
+
+// ============================
+// AUTH MIDDLEWARE
 // ============================
 // AUTH MIDDLEWARE
 // ============================
 
 // JWT verification middleware (HS256 pattern from mcp-server auth)
 const verifyToken = async (c: any, secret: string) => {
-  const authHeader = c.req.header("Authorization") || "";
-  if (!authHeader.startsWith("Bearer ")) {
-    return null;
-  }
-  
-  const token = authHeader.substring(7);
-  try {
-    // HS256 verification - simplified
-    const payload = Buffer.from(token, "base64").toString("utf-8");
-    const parsed = JSON.parse(payload);
-    
-    // Check expiry
-    if (parsed.exp && parsed.exp * 1000 < Date.now()) {
-      return null;
-    }
-    
-    return parsed;
-  } catch {
-    return null;
-  }
-};
+   const authHeader = c.req.header("Authorization") || "";
+   if (!authHeader.startsWith("Bearer ")) {
+     return null;
+   }
+   
+   const token = authHeader.substring(7);
+   try {
+     // HS256 verification - simplified
+     const payload = Buffer.from(token, "base64").toString("utf-8");
+     const parsed = JSON.parse(payload);
+     
+     // Check expiry
+     if (parsed.exp && parsed.exp * 1000 < Date.now()) {
+       return null;
+     }
+     
+     return parsed;
+   } catch {
+     return null;
+   }
+ };
+
+// Extract user info from JWT token
+const getAuthUser = async (c: any) => {
+   const authHeader = c.req.header("Authorization") || "";
+   if (!authHeader.startsWith("Bearer ")) {
+     // For development/testing, return a mock user if no auth header
+     // In production, this should return an error or throw an exception
+     return {
+       id: "dev-user-id",
+       tenantId: "dev-tenant-id",
+       role: "user"
+     };
+   }
+   
+   const token = authHeader.substring(7);
+   try {
+     // HS256 verification - simplified (same as verifyToken)
+     const payload = Buffer.from(token, "base64").toString("utf-8");
+     const parsed = JSON.parse(payload);
+     
+     // Check expiry
+     if (parsed.exp && parsed.exp * 1000 < Date.now()) {
+       // For development/testing, return mock user on expired token
+       // In production, this should return an error
+       return {
+         id: "dev-user-id",
+         tenantId: "dev-tenant-id",
+         role: "user"
+       };
+     }
+     
+     // Return user info from token
+     return {
+       id: parsed.sub || "unknown-user",
+       tenantId: parsed.tenantId || "unknown-tenant",
+       role: parsed.role || "user"
+     };
+   } catch {
+     // For development/testing, return mock user on invalid token
+     // In production, this should return an error
+     return {
+       id: "dev-user-id",
+       tenantId: "dev-tenant-id",
+       role: "user"
+     };
+   }
+ };
 
 // ============================
 // API ROUTES
@@ -833,9 +975,9 @@ api.post("/v1/governance/change-request/:changeId/ciso/approve", async (c) => {
 });
 
 api.post("/v1/governance/change-request/:changeId/product-lead/approve", async (c) => {
-   const { changeId } = c.req.param();
-   const body = await c.req.param();
-   const { leadId, approved } = body;
+    const { changeId } = c.req.param();
+    const body = await c.req.json();
+    const { leadId, approved } = body;
 
    try {
       await changeManagement.productLeadApprove(changeId, leadId, approved);
@@ -1612,7 +1754,37 @@ export class ConsentRetentionService {
       try {
          const record = await db.query.consentRetentionLedger.findFirst({
             where: eq(consentRetentionLedger.id, ledgerId)
-         });
+});
+// ============================
+// SERVER HEALTH EVENTS (FOR AI SELF-HEALING)
+// ============================
+export const serverHealthEvents = pgTable('server_health_events', {
+   id: uuid('id').primaryKey().defaultRandom(),
+   serverId: uuid('server_id').notNull().references(() => servers.id),
+   
+   // Event Details
+   failureType: failureType('failure_type').notNull(),
+   severity: integer('severity').notNull(), // 1 (Low) to 10 (Critical)
+   message: text('message').notNull(),
+   stackTrace: text('stack_trace'), // Optional: Full error log
+   
+   // Metrics at time of failure
+   metrics: jsonb('metrics'), // { cpu: 98, memory: 85, latency: 2500 }
+   
+   // Timeline
+   detectedAt: timestamp('detected_at').defaultNow().notNull(),
+   resolvedAt: timestamp('resolved_at'),
+   
+   // Healing Action
+   actionTaken: healingAction('action_taken'),
+   healingStatus: healingStatus('healing_status').notNull().default('pending'),
+   healingAttempts: integer('healing_attempts').default(0),
+   
+   // AI Diagnosis (Optional)
+   aiDiagnosis: jsonb('ai_diagnosis'), // AI-generated root cause analysis
+   
+   createdAt: timestamp('created_at').defaultNow().notNull(),
+});
          
          if (!record) {
             return { success: false, message: 'Consent record not found' };
@@ -2002,6 +2174,301 @@ export class ShadowMCPHunter {
 }
 
 export const shadowMCPHunter = new ShadowMCPHunter();
+
+#region
+// ============================
+// SERVER-TO-SERVER AUTH MESH SERVICE
+// ============================
+import { db } from './index';
+import { serverIdentities, trustPolicies } from './index';
+import { eq } from 'drizzle-orm';
+
+export class AuthMeshService {
+  /**
+   * Generate a new Identity (Key Pair) for a server
+   */
+  async generateIdentity(serverId: string, tenantId: string) {
+    const { privateKey, publicKey } = crypto.generateKeyPairSync('rsa', {
+      modulusLength: 2048,
+      publicKeyEncoding: { type: 'spki', format: 'pem' },
+      privateKeyEncoding: { type: 'pkcs8', format: 'pem' },
+    });
+
+    const [identity] = await db.insert(serverIdentities).values({
+      serverId,
+      tenantId,
+      publicKey,
+      privateKey, // In production, encrypt this field before storing!
+    }).returning();
+
+    return identity;
+  }
+
+  /**
+   * Sign a request payload
+   */
+  async signRequest(serverId: string, payload: string): Promise<string> {
+    const identity = await db.query.serverIdentities.first({
+      where: and(
+        eq(serverIdentities.serverId, serverId),
+        eq(serverIdentities.isActive, true)
+      ),
+    });
+
+    if (!identity) throw new Error('Server identity not found');
+
+    const privateKey = crypto.createPrivateKey(identity.privateKey);
+    const signature = crypto.sign('sha256', Buffer.from(payload), privateKey);
+    return crypto.createHash('sha256').update(signature).digest('hex');
+  }
+
+  /**
+   * Verify a request signature using the sender's public key
+   */
+  async verifyRequest(serverId: string, payload: string, signature: string): Promise<boolean> {
+    const identity = await db.query.serverIdentities.first({
+      where: and(
+        eq(serverIdentities.serverId, serverId),
+        eq(serverIdentities.isActive, true)
+      ),
+    });
+
+    if (!identity) return false;
+
+    const publicKey = crypto.createPublicKey(identity.publicKey);
+    const verified = crypto.verify('sha256', Buffer.from(payload), publicKey, Buffer.from(signature, 'hex'));
+    return verified;
+  }
+
+  /**
+   * Check Trust Policy (Can Server A call Server B?)
+   */
+  async checkTrust(sourceServerId: string, targetServerId: string, action: string): Promise<{ allowed: boolean; reason: string }> {
+    const policy = await db.query.trustPolicies.first({
+      where: and(
+        eq(trustPolicies.sourceServerId, sourceServerId),
+        eq(trustPolicies.targetServerId, targetServerId)
+      ),
+    });
+
+    if (!policy) {
+      return { allowed: false, reason: 'No trust policy found between servers' };
+    }
+
+    // Check if action is allowed
+    const actions = policy.allowedActions as string[];
+    if (!actions.includes(action)) {
+      return { allowed: false, reason: `Action '${action}' not allowed by policy` };
+    }
+
+    return { allowed: true, reason: 'Trust policy verified' };
+  }
+
+  /**
+   * Create a new Trust Policy
+   */
+  async createTrustPolicy(
+    tenantId: string, 
+    sourceServerId: string, 
+    targetServerId: string, 
+    actions: string[], 
+    trustLevel: string
+  ) {
+    return await db.insert(trustPolicies).values({
+      tenantId,
+      sourceServerId,
+      targetServerId,
+      allowedActions: actions,
+      trustLevel,
+    });
+  }
+}
+
+export const authMeshServiceInstance = new AuthMeshService();
+
+// ============================
+// AI SELF-HEALING SERVICE
+// ============================
+import { db } from './index';
+import { serverHealthEvents } from './index';
+import { eq } from 'drizzle-orm';
+
+export class AIHealerService {
+  /**
+   * Monitor: Detect failures and log events
+   */
+  async detectFailure(serverId: string, metrics: any, error?: string) {
+    const severity = this.calculateSeverity(metrics);
+    const failureType = this.classifyFailure(metrics, error);
+
+    const [event] = await db.insert(serverHealthEvents).values({
+      serverId,
+      failureType,
+      severity,
+      message: error || `High usage detected: CPU ${metrics.cpu}%`,
+      metrics,
+      healingStatus: 'pending',
+    }).returning();
+
+    // Trigger healing process
+    await this.triggerHealing(event.id);
+    
+    return event;
+  }
+
+  /**
+   * AI Diagnosis: Analyze failure and suggest fix
+   */
+  async diagnoseFailure(eventId: string) {
+    const event = await db.query.serverHealthEvents.first({
+      where: eq(serverHealthEvents.id, eventId),
+    });
+
+    if (!event) throw new Error('Event not found');
+
+    // Simulate AI Analysis (In production, call an LLM API here)
+    // Example: "High memory usage + Java heap dump suggests memory leak in module X"
+    let diagnosis = {};
+    let action: healingAction = 'restart';
+
+    if (event.failureType === 'high_memory' && event.metrics.memory > 90) {
+      diagnosis = { 
+        rootCause: 'Likely memory leak in application process', 
+        suggestion: 'Restart process and increase heap size' 
+      };
+      action = 'restart';
+    } else if (event.failureType === 'crash' && event.stackTrace) {
+      diagnosis = { 
+        rootCause: 'Unhandled exception in main thread', 
+        suggestion: 'Rollback to previous stable version' 
+      };
+      action = 'rollback';
+    } else if (event.failureType === 'high_cpu') {
+      diagnosis = { 
+        rootCause: 'Infinite loop or DDoS attack', 
+        suggestion: 'Scale up resources or isolate traffic' 
+      };
+      action = 'scale_up';
+    }
+
+    // Update event with diagnosis
+    await db.update(serverHealthEvents)
+      .set({ 
+        aiDiagnosis: diagnosis,
+        actionTaken: action,
+        healingStatus: 'running',
+        healingAttempts: 1
+      })
+      .where(eq(serverHealthEvents.id, eventId));
+
+    return { event, diagnosis, action };
+  }
+
+  /**
+   * Execute Healing: Perform the recovery action
+   */
+  async executeHealing(eventId: string) {
+    const { event, action } = await this.diagnoseFailure(eventId);
+
+    try {
+      switch (action) {
+        case 'restart':
+          await this.restartServer(event.serverId);
+          break;
+        case 'rollback':
+          await this.rollbackServer(event.serverId);
+          break;
+        case 'scale_up':
+          await this.scaleServer(event.serverId, 2); // Double resources
+          break;
+        case 'isolate':
+          await this.isolateServer(event.serverId);
+          break;
+        default:
+          throw new Error('Unknown healing action');
+      }
+
+      // Mark as successful
+      await db.update(serverHealthEvents)
+        .set({
+          healingStatus: 'success',
+          resolvedAt: new Date(),
+        })
+        .where(eq(serverHealthEvents.id, eventId));
+
+      return { success: true, action };
+
+    } catch (error) {
+      // If healing fails, mark for manual review
+      await db.update(serverHealthEvents)
+        .set({
+          healingStatus: 'failed',
+          healingAttempts: event.healingAttempts + 1,
+          message: `Healing failed: ${error.message}`
+        })
+        .where(eq(serverHealthEvents.id, eventId));
+
+      throw error;
+    }
+  }
+
+  // Helper: Restart Server (via Mesh or CLI)
+  private async restartServer(serverId: string) {
+    // Use the Mesh to send a restart command securely
+    // await authMeshService.sendCommand(serverId, 'restart');
+    console.log(`[HEALING] Restarting server ${serverId}...`);
+    // In a real implementation, this would send a command via the mesh to restart the server
+    // For now, we'll simulate it
+    await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate restart delay
+  }
+
+  // Helper: Rollback (using Time Machine)
+  private async rollbackServer(serverId: string) {
+    // Find the last stable version
+    // const version = await timeMachineService.getLastStableVersion(serverId);
+    // await timeMachineService.rollback(serverId, version.id);
+    console.log(`[HEALING] Rolling back server ${serverId}...`);
+    // In a real implementation, this would use the Time Machine service
+    // For now, we'll simulate it
+    await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate rollback delay
+  }
+
+  // Helper: Scale Up Server
+  private async scaleServer(serverId: string, scaleFactor: number) {
+    console.log(`[HEALING] Scaling up server ${serverId} by factor ${scaleFactor}...`);
+    // In a real implementation, this would interact with your container orchestrator (K8s, Docker Swarm, etc.)
+    // For now, we'll simulate it
+    await new Promise(resolve => setTimeout(resolve, 1500)); // Simulate scaling delay
+  }
+
+  // Helper: Isolate Server
+  private async isolateServer(serverId: string) {
+    console.log(`[HEALING] Isolating server ${serverId}...`);
+    // In a real implementation, this would update network policies or load balancer configs
+    // For now, we'll simulate it
+    await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate isolation delay
+  }
+
+  // Helper: Calculate Severity (1-10)
+  private calculateSeverity(metrics: any): number {
+    let score = 0;
+    if (metrics.cpu > 90) score += 4;
+    if (metrics.memory > 90) score += 4;
+    if (metrics.latency > 2000) score += 2;
+    return Math.min(score, 10);
+  }
+
+  // Helper: Classify Failure Type
+  private classifyFailure(metrics: any, error?: string): failureType {
+    if (error?.includes('OutOfMemory')) return 'crash';
+    if (metrics.cpu > 95) return 'high_cpu';
+    if (metrics.memory > 95) return 'high_memory';
+    if (error?.includes('timeout')) return 'network_timeout';
+    return 'unknown';
+  }
+}
+
+export const aiHealerServiceInstance = new AIHealerService();
 
 // ============================
 // CHANGE MANAGEMENT SERVICE
@@ -2552,7 +3019,8 @@ export const timeMachine = new TimeMachineService();
 api.post("/v1/time-machine/capture", async (c) => {
    const body = await c.req.json();
    const { serverId, deployId, versionTag, description } = body;
-   const userId = "current-user-id"; // In production: get from auth context
+   const user = await getAuthUser(c);
+   const userId = user.id;
 
    try {
       const versionId = await timeMachine.captureSnapshot(
@@ -2580,6 +3048,8 @@ api.post("/v1/time-machine/rollback/:versionId", async (c) => {
    const { versionId } = c.req.param();
    const body = await c.req.json();
    const { serverId } = body;
+   const user = await getAuthUser(c);
+   // In production, you might want to verify that the user has permission to rollback this server
 
    try {
       const result = await timeMachine.rollbackToVersion(serverId, versionId);
@@ -2598,6 +3068,8 @@ api.get("/v1/time-machine/versions/:serverId", async (c) => {
    const { serverId } = c.req.param();
    const { searchParams } = new URL(c.req.url);
    const limit = parseInt(searchParams.get('limit') || '20');
+   const user = await getAuthUser(c);
+   // In production, you might want to verify that the user has permission to view this server's versions
 
    try {
       const versions = await timeMachine.listVersions(serverId, limit);
@@ -2609,6 +3081,8 @@ api.get("/v1/time-machine/versions/:serverId", async (c) => {
 
 api.get("/v1/time-machine/version/:versionId", async (c) => {
    const { versionId } = c.req.param();
+   const user = await getAuthUser(c);
+   // In production, you might want to verify that the user has permission to view this version
 
    try {
       const version = await timeMachine.getVersion(versionId);
@@ -2618,5 +3092,65 @@ api.get("/v1/time-machine/version/:versionId", async (c) => {
       return c.json({ success: true, data: version });
    } catch (error) {
       return c.json({ error: 'Failed to fetch version' }, { status: 500 });
+   }
+});
+
+// ============================
+// SERVER-TO-SERVER AUTH MESH ENDPOINTS
+// ============================
+api.post("/v1/mesh/identities", async (c) => {
+   const user = await getAuthUser(c);
+   const { serverId } = await c.req.json();
+
+   try {
+      const identity = await authMeshServiceInstance.generateIdentity(serverId, user.tenantId);
+      return c.json({ success: true, data: identity });
+   } catch (error) {
+      return c.json({ error: 'Failed to generate identity' }, { status: 500 });
+   }
+});
+
+api.post("/v1/mesh/policies", async (c) => {
+   const user = await getAuthUser(c);
+   const { sourceServerId, targetServerId, actions, trustLevel } = await c.req.json();
+
+   try {
+      await authMeshServiceInstance.createTrustPolicy(
+         user.tenantId,
+         sourceServerId,
+         targetServerId,
+         actions,
+         trustLevel
+      );
+      return c.json({ success: true });
+   } catch (error) {
+      return c.json({ error: 'Failed to create trust policy' }, { status: 500 });
+   }
+});
+
+// ============================
+// AI SELF-HEALING SERVERS ENDPOINTS
+// ============================
+api.get("/v1/self-healing/events", async (c) => {
+   const user = await getAuthUser(c);
+   
+   const events = await db.query.serverHealthEvents.findMany({
+      where: eq(serverHealthEvents.tenantId, user.tenantId),
+      orderBy: (serverHealthEvents, { desc }) => [serverHealthEvents.detectedAt],
+      limit: 50,
+   });
+
+   return c.json({ success: true, data: events });
+});
+
+api.post("/v1/self-healing/events/:id/trigger", async (c) => {
+   const user = await getAuthUser(c);
+   const { id } = c.req.param();
+   
+   try {
+      await aiHealerServiceInstance.executeHealing(id);
+      return c.json({ success: true, message: 'Healing process triggered' });
+   } catch (error) {
+      return c.json({ error: 'Healing failed' }, { status: 500 });
    }
 });
