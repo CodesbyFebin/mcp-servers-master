@@ -2355,4 +2355,5 @@ export class ImmutableAuditTrailService {
   }
 }
 
+export const changeManagement = new ChangeManagementService();
 export const immutableAuditTrail = new ImmutableAuditTrailService();
