@@ -845,11 +845,87 @@ api.post("/v1/governance/change-request/:changeId/product-lead/approve", async (
       return c.json({ error: 'Failed to process Product Lead approval' }, { status: 500 });
    }
 });
+});
+
+// ============ Immutable Audit Trail Endpoints ============
+api.post("/v1/audit/create", async (c) => {
+   const body = await c.req.json();
+   const { serverId, eventType, action, performedBy, details, previousHash } = body;
+
+   try {
+      const result = await immutableAuditTrail.createAuditEntry(
+        serverId,
+        eventType,
+        action,
+        performedBy,
+        details,
+        previousHash
+      );
+
+      return c.json({ 
+         success: true, 
+         entryId: result.entryId,
+         currentHash: result.currentHash,
+         chainHash: result.chainHash,
+         message: 'Audit trail entry created successfully' 
+      }, 201);
+   } catch (error) {
+      return c.json(
+        { error: 'Failed to create audit trail entry', details: error.message },
+        { status: 500 }
+      );
+   }
+});
+
+api.get("/v1/audit/verify/:serverId", async (c) => {
+   const { serverId } = c.req.param();
+
+   try {
+      const result = await immutableAuditTrail.verifyAuditChain(serverId);
+      
+      if (result.isValid) {
+         return c.json({ success: true, message: 'Audit chain is valid' });
+      } else {
+         return c.json({ 
+            success: false, 
+            firstInvalidEntryId: result.firstInvalidEntryId,
+            error: result.error || 'Audit chain validation failed' 
+         }, 400);
+      }
+   } catch (error) {
+      return c.json({ error: 'Failed to verify audit chain' }, { status: 500 });
+   }
+});
+
+api.get("/v1/audit/entries/:serverId", async (c) => {
+   const { serverId } = c.req.param();
+   const { searchParams } = new URL(c.req.url);
+   const limit = parseInt(searchParams.get('limit') || '100');
+   const offset = parseInt(searchParams.get('offset') || '0');
+
+   try {
+      const entries = await immutableAuditTrail.getAuditEntries(serverId, limit, offset);
+      return c.json({ success: true, data: entries, count: entries.length });
+   } catch (error) {
+      return c.json({ error: 'Failed to fetch audit trail entries' }, { status: 500 });
+   }
+});
+
+api.get("/v1/audit/stats/:serverId", async (c) => {
+   const { serverId } = c.req.param();
+
+   try {
+      const stats = await immutableAuditTrail.getAuditStats(serverId);
+      return c.json({ success: true, data: stats });
+   } catch (error) {
+      return c.json({ error: 'Failed to fetch audit trail statistics' }, { status: 500 });
+   }
+});
 
 // ============ Organizations & Teams ============
 api.get("/v1/organizations", async (c) => {
-  const orgList = await db.select().from(organizations).orderBy(asc(organizations.name));
-  return json(orgList);
+   const orgList = await db.select().from(organizations).orderBy(asc(organizations.name));
+   return json(orgList);
 });
 
 api.post("/v1/organizations", async (c) => {
@@ -1763,11 +1839,38 @@ export const changeRequests = pgTable('change_requests', {
   approvedAt: timestamp('approved_at'),
   deployedAt: timestamp('deployed_at'),
   
-  createdAt: timestamp('created_at').defaultNow().notNull(),
-  updatedAt: timestamp('updated_at').defaultNow().notNull(),
+createdAt: timestamp('created_at').defaultNow().notNull(),
+   updatedAt: timestamp('updated_at').defaultNow().notNull(),
 });
 
+// ============================
+// IMMUTABLE AUDIT TRAIL TABLE
+// ============================
+export const auditTrailEntries = pgTable('audit_trail_entries', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  serverId: uuid('server_id').notNull().references(() => servers.id),
+  
+  // Audit Entry Details
+  eventType: text('event_type').notNull(), // e.g., 'tool_deployment', 'config_change', 'security_incident'
+  action: text('action').notNull(), // e.g., 'created', 'updated', 'deleted', 'accessed'
+  performedBy: uuid('performed_by').notNull().references(() => users.id),
+  details: jsonb('details').notNull(), // Flexible JSON field for event-specific data
+  
+  // Immutability Fields
+  previousHash: text('previous_hash').notNull().default('0'.repeat(64)), // Hash of previous entry
+  currentHash: text('current_hash').notNull(), // Hash of this entry's data
+  chainHash: text('chain_hash').notNull(), // Hash linking this entry to previous
+  
+  // Timeline
+  timestamp: timestamp('timestamp').defaultNow().notNull();
+  
+  createdAt: timestamp('created_at').defaultNow().notNull();
+  updatedAt: timestamp('updated_at').defaultNow().notNull();
+});
+
+// ============================
 // Initialize services
+// ============================
 export const ddppBreachService = new DPDPBreachService();
 export const consentRetentionService = new ConsentRetentionService();
 export const indiaAiVoucherService = new IndiaAIVoucherService();
@@ -2020,10 +2123,236 @@ export class ChangeManagementService {
     console.log(`[NOTIFY] ${role.toUpperCase()}: ${message} (Change ID: ${changeId})`);
   }
 
-  private async notifyDeveloper(developerId: string, message: string) {
-    // Send Slack/Email notifications
-    console.log(`[NOTIFY] DEVELOPER ${developerId}: ${message}`);
+private async notifyDeveloper(developerId: string, message: string) {
+     // Send Slack/Email notifications
+     console.log(`[NOTIFY] DEVELOPER ${developerId}: ${message}`);
+   }
+ }
+
+// ============================
+// IMMUTABLE AUDIT TRAIL SERVICE
+// ============================
+import { db } from './index';
+import { auditTrailEntries, servers } from './index';
+import { eq } from 'drizzle-orm';
+import crypto from 'crypto';
+
+export class ImmutableAuditTrailService {
+  private static readonly CHAINING_ALGORITHM = 'sha256';
+
+  /**
+   * Create an immutable audit trail entry
+   * Each entry includes the hash of the previous entry, making the chain tamper-evident
+   */
+  async createAuditEntry(
+    serverId: string,
+    eventType: string,
+    action: string,
+    performedBy: string,
+    details: Record<string, any>,
+    previousHash?: string
+  ): Promise<{ entryId: string; currentHash: string; chainHash: string }> {
+    // Get the latest entry in the chain to get the previous hash if not provided
+    let actualPreviousHash = previousHash;
+    if (!previousHash) {
+      const latestEntry = await db.query.auditTrailEntries.findFirst({
+        where: eq(auditTrailEntries.serverId, serverId),
+        orderBy: (auditTrailEntries, { desc }) => [auditTrailEntries.createdAt],
+      });
+      
+      actualPreviousHash = latestEntry?.currentHash || '0'.repeat(64); // Genesis block hash
+    }
+
+    // Create the entry data to be hashed
+    const entryData = {
+      serverId,
+      eventType,
+      action,
+      performedBy,
+      details,
+      timestamp: new Date().toISOString(),
+      previousHash: actualPreviousHash,
+    };
+
+    // Create the entry hash
+    const entryHash = this.calculateHash(entryData);
+    
+    // Create the chain hash (hash of entry hash + previous hash)
+    const chainData = {
+      entryHash,
+      previousHash: actualPreviousHash,
+    };
+    const chainHash = this.calculateHash(chainData);
+
+    // Store the entry in the database
+    const [entry] = await db.insert(auditTrailEntries).values({
+      serverId,
+      eventType,
+      action,
+      performedBy,
+      details: JSON.stringify(details),
+      previousHash: actualPreviousHash,
+      currentHash: entryHash,
+      chainHash,
+    }).returning();
+
+    return {
+      entryId: entry.id,
+      currentHash: entryHash,
+      chainHash,
+    };
+  }
+
+  /**
+   * Calculate SHA-256 hash of an object
+   */
+  private calculateHash(data: any): string {
+    const jsonString = JSON.stringify(data, Object.keys(data).sort());
+    const hash = crypto.createHash(this.CHAINING_ALGORITHM);
+    hash.update(jsonString);
+    return hash.digest('hex');
+  }
+
+  /**
+   * Verify the integrity of the audit trail for a server
+   * Returns true if the chain is unbroken and all hashes are valid
+   */
+  async verifyAuditChain(serverId: string): Promise<{
+    isValid: boolean;
+    firstInvalidEntryId?: string;
+    error?: string;
+  }> {
+    try {
+      const entries = await db.query.auditTrailEntries.findMany({
+        where: eq(auditTrailEntries.serverId, serverId),
+        orderBy: (auditTrailEntries, { asc }) => [auditTrailEntries.createdAt],
+      });
+
+      if (entries.length === 0) {
+        return { isValid: true }; // Empty chain is valid
+      }
+
+      let previousHash = '0'.repeat(64); // Genesis block hash
+
+      for (const entry of entries) {
+        // Recreate the entry data to verify its hash
+        const entryData = {
+          serverId: entry.serverId,
+          eventType: entry.eventType,
+          action: entry.action,
+          performedBy: entry.performedBy,
+          details: JSON.parse(entry.details),
+          timestamp: new Date(entry.timestamp).toISOString(),
+          previousHash: entry.previousHash,
+        };
+
+        const calculatedHash = this.calculateHash(entryData);
+        if (calculatedHash !== entry.currentHash) {
+          return {
+            isValid: false,
+            firstInvalidEntryId: entry.id,
+            error: `Current hash mismatch for entry ${entry.id}`,
+          };
+        }
+
+        // Verify the chain hash
+        const chainData = {
+          entryHash: entry.currentHash,
+          previousHash,
+        };
+        const calculatedChainHash = this.calculateHash(chainData);
+        if (calculatedChainHash !== entry.chainHash) {
+          return {
+            isValid: false,
+            firstInvalidEntryId: entry.id,
+            error: `Chain hash mismatch for entry ${entry.id}`,
+          };
+        }
+
+        // Update previous hash for next iteration
+        previousHash = entry.currentHash;
+      }
+
+      return { isValid: true };
+    } catch (error) {
+      return {
+        isValid: false,
+        error: `Failed to verify audit chain: ${error.message}`,
+      };
+    }
+  }
+
+  /**
+   * Get audit trail entries for a server
+   */
+  async getAuditEntries(
+    serverId: string,
+    limit: number = 100,
+    offset: number = 0
+  ): Promise<Array<{
+    id: string;
+    eventType: string;
+    action: string;
+    performedBy: string;
+    details: any;
+    timestamp: string;
+    previousHash: string;
+    currentHash: string;
+    chainHash: string;
+  }>> {
+    const entries = await db.query.auditTrailEntries.findMany({
+      where: eq(auditTrailEntries.serverId, serverId),
+      orderBy: (auditTrailEntries, { desc }) => [auditTrailEntries.createdAt],
+      limit,
+      offset,
+    });
+
+    return entries.map(entry => ({
+      id: entry.id,
+      eventType: entry.eventType,
+      action: entry.action,
+      performedBy: entry.performedBy,
+      details: JSON.parse(entry.details),
+      timestamp: entry.timestamp,
+      previousHash: entry.previousHash,
+      currentHash: entry.currentHash,
+      chainHash: entry.chainHash,
+    }));
+  }
+
+  /**
+   * Get audit trail statistics
+   */
+  async getAuditStats(serverId: string): Promise<{
+    totalEntries: number;
+    firstEntryTimestamp: string | null;
+    lastEntryTimestamp: string | null;
+    chainIsValid: boolean;
+  }> {
+    const [countResult] = await db
+      .select({ count: db.count() })
+      .from(auditTrailEntries)
+      .where(eq(auditTrailEntries.serverId, serverId));
+
+    const firstEntry = await db.query.auditTrailEntries.findFirst({
+      where: eq(auditTrailEntries.serverId, serverId),
+      orderBy: (auditTrailEntries, { asc }) => [auditTrailEntries.createdAt],
+    });
+
+    const lastEntry = await db.query.auditTrailEntries.findFirst({
+      where: eq(auditTrailEntries.serverId, serverId),
+      orderBy: (auditTrailEntries, { desc }) => [auditTrailEntries.createdAt],
+    });
+
+    const verification = await this.verifyAuditChain(serverId);
+
+    return {
+      totalEntries: Number(countResult.count),
+      firstEntryTimestamp: firstEntry?.timestamp ?? null,
+      lastEntryTimestamp: lastEntry?.timestamp ?? null,
+      chainIsValid: verification.isValid,
+    };
   }
 }
 
-export const changeManagement = new ChangeManagementService();
+export const immutableAuditTrail = new ImmutableAuditTrailService();
