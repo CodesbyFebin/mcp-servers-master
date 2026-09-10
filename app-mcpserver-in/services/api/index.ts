@@ -759,6 +759,93 @@ api.post("/v1/consent/:ledgerId/perform-erasure", async (c) => {
    }
 });
 
+// ============ Shadow MCP Hunter Endpoints ============
+api.get("/v1/security/shadow-mcp/incidents", async (c) => {
+   const { searchParams } = new URL(c.req.url);
+   const tenantId = searchParams.get('tenantId');
+   const limit = parseInt(searchParams.get('limit') || '50');
+   
+   try {
+      const incidents = await shadowMCPHunter.getActiveIncidents(tenantId);
+      return c.json({ success: true, data: incidents, count: incidents.length });
+   } catch (error) {
+      return c.json({ error: 'Failed to fetch shadow MCP incidents' }, { status: 500 });
+   }
+});
+
+api.post("/v1/security/shadow-mcp/:incidentId/release", async (c) => {
+   const { incidentId } = c.req.param();
+   const body = await c.req.json();
+   const { releasedBy, notes } = body;
+
+   try {
+      const success = await shadowMCPHunter.releaseQuarantine(incidentId, releasedBy, notes);
+      
+      if (success) {
+        return c.json({ success: true, message: 'Quarantine released successfully' });
+      } else {
+        return c.json({ error: 'Failed to release quarantine' }, { status: 500 });
+      }
+   } catch (error) {
+      return c.json({ error: 'Failed to release quarantine' }, { status: 500 });
+   }
+});
+
+// ============ Change Management Endpoints ============
+api.post("/v1/governance/change-request", async (c) => {
+   const body = await c.req.json();
+   const { serverId, toolName, proposedCode, developerId, description } = body;
+
+   try {
+      const changeId = await changeManagement.submitChangeRequest(
+        serverId,
+        toolName,
+        proposedCode,
+        developerId,
+        description
+      );
+
+      return c.json({ 
+         success: true, 
+         changeId,
+         message: 'Change request submitted and sent to CISO for review' 
+      }, 201);
+   } catch (error) {
+      return c.json(
+        { error: 'Failed to submit change request', details: error.message },
+        { status: 500 }
+      );
+   }
+});
+
+api.post("/v1/governance/change-request/:changeId/ciso/approve", async (c) => {
+   const { changeId } = c.req.param();
+   const body = await c.req.json();
+   const { cisoId, approved, reason } = body;
+
+   try {
+      await changeManagement.cisoApprove(changeId, cisoId, approved, reason);
+      
+      return c.json({ success: true, message: 'CISO approval recorded' });
+   } catch (error) {
+      return c.json({ error: 'Failed to process CISO approval' }, { status: 500 });
+   }
+});
+
+api.post("/v1/governance/change-request/:changeId/product-lead/approve", async (c) => {
+   const { changeId } = c.req.param();
+   const body = await c.req.param();
+   const { leadId, approved } = body;
+
+   try {
+      await changeManagement.productLeadApprove(changeId, leadId, approved);
+      
+      return c.json({ success: true, message: 'Product Lead approval recorded' });
+   } catch (error) {
+      return c.json({ error: 'Failed to process Product Lead approval' }, { status: 500 });
+   }
+});
+
 // ============ Organizations & Teams ============
 api.get("/v1/organizations", async (c) => {
   const orgList = await db.select().from(organizations).orderBy(asc(organizations.name));
@@ -1619,7 +1706,324 @@ export class IndiaAIVoucherService {
    }
 }
 
+// ============================
+// ENTERPRISE GOVERNANCE TABLES
+// ============================
+
+// Shadow MCP Hunter Tables
+export const shadowMcpIncidents = pgTable('shadow_mcp_incidents', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  tenantId: uuid('tenant_id').notNull().references(() => tenants.id),
+  
+  // Incident Details
+  sourceIP: text('source_ip').notNull(),
+  destinationIP: text('destination_ip').notNull(),
+  port: integer('port').notNull(),
+  payloadSample: text('payload_sample'),
+  incidentType: text('incident_type').notNull().default('shadow_mcp'), // shadow_mcp, non_compliant_registered
+  
+  // Timeline
+  detectedAt: timestamp('detected_at').defaultNow().notNull(),
+  quarantinedAt: timestamp('quarantined_at'),
+  resolvedAt: timestamp('resolved_at'),
+  
+  // Status
+  status: text('status').notNull().default('detected'), // detected, quarantined, resolved, false_positive
+  
+  // Actions Taken
+  quarantinedBy: text('quarantined_by'), // system or manual
+  resolutionNotes: text('resolution_notes'),
+  
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+  updatedAt: timestamp('updated_at').defaultNow().notNull(),
+});
+
+// Change Management Tables
+export const changeRequests = pgTable('change_requests', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  serverId: uuid('server_id').notNull().references(() => servers.id),
+  toolName: text('tool_name').notNull(),
+  proposedCode: text('proposed_code').notNull(),
+  
+  // Request Details
+  submittedBy: uuid('submitted_by').notNull().references(() => users.id),
+  description: text('description'),
+  
+  // Approval Chain
+  status: text('status').notNull().default('draft'), // draft, pending_ciso, pending_product, approved, rejected
+  cisoId: uuid('ciso_id').references(() => users.id),
+  cisoReason: text('ciso_reason'),
+  productLeadId: uuid('product_lead_id').references(() => users.id),
+  productLeadReason: text('product_lead_reason'),
+  
+  // Timeline
+  submittedAt: timestamp('submitted_at').defaultNow().notNull(),
+  cisoReviewedAt: timestamp('ciso_reviewed_at'),
+  productLeadReviewedAt: timestamp('product_lead_reviewed_at'),
+  approvedAt: timestamp('approved_at'),
+  deployedAt: timestamp('deployed_at'),
+  
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+  updatedAt: timestamp('updated_at').defaultNow().notNull(),
+});
+
 // Initialize services
 export const ddppBreachService = new DPDPBreachService();
 export const consentRetentionService = new ConsentRetentionService();
 export const indiaAiVoucherService = new IndiaAIVoucherService();
+
+// ============================
+// SHADOW MCP HUNTER SERVICE
+// ============================
+import { db } from './index';
+import { shadowMcpIncidents, servers, tenants } from './index';
+import { eq } from 'drizzle-orm';
+
+interface NetworkPacket {
+  sourceIP: string;
+  destinationIP: string;
+  port: number;
+  payloadSignature: string; // e.g., "jsonrpc.2.0", "mcp-handshake"
+  tenantId: string;
+}
+
+export class ShadowMCPHunter {
+  /**
+   * Analyze network traffic for unauthorized MCP patterns
+   */
+  async analyzeTraffic(packet: NetworkPacket): Promise<{ isShadow: boolean; incidentId?: string }> {
+    // 1. Check if traffic is MCP-like (JSON-RPC handshake on non-standard port)
+    const isMCP = packet.payloadSignature.includes('jsonrpc') || 
+                  packet.payloadSignature.includes('mcp') ||
+                  packet.port === 3001; // Common MCP dev port
+
+    if (!isMCP) return { isShadow: false };
+
+    // 2. Check if the source IP belongs to a registered, compliant server
+    const registeredServer = await db.query.servers.findFirst({
+      where: eq(servers.ipAddress, packet.sourceIP),
+      with: { tenant: true },
+    });
+
+    // 3. If not registered, it's a "Shadow MCP"
+    if (!registeredServer) {
+      const incident = await db.insert(shadowMcpIncidents).values({
+        tenantId: packet.tenantId,
+        sourceIP: packet.sourceIP,
+        destinationIP: packet.destinationIP,
+        port: packet.port,
+        payloadSample: packet.payloadSignature,
+        incidentType: 'shadow_mcp',
+        status: 'detected',
+      }).returning();
+
+      // 4. Auto-Quarantine: Push firewall rule to block this IP
+      await this.quarantineIP(packet.sourceIP, packet.tenantId);
+
+      return { isShadow: true, incidentId: incident[0].id };
+    }
+
+    // 5. If registered, check if it's compliant (RBI/DPDP checks)
+    if (registeredServer.status !== 'compliant') {
+      await db.insert(shadowMcpIncidents).values({
+        tenantId: packet.tenantId,
+        sourceIP: packet.sourceIP,
+        destinationIP: packet.destinationIP,
+        port: packet.port,
+        incidentType: 'non_compliant_registered',
+        status: 'warning',
+      });
+    }
+
+    return { isShadow: false };
+  }
+
+  /**
+   * Quarantine: Block IP at the edge firewall
+   */
+  private async quarantineIP(ip: string, tenantId: string) {
+    // Mock: Call Cloudflare/AWS WAF API to block IP
+    console.log(`[SECURITY] Quarantining Shadow MCP at ${ip} for tenant ${tenantId}`);
+    // In production: 
+    // await cloudflareWAF.blockIP(ip, tenantId);
+    // or
+    // await awsWaf.createIPSet(ip, tenantId);
+    
+    // Update incident record
+    await db.update(shadowMcpIncidents)
+      .set({
+        quarantinedAt: new Date(),
+        status: 'quarantined',
+        quarantinedBy: 'system'
+      })
+      .where(eq(shadowMcpIncidents.sourceIP, ip))
+      .where(eq(shadowMcpIncidents.status, 'detected'));
+  }
+
+  /**
+   * Release a quarantined IP (false positive or after investigation)
+   */
+  async releaseQuarantine(incidentId: string, releasedBy: string, notes?: string): Promise<boolean> {
+    try {
+      await db.update(shadowMcpIncidents)
+        .set({
+          status: 'resolved',
+          resolvedAt: new Date(),
+          resolutionNotes: notes,
+          quarantinedBy: releasedBy // Override to show who released it
+        })
+        .where(eq(shadowMcpIncidents.id, incidentId));
+      
+      // In production: Remove firewall rule
+      // await cloudflareWAF.removeIPBlock(incidentId);
+      
+      return true;
+    } catch (error) {
+      console.error('Failed to release quarantine:', error);
+      return false;
+    }
+  }
+
+  /**
+   * Get active shadow MCP incidents for dashboard
+   */
+  async getActiveIncidents(tenantId?: string) {
+    const query = db.query.shadowMcpIncidents.findMany({
+      where: tenantId ? eq(shadowMcpIncidents.tenantId, tenantId) : undefined,
+      orderBy: (shadowMcpIncidents, { desc }) => [desc(shadowMcpIncidents.detectedAt)],
+      limit: 50,
+    });
+    
+    return query;
+  }
+}
+
+export const shadowMCPHunter = new ShadowMCPHunter();
+
+// ============================
+// CHANGE MANAGEMENT SERVICE
+// ============================
+import { db } from './index';
+import { changeRequests, tools, users } from './index';
+import { eq, and } from 'drizzle-orm';
+
+export type ChangeStatus = 'draft' | 'pending_ciso' | 'pending_product' | 'approved' | 'rejected';
+
+export class ChangeManagementService {
+  /**
+   * Step 1: Developer submits a change request
+   */
+  async submitChangeRequest(
+    serverId: string,
+    toolName: string,
+    proposedCode: string,
+    developerId: string,
+    description: string
+  ): Promise<string> {
+    const change = await db.insert(changeRequests).values({
+      serverId,
+      toolName,
+      proposedCode,
+      submittedBy: developerId,
+      description,
+      status: 'pending_ciso', // Initial state
+    }).returning();
+
+    // Notify CISO
+    await this.notifyApprovers('ciso', change[0].id, `New tool "${toolName}" requires security review.`);
+
+    return change[0].id;
+  }
+
+  /**
+   * Step 2: CISO Approval (Security Gate)
+   */
+  async cisoApprove(changeId: string, cisoId: string, approved: boolean, reason?: string) {
+    const change = await db.query.changeRequests.findFirst({
+      where: eq(changeRequests.id, changeId),
+    });
+
+    if (!change) throw new Error('Change request not found');
+
+    let newStatus: ChangeStatus = 'rejected';
+    
+    if (approved) {
+      newStatus = 'pending_product'; // Move to Product Lead
+      // Notify Product Lead
+      await this.notifyApprovers('product_lead', changeId, `Security approved. Awaiting product review for "${change.toolName}".`);
+    } else {
+      // Notify Developer of rejection
+      await this.notifyDeveloper(change.submittedBy, `Change rejected by CISO: ${reason}`);
+    }
+
+    await db.update(changeRequests)
+      .set({ 
+        status: newStatus, 
+        cisoId, 
+        cisoReason: reason,
+        updatedAt: new Date() 
+      })
+      .where(eq(changeRequests.id, changeId));
+  }
+
+  /**
+   * Step 3: Product Lead Approval (Business Gate)
+   */
+  async productLeadApprove(changeId: string, leadId: string, approved: boolean) {
+    const change = await db.query.changeRequests.findFirst({
+      where: eq(changeRequests.id, changeId),
+    });
+
+    if (!change) throw new Error('Change request not found');
+
+    if (approved) {
+      // DEPLOY: Apply the change to the live server
+      await this.deployToolChange(change.serverId, change.toolName, change.proposedCode);
+      
+      await db.update(changeRequests)
+        .set({ 
+          status: 'approved', 
+          productLeadId: leadId, 
+          deployedAt: new Date() 
+        })
+        .where(eq(changeRequests.id, changeId));
+
+      await this.notifyDeveloper(change.submittedBy, `Change approved and deployed!`);
+    } else {
+      await db.update(changeRequests)
+        .set({ status: 'rejected', productLeadId: leadId })
+        .where(eq(changeRequests.id, changeId));
+    }
+  }
+
+  /**
+   * Helper: Actually deploy the tool to the MCP server
+   */
+  private async deployToolChange(serverId: string, toolName: string, code: string) {
+    // 1. Write code to server's filesystem
+    // 2. Restart server process
+    // 3. Verify tool is registered
+    console.log(`[DEPLOY] Deploying tool ${toolName} to server ${serverId}`);
+    
+    // In production, this would:
+    // 1. Update the tool's code in the storage system
+    // 2. Trigger a redeploy of the MCP server
+    // 3. Verify the new tool is registered and healthy
+  }
+
+  private async notifyApprovers(role: string, changeId: string, message: string) {
+    const approvers = await db.query.users.findMany({
+      where: eq(users.role, role),
+    });
+    // Send Slack/Email notifications
+    // For now, just log
+    console.log(`[NOTIFY] ${role.toUpperCase()}: ${message} (Change ID: ${changeId})`);
+  }
+
+  private async notifyDeveloper(developerId: string, message: string) {
+    // Send Slack/Email notifications
+    console.log(`[NOTIFY] DEVELOPER ${developerId}: ${message}`);
+  }
+}
+
+export const changeManagement = new ChangeManagementService();
