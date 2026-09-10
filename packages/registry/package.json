@@ -5,9 +5,9 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "dev": "tsc --watch"
+    "compile": "tsc"
   },
-  "devDependencies": {
-    "typescript": "^5.9.3"
+  "dependencies": {
+    "@mcp/servers-contracts": "0.1.0"
   }
 }

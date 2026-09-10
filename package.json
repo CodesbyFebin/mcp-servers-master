@@ -1,28 +1,22 @@
 {
-  "name": "mcpserver-in-web",
-  "version": "0.1.0",
+  "name": "app-mcpserver-in",
   "private": true,
+  "workspaces": [
+    "packages/*",
+    "services/*",
+    "apps/*"
+  ],
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "test": "vitest run"
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "compile": "tsc --noEmit -p packages/contracts/tsconfig.json && tsc --noEmit -p packages/evidence/tsconfig.json && tsc --noEmit -p packages/registry/tsconfig.json && tsc --noEmit -p packages/auth/tsconfig.json"
   },
   "dependencies": {
-    "@mcp/servers-registry": "file:packages/registry",
-    "next": "^14.2.4",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "turbo": "^1.13.3"
   },
   "devDependencies": {
-    "@types/node": "^20.0.0",
-    "@types/react": "^18.3.0",
-    "@types/react-dom": "^18.3.0",
-    "autoprefixer": "^10.4.0",
-    "postcss": "^8.4.0",
-    "tailwindcss": "^3.4.0",
-    "typescript": "^5.4.0",
-    "vitest": "^1.6.0"
+    "typescript": "^5.9.3"
   }
 }
