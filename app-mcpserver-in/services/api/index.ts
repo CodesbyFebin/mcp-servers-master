@@ -16,6 +16,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { z } from 'zod';
 import crypto from 'crypto';
 import fetch from 'node-fetch';
+import { parseStringPromise } from 'xml2js';
 
 // Database connection
 const connectionString = process.env.DATABASE_URL || "postgresql://localhost:5432/mcp_servers";
@@ -271,32 +272,37 @@ export const userPreferences = pgTable("user_preferences", {
 // ============================
 // KYC TOKENS (Aadhaar/Identity Verification)
 // ============================
-export const kycMethod = pgEnum('kyc_method', ['aadhaar_token', 'digilocker', 'video_kyc', 'pan_card']);
+export const verificationMethod = pgEnum('verification_method', [
+  'tokenize_api', // Current method (requires AUA/ASA)
+  'ovse_offline'  // New OVSE method (Aadhaar Paperless Offline e-KYC)
+]);
+
+export const kycMethod = pgEnum('kyc_method', ['aadhaar_offline', 'digilocker', 'video_kyc', 'pan_card']);
 export const kycStatus = pgEnum('kyc_status', ['pending', 'verified', 'failed', 'expired']);
 
 export const kycTokens = pgTable("kyc_tokens", {
    id: uuid("id").primaryKey().defaultRandom(),
    tenantId: uuid("tenant_id").notNull().references(() => tenants.id),
    
-   // UIDAI Token (Entity-specific, not the Aadhaar number itself)
-   uidToken: text("uid_token").notNull(), // The 16-char tokenized reference from UIDAI
+   // Identity Data
+   aadhaarHash: text("aadhaar_hash").notNull(), // SHA256 of Aadhaar (client-side, for verification)
+   ovseXml: text("ovse_xml"), // The signed offline XML payload from Aadhaar app
+   ovseSignature: text("ovse_signature"), // Base64 signature for validation
    
-   // Optional: VID (Virtual ID) - only if explicitly requested by user
-   vid: text("vid"), 
+   // Verification Method
+   method: verification_method("method").notNull().default('ovse_offline'),
    
    // Consent Artifact: Hash of the consent form + timestamp
    consentHash: text("consent_hash").notNull(), 
    consentTimestamp: timestamp("consent_timestamp").notNull(),
    
-   // Verification Method (OTP, QR, App)
-   verificationMethod: text("verification_method").notNull(), // 'otp', 'qr', 'app'
-   
-   // Fallback Path (if OTP fails)
-   fallbackMethod: kycMethod("fallback_method"), // 'digilocker', 'video_kyc'
+   // Extracted KYC data (name, DOB, gender, address, etc.)
+   payloadData: jsonb("payload_data"), // Extracted fields from XML
    
    // Status
    status: kycStatus("status").notNull().default('pending'),
-   expiresAt: timestamp("expires_at"), // Token validity (usually 1 year)
+   verifiedAt: timestamp("verified_at"),
+   expiresAt: timestamp("expires_at"),
    
    createdAt: timestamp("created_at").defaultNow().notNull(),
    updatedAt: timestamp("updated_at").defaultNow().notNull(),
@@ -331,10 +337,11 @@ export const dpdpBreachEvents = pgTable('dpdp_breach_events', {
   dataTypes: jsonb('data_types').$type<string[]>().notNull(), // e.g. ['aadhaar', 'pan', 'phone']
   estimatedAffectedUsers: integer('estimated_affected_users').notNull(),
   
-  // Timeline
-  detectedAt: timestamp('detected_at').notNull(),
-  reportedToBoardAt: timestamp('reported_to_board_at'), // Must be within 72h
-  reportedToUsersAt: timestamp('reported_to_users_at'), // Must be within 72h
+// Timeline
+   detectedAt: timestamp('detected_at').notNull(),
+   reportedToCertInAt: timestamp('reported_to_cert_in_at'), // CERT-In reporting (6h for financial tenants)
+   reportedToBoardAt: timestamp('reported_to_board_at'), // Must be within 72h
+   reportedToUsersAt: timestamp('reported_to_users_at'), // Must be within 72h
   
   // Notification Artifacts
   boardNotificationId: text('board_notification_id'), // Reference ID from Board
@@ -724,68 +731,62 @@ api.patch("/v1/users/:userId/preferences", async (c) => {
    return json(pref);
  });
 
- // ============ KYC Tokenization ============
-api.post("/v1/kyc/tokenize", async (c) => {
+// ============ KYC Verification (Aadhaar Paperless Offline e-KYC) ============
+api.post("/v1/kyc/verify", async (c) => {
    // Note: In a production implementation, we would use the redactRequestMiddleware
-   // For now, we'll parse the body directly and assume client-side hashing
+   // For now, we'll parse the body directly
    const body = await c.req.json();
 
    const { 
-     tenantId, 
-     aidHash, 
-     consentHash, 
-     consentTimestamp, 
-     verificationMethod, 
-     fallbackMethod 
+      tenantId, 
+      aadhaarNumber, 
+      ovseXml, 
+      signature,
+      consentHash, 
+      consentTimestamp 
    } = body;
 
    // Validate Consent
    if (!consentHash || !consentTimestamp) {
-     return c.json({ error: 'Missing consent details' }, 400);
+      return c.json({ error: 'Missing consent details' }, 400);
    }
 
-   // Generate Token
+   // Validate required fields
+   if (!aadhaarNumber || !ovseXml || !signature) {
+      return c.json({ error: 'Missing required fields: aadhaarNumber, ovseXml, or signature' }, 400);
+   }
+
+   // Generate hash of Aadhaar for storage (client should do this, but we verify here)
+   const aidHash = crypto.createHash('sha256').update(aadhaarNumber).digest('hex');
+
+   // Process Offline Verification
    try {
-     const { uidToken, vid } = await uidaiService.tokenizeAadhaar(
-       aidHash,
-       consentHash,
-       consentTimestamp,
-       verificationMethod
-     );
-
-     // Store Token in DB (Only the token, NOT the Aadhaar)
-     const record = await db
-       .insert(kycTokens)
-       .values({
+      const record = await ovseOfflineService.processOfflineVerification(
          tenantId,
-         uidToken,
-         vid,
+         aidHash,
+         ovseXml,
+         signature,
          consentHash,
-         consentTimestamp: new Date(consentTimestamp),
-         verificationMethod,
-         fallbackMethod,
-         status: 'verified',
-         expiresAt: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000), // 1 year
-       })
-       .returning();
+         consentTimestamp
+      );
 
-     // Log Access (DPDP Requirement)
-     await db.insert(kycAccessLogs).values({
-       kycTokenId: record[0].id,
-       accessedBy: tenantId, // Or current user ID from auth context
-       purpose: 'token_generation',
-     });
+      // Log Access (DPDP Requirement)
+      await db.insert(kycAccessLogs).values({
+         kycTokenId: record.id,
+         accessedBy: tenantId, // Or current user ID from auth context
+         purpose: 'kyc_verification',
+      });
 
-     return json({
-       success: true,
-       kycTokenId: record[0].id,
-       message: 'Token generated successfully',
-     });
+      return json({
+         success: true,
+         kycTokenId: record.id,
+         message: 'KYC verification completed successfully',
+      });
    } catch (error) {
-     console.error('Tokenize Error:', error);
-     return c.json({ error: 'Tokenization failed', details: error.message }, 500);
+      console.error('KYC Verification Error:', error);
+      return c.json({ error: 'KYC verification failed', details: error.message }, 500);
    }
- });
+});
 
  // ============ DPDP Compliance Endpoints ============
 // Breach Notification Endpoints
@@ -1337,112 +1338,107 @@ export function createApiService() {
 });
 
 // ============================
-// UIDAI Token Service
+// OVSE OFFLINE e-KYC SERVICE
 // ============================
+import crypto from 'crypto';
+import { parseStringPromise } from 'xml2js';
 
-interface TokenizePayload {
-   aidHash: string; // Hash of Aadhaar (NOT the number itself)
-   cidr: number; // Client ID
-   timestamp: string; // ISO-8601
-   tokenData: string; // Base64 encoded XML
-}
+// Load UIDAI Public Key (Store in .env or Vault)
+const UIDAI_PUBLIC_KEY = process.env.UIDAI_OFFLINE_PUBLIC_KEY ||
+  `-----BEGIN PUBLIC KEY-----
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA
+-----END PUBLIC KEY-----`; // Placeholder - replace with actual UIDAI public key
 
-export class UIDAITokenService {
-  private baseUrl: string;
-  private clientId: string;
-  private clientSecret: string;
-  private certPath: string;
-  private keyPath: string;
+export class OVSEOfflineService {
+  /**
+   * Validate the Offline XML Signature
+   */
+  async validateOfflineSignature(xmlString: string, signature: string): Promise<boolean> {
+    if (!UIDAI_PUBLIC_KEY) {
+      throw new Error('UIDAI Public Key not configured');
+    }
 
-  constructor() {
-    this.baseUrl = process.env.UIDAI_TOKENIZE_URL || 'https://uat.uidai.gov.in/tokenize';
-    this.clientId = process.env.UIDAI_CLIENT_ID;
-    this.clientSecret = process.env.UIDAI_CLIENT_SECRET;
-    this.certPath = process.env.UIDAI_CERT_PATH || './certs/uidai_cert.pem';
-    this.keyPath = process.env.UIDAI_KEY_PATH || './certs/uidai_key.pem';
+    // 1. Extract the signed data (remove signature tag)
+    const signer = crypto.createVerify('SHA256');
+    signer.update(xmlString); // In production, use the exact canonicalized XML string
+    signer.end();
+
+    const isValid = signer.verify(
+      UIDAI_PUBLIC_KEY,
+      Buffer.from(signature, 'base64')
+    );
+
+    return isValid;
   }
 
   /**
-   * Step 1: Generate a Hash of the Aadhaar (Client-side, never sent to server)
-   * Use this on the client to hash Aadhaar before sending to your backend
+   * Parse and Extract Data from Offline XML
    */
-  static hashAadhaar(aadhaarNumber: string): string {
-    const hash = crypto.createHash('sha256');
-    hash.update(aadhaarNumber);
-    return hash.digest('hex');
-  }
-
-  /**
-   * Step 2: Tokenize the Aadhaar (Server-side)
-   * Returns a UID Token for the specific client (tenant)
-   */
-  async tokenizeAadhaar(
-    aidHash: string,
-    consentHash: string,
-    consentTimestamp: string,
-    verificationMethod: 'otp' | 'qr' | 'app'
-  ): Promise<{ uidToken: string; vid?: string }> {
-    // Build the XML payload required by UIDAI Tokenize API
-    const xmlPayload = `
-      <TokenizeRequest>
-        <RequestHeader>
-          <ClientId>${this.clientId}</ClientId>
-          <Timestamp>${new Date().toISOString()}</Timestamp>
-        </RequestHeader>
-        <TokenizeData>
-          <AadhaarHash>${aidHash}</AadhaarHash>
-          <ConsentHash>${consentHash}</ConsentHash>
-          <ConsentTimestamp>${consentTimestamp}</ConsentTimestamp>
-          <VerificationMethod>${verificationMethod}</VerificationMethod>
-        </TokenizeData>
-      </TokenizeRequest>
-    `;
-
+  async parseOfflineXML(xmlString: string): Promise<any> {
     try {
-      const response = await fetch(this.baseUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/xml',
-          'Authorization': `Bearer ${this.clientSecret}`,
-        },
-        body: xmlPayload,
-      });
-
-      if (!response.ok) {
-        throw new Error(`UIDAI Tokenize failed: ${response.statusText}`);
-      }
-
-      const result = await response.text();
-      // Parse XML response to extract UID Token
-      const tokenMatch = result.match(/<Token>([^<]+)<\/Token>/);
-      const vidMatch = result.match(/<VID>([^<]+)<\/VID>/);
-
-      if (!tokenMatch) {
-        throw new Error('No UID Token returned from UIDAI');
-      }
-
+      const parsed = await parseStringPromise(xmlString);
+      // UIDAI Offline XML structure is complex; extract required fields
+      const data = parsed.AadhaarOfflineVerificationResponse;
+      
       return {
-        uidToken: tokenMatch[1],
-        vid: vidMatch?.[1],
+        name: data?.Name?.[0],
+        dob: data?.DOB?.[0],
+        gender: data?.Gender?.[0],
+        address: data?.Address?.[0],
+        phone: data?.MobileNumber?.[0], // Masked mobile number
+        email: data?.Email?.[0], // Masked email
+        photo: data?.Photo?.[0], // Base64 encoded photo
+        // ... other fields as needed
       };
     } catch (error) {
-      console.error('UIDAI Tokenize Error:', error);
-      throw error;
+      throw new Error(`Failed to parse Offline XML: ${error.message}`);
     }
   }
 
   /**
-   * Step 3: Verify Identity using Token (Optional: for re-verification)
-   * Use this if you need to re-verify an existing token (e.g., for transaction signing)
+   * Process a new Offline Verification Request
    */
-  async verifyToken(tokenId: string, transactionId: string): Promise<boolean> {
-    // In production, this would call UIDAI's verification endpoint
-    // For now, we assume the token is valid if it exists in our DB
-    return true; // Placeholder
+  async processOfflineVerification(
+    tenantId: string,
+    aadhaarHash: string,
+    ovseXml: string,
+    signature: string,
+    consentHash: string,
+    consentTimestamp: string
+  ) {
+    // 1. Validate Signature
+    const isValid = await this.validateOfflineSignature(ovseXml, signature);
+    if (!isValid) {
+      throw new Error('Invalid Signature: XML tampered or not from UIDAI');
+    }
+
+    // 2. Parse Data
+    const payloadData = await this.parseOfflineXML(ovseXml);
+
+    // 3. Store Record
+    const [record] = await db.insert(kycTokens).values({
+      tenantId,
+      aadhaarHash,
+      ovseXml,
+      ovseSignature: signature,
+      method: 'ovse_offline',
+      consentHash,
+      consentTimestamp: new Date(consentTimestamp),
+      payloadData,
+      status: 'verified',
+      verifiedAt: new Date(),
+      expiresAt: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000), // 1 year
+    }).returning();
+
+    return record;
   }
 }
 
-export const uidaiService = new UIDAITokenService();
+export const ovseOfflineService = new OVSEOfflineService();
+
+// ============================
+// KYC Fallback Service
+// ============================
 
 // ============================
 // KYC Fallback Service
