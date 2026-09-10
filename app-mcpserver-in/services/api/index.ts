@@ -12,11 +12,41 @@ import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
 import { eq, and, or, desc, asc, lt, gt } from "drizzle-orm";
 import { json } from "@hono/jsonschema";
+import { v4 as uuidv4 } from 'uuid';
+import { z } from 'zod';
+import crypto from 'crypto';
+import fetch from 'node-fetch';
 
 // Database connection
 const connectionString = process.env.DATABASE_URL || "postgresql://localhost:5432/mcp_servers";
 const sql = postgres(connectionString);
 const db = drizzle(sql);
+
+// Mock notification functions
+const sendEmail = async (to: string, subject: string, body: string): Promise<void> => {
+  console.log(`[EMAIL] To: ${to}, Subject: ${subject}`);
+  // In production: Use SES, SendGrid, or similar
+};
+
+const sendSMS = async (to: string, message: string): Promise<void> => {
+  console.log(`[SMS] To: ${to}, Message: ${message}`);
+  // In production: Use Twilio, AWS SNS, or similar
+};
+
+// Schema for Board Notification (Rule 8 of DPDP Rules 2025)
+const BOARD_NOTIFICATION_SCHEMA = z.object({
+  fiduciaryName: z.string(),
+  breachDescription: z.string(),
+  dataCategories: z.array(z.string()),
+  affectedUsersCount: z.number(),
+  protectiveMeasures: z.string(),
+  contactDetails: z.object({
+    name: z.string(),
+    email: z.string(),
+    phone: z.string(),
+  }),
+  timestamp: z.string(),
+});
 
 // ============================
 // DATABASE SCHEMA (Drizzle)
@@ -216,28 +246,47 @@ export const kycAccessLogs = pgTable("kyc_access_logs", {
 // ============================
 // DPDP COMPLIANCE TABLES (Per DPDP Rules 2025)
 // ============================
-export const dpdpBreachEvent = pgTable("dpdp_breach_events", {
-   id: uuid("id").primaryKey().defaultRandom(),
-   tenantId: uuid("tenant_id").notNull().references(() => tenants.id),
-   
-   // Breach Details
-   breachTitle: text("breach_title").notNull(),
-   breachDescription: text("breach_description").notNull(),
-   discoveredAt: timestamp("discovered_at").notNull(),
-   reportedAt: timestamp("reported_at"),
-   
-   // Affected Data
-   dataCategories: text("data_categories").array().notNull(), // e.g., ['personal', 'sensitive', 'financial']
-   affectedRecords: integer("affected_records"),
-   
-   // Protective Measures
-   protectiveMeasures: text("protective_measures").notNull(),
-   
-   // Status
-   status: varchar("status", { length: 20 }).notNull().default('investigating'), // investigating, reported, mitigated, closed
-   
-   createdAt: timestamp("created_at").defaultNow().notNull(),
-   updatedAt: timestamp("updated_at").defaultNow().notNull(),
+export const breachSeverity = pgEnum('breach_severity', ['low', 'medium', 'high', 'critical']);
+export const notificationStatus = pgEnum('notification_status', ['pending', 'draft', 'sent', 'failed']);
+
+export const dpdpBreachEvents = pgTable('dpdp_breach_events', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  tenantId: uuid('tenant_id').notNull().references(() => tenants.id),
+  
+  // Incident Details
+  title: text('title').notNull(),
+  description: text('description').notNull(), // Plain-language description
+  severity: breachSeverity('severity').notNull(),
+  
+  // Data Involved
+  dataTypes: jsonb('data_types').$type<string[]>().notNull(), // e.g. ['aadhaar', 'pan', 'phone']
+  estimatedAffectedUsers: integer('estimated_affected_users').notNull(),
+  
+  // Timeline
+  detectedAt: timestamp('detected_at').notNull(),
+  reportedToBoardAt: timestamp('reported_to_board_at'), // Must be within 72h
+  reportedToUsersAt: timestamp('reported_to_users_at'), // Must be within 72h
+  
+  // Notification Artifacts
+  boardNotificationId: text('board_notification_id'), // Reference ID from Board
+  userNotificationTemplateId: text('user_notification_template_id'),
+  
+  // Status
+  status: text('status').notNull().default('open'), // 'open', 'investigating', 'resolved', 'escalated'
+  resolvedAt: timestamp('resolved_at'),
+  
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+  updatedAt: timestamp('updated_at').defaultNow().notNull(),
+});
+
+// Breach Log: Immutable audit trail for Board audits
+export const dpdpBreachLogs = pgTable('dpdp_breach_logs', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  breachEventId: uuid('breach_event_id').notNull().references(() => dpdpBreachEvents.id),
+  action: text('action').notNull(), // 'detected', 'reported_board', 'reported_user', 'resolved'
+  performedBy: uuid('performed_by').notNull(),
+  timestamp: timestamp('timestamp').defaultNow().notNull(),
+  details: jsonb('details'),
 });
 
 // Consent and Retention Ledger
@@ -265,8 +314,44 @@ export const consentRetentionLedger = pgTable("consent_retention_ledger", {
    erasureNotificationSent: boolean("erasure_notification_sent").default(false),
    erasureNotificationSentAt: timestamp("erasure_notification_sent_at"),
    
-   createdAt: timestamp("created_at").defaultNow().notNull(),
-   updatedAt: timestamp("updated_at").defaultNow().notNull(),
+createdAt: timestamp("created_at").defaultNow().notNull(),
+    updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});
+
+// ============================
+// INDIA AI COMPUTE VOUCHER TABLES
+// ============================
+export const voucherStatus = pgEnum('voucher_status', ['requested', 'pending', 'approved', 'rejected', 'expired', 'used']);
+
+export const indiaAiVouchers = pgTable('india_ai_vouchers', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  tenantId: uuid('tenant_id').notNull().references(() => tenants.id),
+  
+  // Request Details
+  projectTitle: text('project_title').notNull(),
+  projectDescription: text('project_description').notNull(),
+  gpuType: text('gpu_type').notNull(), // 'standard' (Rs 115), 'h100' (Rs 150)
+  estimatedHours: integer('estimated_hours').notNull(),
+  useCaseCategory: text('use_case_category').notNull(), // 'research', 'startup', 'msme'
+  
+  // Voucher Details
+  voucherCode: text('voucher_code').unique().notNull(), // Generated by IndiaAI
+  subsidyRate: text('subsidy_rate').notNull(), // '40%', '20%', '0%'
+  effectiveRatePerHour: text('effective_rate_per_hour').notNull(), // e.g., 'Rs 69'
+  
+  // Timeline
+  requestedAt: timestamp('requested_at').defaultNow().notNull(),
+  approvedAt: timestamp('approved_at'),
+  expiresAt: timestamp('expires_at').notNull(),
+  usedAt: timestamp('used_at'),
+  
+  // Status
+  status: voucherStatus('status').notNull().default('requested'),
+  rejectionReason: text('rejection_reason'),
+  internalNotes: text('internal_notes'),
+  
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });
 
 // ============================
@@ -715,6 +800,213 @@ api.post("/v1/organizations/:orgId/teams", async (c) => {
   return json(team, 201);
 });
 
+// ============ DPDP Compliance Endpoints ============
+// Breach Notification Endpoints
+api.post("/v1/dpdp/breach/report", async (c) => {
+   const body = await c.req.json();
+   const { 
+     tenantId, 
+     title, 
+     description, 
+     severity, 
+     dataTypes, 
+     affectedUsers 
+   } = body;
+
+   try {
+     const result = await ddppBreachService.createBreachEvent(
+       tenantId,
+       title,
+       description,
+       severity as any,
+       dataTypes,
+       affectedUsers
+     );
+
+     // Auto-trigger Board Notification if severity is High/Critical
+     if (['high', 'critical'].includes(severity)) {
+       await ddppBreachService.generateBoardNotification(result.id);
+       await ddppBreachService.notifyAffectedUsers(result.id);
+     }
+
+     return c.json({
+       success: true,
+       breachId: result.id,
+       deadlineHours: result.hoursUntilDeadline,
+     });
+   } catch (error) {
+     return c.json(
+       { error: 'Breach reporting failed', details: error.message },
+       { status: 500 }
+     );
+   }
+});
+
+api.patch("/v1/dpdp/breach/:breachId/status", async (c) => {
+   const { breachId } = c.req.param();
+   const body = await c.req.json();
+   const { status, mitigations } = body;
+
+   // Note: In a full implementation, we would use the DPDPBreachService methods
+   // For now, we'll update the breach event directly
+   try {
+      // First get the current breach record to access protectiveMeasures
+      const currentBreach = await db.query.dpdpBreachEvents.findFirst({
+         where: eq(dpdpBreachEvents.id, breachId)
+      });
+      
+      await db
+         .update(dpdpBreachEvents)
+         .set({
+            status,
+            reportedToBoardAt: status === 'reported' || status === 'mitigated' || status === 'closed' ? new Date() : undefined,
+            reportedToUsersAt: status === 'reported' || status === 'mitigated' || status === 'closed' ? new Date() : undefined,
+            ...(mitigations && currentBreach && { protectiveMeasures: `${currentBreach.protectiveMeasures} | Mitigations: ${mitigations}` })
+         })
+         .where(eq(dpdpBreachEvents.id, breachId));
+         
+      return c.json({ success: true, message: 'Breach status updated' });
+   } catch (error) {
+      return c.json({ error: 'Failed to update breach status' }, 500);
+   }
+});
+
+// Consent and Retention Endpoints
+api.post("/v1/consent/record", async (c) => {
+   const body = await c.req.json();
+   const { 
+     tenantId, 
+     kycTokenId, 
+     consentHash, 
+     consentTimestamp, 
+     purpose, 
+     retentionPeriod, 
+     retentionUnit 
+   } = body;
+
+   try {
+     const result = await consentRetentionService.recordConsent(
+       tenantId,
+       kycTokenId,
+       consentHash,
+       new Date(consentTimestamp),
+       purpose,
+       retentionPeriod,
+       retentionUnit
+     );
+
+     if (result.success) {
+       return c.json({ 
+         success: true, 
+         ledgerId: result.ledgerId,
+         message: 'Consent recorded with retention timeline' 
+       }, 201);
+     } else {
+       return c.json({ error: 'Failed to record consent' }, 500);
+     }
+   } catch (error) {
+     return c.json({ error: 'Consent recording failed', details: error.message }, { status: 500 });
+   }
+});
+
+api.get("/v1/consent/check-erasure-notifications", async (c) => {
+   try {
+      const records = await consentRetentionService.checkForErasureNotifications();
+      return c.json({ 
+         success: true, 
+         records,
+         count: records.length
+      });
+   } catch (error) {
+      return c.json({ error: 'Failed to check for erasure notifications' }, { status: 500 });
+   }
+});
+
+api.post("/v1/consent/:ledgerId/erasure-notification/sent", async (c) => {
+   const { ledgerId } = c.req.param();
+   
+   try {
+      const success = await consentRetentionService.markErasureNotificationSent(ledgerId);
+      
+      if (success) {
+        return c.json({ success: true, message: 'Erasure notification marked as sent' });
+      } else {
+        return c.json({ error: 'Failed to mark erasure notification as sent' }, 500);
+      }
+   } catch (error) {
+      return c.json({ error: 'Failed to mark erasure notification as sent' }, { status: 500 });
+   }
+});
+
+api.post("/v1/consent/:ledgerId/perform-erasure", async (c) => {
+   const { ledgerId } = c.req.param();
+   
+   try {
+      const result = await consentRetentionService.performErasure(ledgerId);
+      
+      if (result.success) {
+        return c.json({ success: true, message: result.message });
+      } else {
+        return c.json({ error: result.message }, 500);
+      }
+   } catch (error) {
+      return c.json({ error: 'Failed to perform erasure' }, { status: 500 });
+   }
+});
+
+// ============ IndiaAI Compute Voucher Endpoints ============
+api.post("/v1/compute/indiaai", async (c) => {
+   const body = await c.req.json();
+   const { 
+     tenantId, 
+     projectTitle, 
+     projectDescription, 
+     gpuType, 
+     estimatedHours, 
+     useCaseCategory 
+   } = body;
+
+   try {
+     const result = await indiaAiVoucherService.requestVoucher(
+       tenantId,
+       projectTitle,
+       projectDescription,
+       gpuType,
+       estimatedHours,
+       useCaseCategory
+     );
+
+     return c.json({
+       success: true,
+       voucherId: result.id,
+       estimatedCost: result.estimatedCost,
+       message: 'Voucher request submitted. You will be notified upon approval.',
+     });
+   } catch (error) {
+     return c.json(
+       { error: 'Voucher request failed', details: error.message },
+       { status: 500 }
+     );
+   }
+});
+
+api.get("/v1/compute/indiaai", async (c) => {
+   const { searchParams } = new URL(c.req.url);
+   const tenantId = searchParams.get('tenantId');
+
+   try {
+      const vouchers = await db.query.indiaAiVouchers.findMany({
+         where: eq(indiaAiVouchers.tenantId, tenantId),
+         orderBy: (indiaAiVouchers, { desc }) => [desc(indiaAiVouchers.requestedAt)],
+         limit: 10,
+      });
+
+      return c.json({ success: true, data: vouchers });
+   } catch (error) {
+      return c.json({ error: 'Failed to fetch voucher requests' }, { status: 500 });
+   }
+});
+
 // ============================
 // Export handler
 // ============================
@@ -742,15 +1034,12 @@ export function createApiService() {
 // ============================
 // UIDAI Token Service
 // ============================
-import fetch from 'node-fetch';
-import { v4 as uuidv4 } from 'uuid';
-import crypto from 'crypto';
 
 interface TokenizePayload {
-  aidHash: string; // Hash of Aadhaar (NOT the number itself)
-  cidr: number; // Client ID
-  timestamp: string; // ISO-8601
-  tokenData: string; // Base64 encoded XML
+   aidHash: string; // Hash of Aadhaar (NOT the number itself)
+   cidr: number; // Client ID
+   timestamp: string; // ISO-8601
+   tokenData: string; // Base64 encoded XML
 }
 
 export class UIDAITokenService {
@@ -900,73 +1189,151 @@ import { v4 as uuidv4 } from 'uuid';
  * Implements 72-hour breach notification requirement
  */
 export class DPDPBreachService {
-   /**
-   * Report a breach event
-   * Must be reported to Data Protection Board within 72 hours of discovery
+  /**
+   * Step 1: Detect & Log Breach (Triggered by security monitoring)
    */
-   static async reportBreach(
-      tenantId: string,
-      breachTitle: string,
-      breachDescription: string,
-      dataCategories: string[],
-      affectedRecords: number,
-      protectiveMeasures: string
-   ): Promise<{ success: boolean; breachId: string }> {
-      try {
-         const breachId = uuidv4();
-         
-         const [record] = await db
-            .insert(dpdpBreachEvent)
-            .values({
-               id: breachId,
-               tenantId,
-               breachTitle,
-               breachDescription,
-               discoveredAt: new Date(),
-               dataCategories,
-               affectedRecords,
-               protectiveMeasures,
-               status: 'investigating'
-            })
-            .returning();
+  async createBreachEvent(
+    tenantId: string,
+    title: string,
+    description: string,
+    severity: typeof breachSeverity.Values[number],
+    dataTypes: string[],
+    affectedUsers: number
+  ): Promise<{ id: string; hoursUntilDeadline: number }> {
+    const now = new Date();
+    const detectedAt = now.toISOString();
+    
+    // Calculate 72-hour deadline
+    const deadline = new Date(now.getTime() + 72 * 60 * 60 * 1000);
 
-         // In a production system, this would trigger notifications to:
-         // 1. Data Protection Board (within 72 hours)
-         // 2. Affected principals (individuals)
-         // For now, we'll log that notifications should be sent
-         console.log(`Breach ${breachId} reported. Notifications should be sent to DP Board and affected individuals within 72 hours.`);
-         
-         return { success: true, breachId };
-      } catch (error) {
-         console.error('Failed to report breach:', error);
-         return { success: false, breachId: '' };
-      }
-   }
+    const breach = await db.insert(dpdpBreachEvents).values({
+      tenantId,
+      title,
+      description,
+      severity,
+      dataTypes,
+      estimatedAffectedUsers: affectedUsers,
+      detectedAt: new Date(detectedAt),
+    }).returning();
 
-   /**
-   * Update breach status and add mitigation details
+    // Log detection
+    await this.logAction(breach[0].id, 'detected', { severity, affectedUsers });
+
+    return {
+      id: breach[0].id,
+      hoursUntilDeadline: 72,
+    };
+  }
+
+  /**
+   * Step 2: Generate Board Notification (Mandatory within 72h)
    */
-   static async updateBreachStatus(
-      breachId: string,
-      status: 'investigating' | 'reported' | 'mitigated' | 'closed',
-      mitigations?: string
-   ): Promise<boolean> {
-      try {
-         await db
-            .update(dpdpBreachEvent)
-            .set({
-               status,
-               reportedAt: status === 'reported' || status === 'mitigated' || status === 'closed' ? new Date() : undefined,
-               ...(mitigations && { protectiveMeasures: `${dpdpBreachEvent.protectiveMeasures} | Mitigations: ${mitigations}` })
-            })
-            .where(eq(dpdpBreachEvent.id, breachId));
-            
-         return true;
-      } catch (error) {
-         console.error('Failed to update breach status:', error);
-         return false;
-      }
-   }
+  async generateBoardNotification(breachId: string): Promise<string> {
+    const breach = await db.query.dpdpBreachEvents.findFirst({
+      where: eq(dpdpBreachEvents.id, breachId),
+      with: { tenant: true },
+    });
+
+    if (!breach) throw new Error('Breach not found');
+
+    // Construct Board Notification (Rule 8)
+    const notification = {
+      fiduciaryName: breach.tenant.name,
+      breachDescription: breach.description,
+      dataCategories: breach.dataTypes,
+      affectedUsersCount: breach.estimatedAffectedUsers,
+      protectiveMeasures: "Investigation initiated. Users notified. Security patches applied.",
+      contactDetails: {
+        name: "Compliance Officer",
+        email: `${breach.tenant.id}@compliance.gov.in`, // Placeholder
+        phone: "+91-1800-123-4567",
+      },
+      timestamp: new Date().toISOString(),
+    };
+
+    // Send to DPA Portal (Mock API call to Data Protection Board)
+    // In production: POST to https://dpb.gov.in/api/v1/breaches
+    const boardResponse = await fetch('https://dpb.gov.in/api/v1/breaches', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(notification),
+    });
+
+    if (!boardResponse.ok) {
+      throw new Error('Failed to notify Board');
+    }
+
+    const result = await boardResponse.json();
+    
+    // Update breach record
+    await db.update(dpdpBreachEvents)
+      .set({ 
+        reportedToBoardAt: new Date(), 
+        boardNotificationId: result.notificationId 
+      })
+      .where(eq(dpdpBreachEvents.id, breachId));
+
+    await this.logAction(breachId, 'reported_board', { notificationId: result.notificationId });
+
+    return result.notificationId;
+  }
+
+  /**
+   * Step 3: Notify Affected Users (Mandatory within 72h)
+   */
+  async notifyAffectedUsers(breachId: string): Promise<void> {
+    const breach = await db.query.dpdpBreachEvents.findFirst({
+      where: eq(dpdpBreachEvents.id, breachId),
+    });
+
+    if (!breach) throw new Error('Breach not found');
+
+    // Mock user retrieval (in production, query affected user IDs from your DB)
+    const affectedUserIds = ['user-123', 'user-456']; // Placeholder
+
+    const notificationTemplate = `
+      Subject: URGENT: Security Incident Affecting Your Data
+
+      Dear User,
+
+      We are writing to inform you of a security incident involving your ${breach.dataTypes.join(', ')} data.
+
+      What happened: ${breach.description}
+      What data was involved: ${breach.dataTypes.join(', ')}
+      What we are doing: ${breach.severity === 'critical' ? 'Full investigation and law enforcement notification.' : 'Security patch applied.'}
+      What you should do: Change your password immediately. Monitor your accounts for suspicious activity.
+
+      Contact us: support@yourplatform.com | +91-1800-123-4567
+
+      Sincerely,
+      ${breach.tenant?.name || 'Your Platform'}
+    `;
+
+    // Send via Email & SMS
+    for (const userId of affectedUserIds) {
+      await sendEmail(userId, 'URGENT: Security Incident', notificationTemplate);
+      await sendSMS(userId, 'URGENT: Security Incident', notificationTemplate.substring(0, 160));
+    }
+
+    // Log notification
+    await db.update(dpdpBreachEvents)
+      .set({ reportedToUsersAt: new Date() })
+      .where(eq(dpdpBreachEvents.id, breachId));
+
+    await this.logAction(breachId, 'reported_user', { count: affectedUserIds.length });
+  }
+
+  /**
+   * Helper: Log actions for audit trail
+   */
+  private async logAction(breachId: string, action: string, details: any) {
+    await db.insert(dpdpBreachLogs).values({
+      breachEventId: breachId,
+      action,
+      performedBy: 'system',
+      details,
+    });
+  }
 }
 
 /**
@@ -1117,6 +1484,142 @@ export class ConsentRetentionService {
    }
 }
 
+/**
+ * IndiaAI Voucher Service
+ * Manages the application workflow for subsidized compute access
+ */
+export class IndiaAIVoucherService {
+   /**
+   * Step 1: Calculate Estimated Cost & Subsidy
+   */
+   calculateCost(gpuType: string, hours: number): { 
+      baseRate: number; 
+      subsidyRate: string; 
+      finalRate: number; 
+      totalCost: number 
+   } {
+      const rates = {
+         standard: 115.85, // Rs/GPU-hour (bids from 2026)
+         h100: 150.00,
+      };
+
+      const baseRate = rates[gpuType as keyof typeof rates] || 115.85;
+      let subsidyRate = '0%';
+      let finalRate = baseRate;
+
+      // Subsidy tiers based on use case (MeitY Guidelines)
+      if (hours > 1000) {
+         subsidyRate = '40%';
+         finalRate = baseRate * 0.6;
+      } else if (hours > 500) {
+         subsidyRate = '20%';
+         finalRate = baseRate * 0.8;
+      }
+
+      return {
+         baseRate,
+         subsidyRate,
+         finalRate,
+         totalCost: finalRate * hours,
+      };
+   }
+
+   /**
+   * Step 2: Submit Voucher Request
+   */
+   async requestVoucher(
+      tenantId: string,
+      projectTitle: string,
+      projectDescription: string,
+      gpuType: string,
+      estimatedHours: number,
+      useCaseCategory: string
+   ): Promise<{ id: string; estimatedCost: number }> {
+      const costCalc = this.calculateCost(gpuType, estimatedHours);
+      
+      // Generate unique voucher code (will be replaced by IndiaAI on approval)
+      const voucherCode = `INDIAAI-${tenantId}-${crypto.randomBytes(4).toString('hex').toUpperCase()}`;
+      
+      const expiresAt = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000); // 30 days validity
+
+      const record = await db.insert(indiaAiVouchers).values({
+         tenantId,
+         projectTitle,
+         projectDescription,
+         gpuType,
+         estimatedHours,
+         useCaseCategory,
+         voucherCode,
+         subsidyRate: costCalc.subsidyRate,
+         effectiveRatePerHour: `Rs ${costCalc.finalRate.toFixed(2)}`,
+         expiresAt,
+      }).returning();
+
+      return {
+         id: record[0].id,
+         estimatedCost: costCalc.totalCost,
+      };
+   }
+
+   /**
+   * Step 3: Approve/Reject Request (Internal Admin or IndiaAI API)
+   */
+   async processVoucherRequest(
+      voucherId: string,
+      approved: boolean,
+      rejectionReason?: string
+   ): Promise<{ status: typeof voucherStatus.Values[number]; voucherCode?: string }> {
+      const voucher = await db.query.indiaAiVouchers.findFirst({
+         where: eq(indiaAiVouchers.id, voucherId),
+      });
+
+      if (!voucher) throw new Error('Voucher request not found');
+
+      if (approved) {
+         const newStatus = voucherStatus.APPROVED;
+         
+         // In production: Call IndiaAI API to get real voucher code
+         // const realVoucher = await indiaAIAPIClient.issueVoucher(voucher.projectTitle);
+         const realVoucherCode = `INDIAAI-REAL-${crypto.randomBytes(4).toString('hex').toUpperCase()}`;
+         
+         await db.update(indiaAiVouchers)
+            .set({
+               status: newStatus,
+               voucherCode: realVoucherCode,
+               approvedAt: new Date(),
+            })
+            .where(eq(indiaAiVouchers.id, voucherId));
+
+         return { status: newStatus, voucherCode: realVoucherCode };
+      } else {
+         await db.update(indiaAiVouchers)
+            .set({
+               status: voucherStatus.REJECTED,
+               rejectionReason,
+            })
+            .where(eq(indiaAiVouchers.id, voucherId));
+
+         return { status: voucherStatus.REJECTED };
+      }
+   }
+
+   /**
+   * Step 4: Validate Voucher for Deployment
+   */
+   async validateVoucher(voucherCode: string): Promise<boolean> {
+      const voucher = await db.query.indiaAiVouchers.findFirst({
+         where: and(
+            eq(indiaAiVouchers.voucherCode, voucherCode),
+            eq(indiaAiVouchers.status, voucherStatus.APPROVED),
+            gte(indiaAiVouchers.expiresAt, new Date())
+         ),
+      });
+
+      return !!voucher;
+   }
+}
+
 // Initialize services
 export const ddppBreachService = new DPDPBreachService();
 export const consentRetentionService = new ConsentRetentionService();
+export const indiaAiVoucherService = new IndiaAIVoucherService();
