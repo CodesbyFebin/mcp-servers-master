@@ -13,10 +13,11 @@ export default function TracePage() {
     limit: '50',
     offset: '0',
   });
+  const [redactPii, setRedactPii] = useState(false);
 
   useEffect(() => {
     fetchExecutions();
-  }, [filters]);
+  }, [filters, redactPii]);
 
   const fetchExecutions = async () => {
     setLoading(true);
@@ -33,7 +34,18 @@ export default function TracePage() {
         throw new Error(`Failed to fetch executions: ${response.status}`);
       }
       const data = await response.json();
-      setExecutions(data);
+      
+      // Apply PII redaction if enabled
+      const processedData = redactPii 
+        ? data.map(execution => ({
+            ...execution,
+            args: execution.args ? JSON.parse(JSON.stringify(execution.args).replace(/(aadhaar|pan|gstin|phone|email|bank_account|upi_id|account_number|ifsc_code|vpa|password|token|secret|key)\":\s*\"[^\"]*\"/g, '$1": "[REDACTED]"') : execution.args,
+            result: execution.result ? JSON.parse(JSON.stringify(execution.result).replace(/(aadhaar|pan|gstin|phone|email|bank_account|upi_id|account_number|ifsc_code|vpa|password|token|secret|key)\":\s*\"[^\"]*\"/g, '$1": "[REDACTED]"') : execution.result,
+            error: execution.error ? execution.error.replace(/(aadhaar|pan|gstin|phone|email|bank_account|upi_id|account_number|ifsc_code|vpa|password|token|secret|key)\s*[:=]\s*[^\s,}]+/g, '$1: [REDACTED]') : execution.error
+          }))
+        : data;
+      
+      setExecutions(processedData);
     } catch (err) {
       setError((err as Error).message);
       console.error('Error fetching executions:', err);
@@ -54,7 +66,20 @@ export default function TracePage() {
   return (
     <div className="min-h-screen bg-gray-50 p-6">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-3xl font-bold mb-6">Execution Trace Viewer</h1>
+        <div className="flex justify-between items-start mb-4">
+          <h1 className="text-3xl font-bold">Execution Trace Viewer</h1>
+          <div className="flex items-center space-x-3">
+            <label className="flex items-center text-sm font-medium text-gray-700">
+              <input
+                type="checkbox"
+                checked={redactPii}
+                onChange={(e) => setRedactPii(e.target.checked)}
+                className="mr-2 h-4 w-4 text-blue-600"
+              />
+              Redact PII
+            </label>
+          </div>
+        </div>
         
         {/* Filters */}
         <div className="bg-white rounded-lg shadow-md p-6 mb-6">
@@ -113,10 +138,12 @@ export default function TracePage() {
             <thead className="bg-gray-50">
               <tr>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Time</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Request ID</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Server</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tool</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Duration (ms)</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Performance</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Args</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Result / Error</th>
               </tr>
@@ -124,7 +151,7 @@ export default function TracePage() {
             <tbody className="divide-y divide-gray-200">
               {executions.length === 0 ? (
                 <tr>
-                  <td className="px-6 py-4 text-center text-gray-500" colSpan="7">
+                  <td className="px-6 py-4 text-center text-gray-500" colSpan="9">
                     No executions found
                   </td>
                 </tr>
@@ -133,6 +160,9 @@ export default function TracePage() {
                   <tr key={exec.id} className="hover:bg-gray-50">
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                       {new Date(exec.createdAt).toLocaleString()}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                      {exec.request_id || exec.id || 'N/A'}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                       {exec.serverName || `Server #${exec.serverId}`}
@@ -151,6 +181,15 @@ export default function TracePage() {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                       {exec.durationMs ?? 0}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-sm font-medium">
+                      {exec.durationMs && exec.durationMs > 2000 ? (
+                        <span className="bg-red-100 text-red-800 px-2 inline-flex items-center leading-5 rounded-full">Slow</span>
+                      ) : exec.durationMs && exec.durationMs > 1000 ? (
+                        <span className="bg-yellow-100 text-yellow-800 px-2 inline-flex items-center leading-5 rounded-full">Moderate</span>
+                      ) : (
+                        <span className="bg-green-100 text-green-800 px-2 inline-flex items-center leading-5 rounded-full">Fast</span>
+                      )}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
                       <pre className="text-xs">{JSON.stringify(exec.args, null, 2)}</pre>

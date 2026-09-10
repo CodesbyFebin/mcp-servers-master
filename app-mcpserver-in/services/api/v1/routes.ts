@@ -1,18 +1,21 @@
-/* API v1 Routes for MCPserver.in
-   Organized route handlers for the authenticated API service.
-   Follows the Phase 1.5 patterns: evidence-first, publication authority,
-   deterministic fail-closed, Zod-validated schemas where applicable.
-*/
-
-// Route handler imports (would be in separate files in production)
 import { createApiService } from "../api";
 import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
 import { eq, and, or, desc, asc } from "drizzle-orm";
 import { users, organizations, teams, servers, tools, resources, prompts, executions, skills, workflows, modelProviders, userPreferences } from "../api/schema";
+import { redactRequestMiddleware } from '../../lib/middleware/pii-redact';
+import { randomUUID } from 'crypto';
 
 // Create the API service instance
 const api = createApiService();
+
+// Middleware to apply PII redaction to all API routes
+api.use('*', async (c, next) => {
+  const redactedRequest = await redactRequestMiddleware(c.req as any);
+  // Replace the request with the redacted version
+  c.req = redactedRequest;
+  await next();
+});
 
 // ============================
 // v1 API Routes
@@ -118,14 +121,17 @@ api.post("/execution", async (c) => {
      return json({ error: "Tool not found" }, 404);
    }
    
-   // Prepare execution record
-   const executionData = {
-     userId: userId || 1, // default to user 1 if not provided
-     serverId: Number(serverId),
-     toolId: Number(toolId),
-     args: args || {},
-     status: "running",
-   };
+// Prepare execution record with request ID and start time
+    const startTime = Date.now();
+    const requestId = randomUUID(); // Generate unique request ID for tracing
+    const executionData = {
+      userId: userId || 1, // default to user 1 if not provided
+      serverId: Number(serverId),
+      toolId: Number(toolId),
+      request_id: requestId, // Add request ID for trace correlation
+      args: args || {},
+      status: "running",
+    };
    
    let executionId;
    try {
@@ -134,7 +140,7 @@ api.post("/execution", async (c) => {
        .insert(executions)
        .values(executionData)
        .returning();
-     
+   
      executionId = execution.id;
      
      // Call MCP server via HTTP
@@ -156,6 +162,8 @@ api.post("/execution", async (c) => {
      }
      
      const result = await response.json();
+     const endTime = Date.now();
+     const durationMs = endTime - startTime;
      
      // Update execution with result
      await db
@@ -163,7 +171,7 @@ api.post("/execution", async (c) => {
        .set({
          result: result,
          status: "succeeded",
-         durationMs: 0, // We don't measure duration here, but we could
+         durationMs: durationMs,
          updatedAt: new Date(),
        })
        .where(eq(executions.id, executionId));
@@ -175,6 +183,7 @@ api.post("/execution", async (c) => {
          userId: executions.userId,
          serverId: executions.serverId,
          toolId: executions.toolId,
+         request_id: executions.request_id,
          args: executions.args,
          result: executions.result,
          error: executions.error,
@@ -193,12 +202,15 @@ api.post("/execution", async (c) => {
    } catch (err) {
      // Update execution with error
      if (executionId) {
+       const endTime = Date.now();
+       const durationMs = endTime - startTime;
+       
        await db
          .update(executions)
          .set({
            error: (err as Error).message,
            status: "failed",
-           durationMs: 0,
+           durationMs: durationMs,
            updatedAt: new Date(),
          })
          .where(eq(executions.id, executionId));
@@ -242,6 +254,7 @@ api.get("/executions", async (c) => {
        userId: executions.userId,
        serverId: executions.serverId,
        toolId: executions.toolId,
+       request_id: executions.request_id,
        args: executions.args,
        result: executions.result,
        error: executions.error,
@@ -274,113 +287,113 @@ api.get("/executions", async (c) => {
 
 // Publication authority check (public endpoint)
 api.get("/v1/publication-authority", async (c) => {
-  // Demonstrates the centralized isServerIndexable() function
-  // published + evidence + verified + qualifyingEvidence => indexable
-  // Fail-closed: any missing condition => not indexable
-  
-  const { published, evidenceCount, evidenceVerified, status } = c.req.query();
-  
-  // Centralized publication authority rules (deterministic, fail-closed)
-  let indexable = false;
-  let reason = "";
-  
-  const publishedBool = published === "true";
-  const evidenceCountNum = evidenceCount ? parseInt(evidenceCount, 10) : 0;
-  const evidenceVerifiedBool = evidenceVerified === "true";
-  const statusBool = status;
-  
-  // Rule 1: published + evidence + verified => indexable
-  if (publishedBool && evidenceCountNum > 0 && evidenceVerifiedBool && statusBool === "published") {
-    indexable = true;
-    reason = "published && evidenceCount > 0 && verified && published => indexable";
-  }
-  // Rule 2: published + no evidence => not indexable
-  else if (publishedBool && evidenceCountNum === 0) {
-    indexable = false;
-    reason = "published && no evidence => not indexable";
-  }
-  // Rule 3: published + unverified => not indexable
-  else if (publishedBool && !evidenceVerifiedBool) {
-    indexable = false;
-    reason = "published && unverified => not indexable";
-  }
-  // Rule 4: draft + evidence + verified => not indexable
-  else if (!publishedBool && evidenceCountNum > 0 && evidenceVerifiedBool && statusBool === "draft") {
-    indexable = false;
-    reason = "draft + evidence + verified => not indexable";
-  }
-  // Rule 5: unknown status => not indexable
-  else if (!statusBool) {
-    indexable = false;
-    reason = "unknown status => not indexable";
-  }
-  // Default: not indexable
-  else {
-    indexable = false;
-    reason = "conditions not met for indexation";
-  }
-  
-  return json({ 
-    indexable, 
-    reason,
-    publicationAuthority: "Evidence Ledger",
-    failClosed: true 
-  });
+   // Demonstrates the centralized isServerIndexable() function
+   // published + evidence + verified + qualifyingEvidence => indexable
+   // Fail-closed: any missing condition => not indexable
+   
+   const { published, evidenceCount, evidenceVerified, status } = c.req.query();
+   
+   // Centralized publication authority rules (deterministic, fail-closed)
+   let indexable = false;
+   let reason = "";
+   
+   const publishedBool = published === "true";
+   const evidenceCountNum = evidenceCount ? parseInt(evidenceCount, 10) : 0;
+   const evidenceVerifiedBool = evidenceVerified === "true";
+   const statusBool = status;
+   
+   // Rule 1: published + evidence + verified => indexable
+   if (publishedBool && evidenceCountNum > 0 && evidenceVerifiedBool && statusBool === "published") {
+     indexable = true;
+     reason = "published && evidenceCount > 0 && verified && published => indexable";
+   }
+   // Rule 2: published + no evidence => not indexable
+   else if (publishedBool && evidenceCountNum === 0) {
+     indexable = false;
+     reason = "published && no evidence => not indexable";
+   }
+   // Rule 3: published + unverified => not indexable
+   else if (publishedBool && !evidenceVerifiedBool) {
+     indexable = false;
+     reason = "published && unverified => not indexable";
+   }
+   // Rule 4: draft + evidence + verified => not indexable
+   else if (!publishedBool && evidenceCountNum > 0 && evidenceVerifiedBool && statusBool === "draft") {
+     indexable = false;
+     reason = "draft + evidence + verified => not indexable";
+   }
+   // Rule 5: unknown status => not indexable
+   else if (!statusBool) {
+     indexable = false;
+     reason = "unknown status => not indexable";
+   }
+   // Default: not indexable
+   else {
+     indexable = false;
+     reason = "conditions not met for indexation";
+   }
+   
+   return json({ 
+     indexable, 
+     reason,
+     publicationAuthority: "Evidence Ledger",
+     failClosed: true 
+   });
 });
 
 // SEO & sitemap routes
 api.get("/sitemap.xml", async (c) => {
-  // Generate sitemap for public knowledge graph
-  // In production: would query all indexable servers/URLs
-  const baseUrl = "https://www.mcpserver.in";
-  
-  const urls = [
-    { loc: baseUrl, lastmod: new Date().toISOString().split("T")[0], changefreq: "daily", priority: "1.0" },
-    { loc: `${baseUrl}/servers`, lastmod: new Date().toISOString().split("T")[0], changefreq: "weekly", priority: "0.8" },
-    { loc: `${baseUrl}/categories`, lastmod: new Date().toISOString().split("T")[0], changefreq: "weekly", priority: "0.6" },
-    { loc: `${baseUrl}/evidence`, lastmod: new Date().toISOString().split("T")[0], changefreq: "weekly", priority: "0.5" },
-    { loc: `${baseUrl}/methodology`, lastmod: new Date().toISOString().split("T")[0], changefreq: "monthly", priority: "0.4" },
-    { loc: `${baseUrl}/about`, lastmod: new Date().toISOString().split("T")[0], changefreq: "yearly", priority: "0.3" },
-  ];
-  
-  const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  ${urls.map(u => `
-    <url>
-      <loc>${u.loc}</loc>
-      <lastmod>${u.lastmod}</lastmod>
-      <changefreq>${u.changefreq}</changefreq>
-      <priority>${u.priority}</priority>
-    </url>`).join("")}
-</urlset>`;
-  
-  return new Response(xml, {
-    headers: { "Content-Type": "application/xml" },
-  });
+   // Generate sitemap for public knowledge graph
+   // In production: would query all indexable servers/URLs
+   const baseUrl = "https://www.mcpserver.in";
+   
+   const urls = [
+     { loc: baseUrl, lastmod: new Date().toISOString().split("T")[0], changefreq: "daily", priority: "1.0" },
+     { loc: `${baseUrl}/servers`, lastmod: new Date().toISOString().split("T")[0], changefreq: "weekly", priority: "0.8" },
+     { loc: `${baseUrl}/categories`, lastmod: new Date().toISOString().split("T")[0], changefreq: "weekly", priority: "0.6" },
+     { loc: `${baseUrl}/evidence`, lastmod: new Date().toISOString().split("T")[0], changefreq: "weekly", priority: "0.5" },
+     { loc: `${baseUrl}/methodology`, lastmod: new Date().toISOString().split("T")[0], changefreq: "monthly", priority: "0.4" },
+     { loc: `${baseUrl}/about`, lastmod: new Date().toISOString().split("T")[0], changefreq: "yearly", priority: "0.3" },
+   ];
+   
+   const xml = `<?xml version="1.0" encoding="UTF-8"?>
+ <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+   ${urls.map(u => `
+     <url>
+       <loc>${u.loc}</loc>
+       <lastmod>${u.lastmod}</lastmod>
+       <changefreq">${u.changefreq}</changefreq>
+       <priority>${u.priority}</priority>
+     </url>`).join("")}
+ </urlset>`;
+   
+   return new Response(xml, {
+     headers: { "Content-Type": "application/xml" },
+   });
 });
 
 // robots.txt
 api.get("/robots.txt", async (c) => {
-  const content = `
-User-agent: *
-Allow: /
-Disallow: /api/
-Disallow: /drafts/
-Disallow: /internal/
-
-User-agent: GPTBot
-Allow: /
-User-agent: ClaudeBot
-Allow: /
-User-agent: PerplexityBot
-Allow: /
-
-Sitemap: https://www.mcpserver.in/sitemap.xml
-`.trim();
-  
-  return new Response(content, {
-    headers: { "Content-Type": "text/plain" },
-  });
+   const content = `
+ User-agent: *
+ Allow: /
+ Disallow: /api/
+ Disallow: /drafts/
+ Disallow: /internal/
+ 
+ User-agent: GPTBot
+ Allow: /
+ User-agent: ClaudeBot
+ Allow: /
+ User-agent: PerplexityBot
+ Allow: /
+ 
+ Sitemap: https://www.mcpserver.in/sitemap.xml
+ `.trim();
+   
+   return new Response(content, {
+     headers: { "Content-Type": "text/plain" },
+   });
 });
 
 // Export for Hono framework

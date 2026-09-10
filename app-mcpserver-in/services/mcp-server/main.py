@@ -104,7 +104,7 @@ async def handle_initialize(params: dict) -> dict:
         "serverInfo": {
             "name": "FastMCP",
             "version": "0.1.0",
-            "description": "MCP server with India enterprise tools and UPI payment capabilities",
+            "description": "MCP server with India enterprise tools and UPI payment capabilities (Razorpay Sandbox)",
             "toolsCount": 12,
             "supports": ["gst", "upi", "upi_initiation", "upi_status", "pan", "cin", "ifsc", "web_search", "doc_parse", "database", "gateway_complete", "gateway_health"],
         }
@@ -117,10 +117,10 @@ async def handle_tools_list(params: dict) -> dict:
         "tools": [
             {"name": "gst.validate", "description": "Validate GSTIN number"},
             {"name": "payments.validate", "description": "Validate UPI VPA"},
-            {"name": "upi.initiate", "description": "Initiate UPI payment (mock)"},
-            {"name": "upi.status", "description": "Check UPI transaction status (mock)"},
+            {"name": "upi.initiate", "description": "Initiate UPI payment via Razorpay Sandbox"},
+            {"name": "upi.status", "description": "Check UPI transaction status via Razorpay Sandbox"},
             {"name": "corporate.decode_pan", "description": "Decode PAN card number"},
-            {"name": "corporate.decode_cin": "description": "Decode CIN number"},
+            {"name": "corporate.decode_cin", "description": "Decode CIN number"},
             {"name": "banking.decode_ifsc", "description": "Decode IFSC code"},
             {"name": "skills.search", "description": "Web search for live context"},
             {"name": "skills.doc_parse", "description": "Document OCR and parsing"},
@@ -136,9 +136,9 @@ async def handle_server_info(params: dict) -> dict:
     return {
         "name": "FastMCP",
         "version": "0.1.0",
-        "description": "MCP server with India enterprise tools",
-        "toolsCount": 10,
-        "supports": ["gst", "upi", "pan", "cin", "ifsc", "web_search", "doc_parse", "database", "gateway_complete", "gateway_health"],
+        "description": "MCP server with India enterprise tools and UPI payment capabilities (Razorpay Sandbox)",
+        "toolsCount": 12,
+        "supports": ["gst", "upi", "upi_initiation", "upi_status", "pan", "cin", "ifsc", "web_search", "doc_parse", "database", "gateway_complete", "gateway_health"],
     }
 
 

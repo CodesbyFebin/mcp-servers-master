@@ -111,16 +111,18 @@ export const prompts = pgTable("prompts", {
 });
 
 export const executions = pgTable("executions", {
-  id: serial("id").primaryKey(),
-  userId: integer("user_id").references(() => users.id),
-  serverId: integer("server_id").references(() => servers.id),
-  toolId: integer("tool_id").references(() => tools.id),
-  args: jsonCol("args").$type<object>().default({}),
-  result: jsonCol("result"),
-  error: text("error"),
-  durationMs: integer("duration_ms"),
-  status: varchar("status", { length: 50 }).default("succeeded"), // succeeded | failed | errored
-  createdAt: timestamp("created_at").defaultNow(),
+   id: serial("id").primaryKey(),
+   userId: integer("user_id").references(() => users.id),
+   serverId: integer("server_id").references(() => servers.id),
+   toolId: integer("tool_id").references(() => tools.id),
+   request_id: varchar("request_id", { length: 255 }), // Added for trace correlation
+   args: jsonCol("args").$type<object>().default({}),
+   result: jsonCol("result"),
+   error: text("error"),
+   durationMs: integer("duration_ms"),
+   status: varchar("status", { length: 50 }).default("succeeded"), // succeeded | failed | errored
+   createdAt: timestamp("created_at").defaultNow(),
+   updatedAt: timestamp("updated_at").defaultNow(),
 });
 
 export const skills = pgTable("skills", {
