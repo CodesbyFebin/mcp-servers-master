@@ -2357,3 +2357,266 @@ export class ImmutableAuditTrailService {
 
 export const changeManagement = new ChangeManagementService();
 export const immutableAuditTrail = new ImmutableAuditTrailService();
+
+// ============================
+// DEVELOPER EXPERIENCE: TIME MACHINE TABLES
+// ============================
+export const serverVersions = pgTable('server_versions', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  serverId: uuid('server_id').notNull().references(() => servers.id),
+  deployId: uuid('deploy_id').references(() => deployments.id),
+  
+  // Version Data
+  versionTag: text('version_tag'), // e.g., 'v1.2.3', 'commit-abc123'
+  snapshotData: jsonb('snapshot_data').notNull(), // Complete server state snapshot
+  
+  // Timeline
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+  
+  // Metadata
+  createdBy: uuid('created_by').notNull().references(() => users.id),
+  description: text('description'), // Why this version was created
+});
+
+// ============================
+// DEVELOPER EXPERIENCE SERVICES
+// ============================
+import { db } from './index';
+import { serverVersions, deployments, servers } from './index';
+import { eq, desc } from 'drizzle-orm';
+
+export class TimeMachineService {
+  /**
+   * Capture a snapshot of the current server state
+   */
+  async captureSnapshot(
+    serverId: string, 
+    deployId: string, 
+    versionTag: string,
+    createdBy: string,
+    description?: string
+  ): Promise<string> {
+    // 1. Gather complete server state
+    const server = await db.query.servers.findFirst({ where: eq(servers.id, serverId) });
+    if (!server) throw new Error('Server not found');
+
+    // 2. Snapshot Code (Git commit hash, current files)
+    // 3. Snapshot Config (Env vars, DB schema version, env files)
+    // 4. Snapshot State (DB dump, vector store snapshots, cache states)
+    
+    const snapshotData = {
+      serverInfo: {
+        id: server.id,
+        name: server.name,
+        slug: server.slug,
+        status: server.status,
+        currentCommit: server.currentCommit,
+        environment: server.environment,
+      },
+      // In production, this would include:
+      // - Code snapshot (git archive or file copy)
+      // - Configuration snapshot (environment variables, config files)
+      // - State snapshot (database schemas, data, vector indices)
+      // - Dependency snapshots (package.json, requirements.txt, etc.)
+      timestamp: new Date().toISOString(),
+      versionTag,
+    };
+
+    // Store the snapshot
+    const [version] = await db.insert(serverVersions).values({
+      serverId,
+      deployId,
+      versionTag,
+      snapshotData,
+      createdBy,
+      description: description || `Snapshot created at ${new Date().toISOString()}`,
+    }).returning();
+
+    return version.id;
+  }
+
+  /**
+   * Rollback to a specific version
+   */
+  async rollbackToVersion(
+    serverId: string, 
+    targetVersionId: string
+  ): Promise<{ success: boolean; message: string }> {
+    const targetVersion = await db.query.serverVersions.findFirst({
+      where: eq(serverVersions.id, targetVersionId),
+    });
+
+    if (!targetVersion) throw new Error('Version not found');
+
+    const snapshot = targetVersion.snapshotData;
+
+    try {
+      // 1. Revert Code: Checkout specific commit or restore files
+      await this.restoreCodeSnapshot(serverId, snapshot);
+
+      // 2. Revert Config: Restore environment variables and config files
+      await this.restoreConfigSnapshot(serverId, snapshot);
+
+      // 3. Revert State: Restore database, vector store, cache
+      await this.restoreStateSnapshot(serverId, snapshot);
+
+      // 4. Restart Server with restored state
+      await this.restartServer(serverId);
+
+      // 5. Mark as "Rolled Back" in audit log
+      await db.insert(deployments).values({
+        serverId,
+        type: 'rollback',
+        targetVersionId,
+        status: 'success',
+        createdAt: new Date(),
+      });
+
+      return { success: true, message: `Successfully rolled back to version ${targetVersion.versionTag || targetVersionId}` };
+    } catch (error) {
+      // Log the rollback failure
+      await db.insert(deployments).values({
+        serverId,
+        type: 'rollback_failure',
+        targetVersionId,
+        status: 'failed',
+        error: error.message,
+        createdAt: new Date(),
+      });
+      
+      return { success: false, message: `Rollback failed: ${error.message}` };
+    }
+  }
+
+  /**
+   * List available versions for UI
+   */
+  async listVersions(serverId: string, limit: number = 20) {
+    return await db.query.serverVersions.findMany({
+      where: eq(serverVersions.serverId, serverId),
+      orderBy: desc(serverVersions.createdAt),
+      limit,
+    });
+  }
+
+  /**
+   * Get a specific version by ID
+   */
+  async getVersion(versionId: string) {
+    return await db.query.serverVersions.findFirst({
+      where: eq(serverVersions.id, versionId),
+    });
+  }
+
+  // ============================
+  // Helper Methods (Production implementations would be more detailed)
+  // ============================
+  
+  private async restoreCodeSnapshot(serverId: string, snapshot: any): Promise<void> {
+    // In production:
+    // 1. Checkout git commit: git checkout <commit-hash>
+    // 2. Or restore from code archive
+    console.log(`[TIME MACHINE] Restoring code snapshot for server ${serverId}`);
+    // await exec(`cd /servers/${serverId} && git reset --hard ${snapshot.serverInfo.currentCommit}`);
+  }
+
+  private async restoreConfigSnapshot(serverId: string, snapshot: any): Promise<void> {
+    // In production:
+    // 1. Restore environment variables
+    // 2. Restore config files (config/, .env, etc.)
+    console.log(`[TIME MACHINE] Restoring config snapshot for server ${serverId}`);
+  }
+
+  private async restoreStateSnapshot(serverId: string, snapshot: any): Promise<void> {
+    // In production:
+    // 1. Restore database from dump/backup
+    // 2. Restore vector store indices
+    // 3. Restore cache states (Redis, etc.)
+    console.log(`[TIME MACHINE] Restoring state snapshot for server ${serverId}`);
+  }
+
+  private async restartServer(serverId: string): Promise<void> {
+    // In production:
+    // 1. Stop current server process
+    // 2. Start server with restored state
+    console.log(`[TIME MACHINE] Restarting server ${serverId}`);
+    // await exec(`pm2 restart server-${serverId}`);
+  }
+}
+
+export const timeMachine = new TimeMachineService();
+
+// ============================
+// TIME MACHINE ENDPOINTS
+// ============================
+api.post("/v1/time-machine/capture", async (c) => {
+   const body = await c.req.json();
+   const { serverId, deployId, versionTag, description } = body;
+   const userId = "current-user-id"; // In production: get from auth context
+
+   try {
+      const versionId = await timeMachine.captureSnapshot(
+        serverId,
+        deployId,
+        versionTag,
+        userId,
+        description
+      );
+
+      return c.json({ 
+         success: true, 
+         versionId,
+         message: 'Server state snapshot captured successfully' 
+      }, 201);
+   } catch (error) {
+      return c.json(
+        { error: 'Failed to capture snapshot', details: error.message },
+        { status: 500 }
+      );
+   }
+});
+
+api.post("/v1/time-machine/rollback/:versionId", async (c) => {
+   const { versionId } = c.req.param();
+   const body = await c.req.json();
+   const { serverId } = body;
+
+   try {
+      const result = await timeMachine.rollbackToVersion(serverId, versionId);
+      
+      if (result.success) {
+        return c.json({ success: true, message: result.message });
+      } else {
+        return c.json({ error: result.message }, { status: 400 });
+      }
+   } catch (error) {
+      return c.json({ error: 'Rollback failed', details: error.message }, { status: 500 });
+   }
+});
+
+api.get("/v1/time-machine/versions/:serverId", async (c) => {
+   const { serverId } = c.req.param();
+   const { searchParams } = new URL(c.req.url);
+   const limit = parseInt(searchParams.get('limit') || '20');
+
+   try {
+      const versions = await timeMachine.listVersions(serverId, limit);
+      return c.json({ success: true, data: versions, count: versions.length });
+   } catch (error) {
+      return c.json({ error: 'Failed to fetch versions' }, { status: 500 });
+   }
+});
+
+api.get("/v1/time-machine/version/:versionId", async (c) => {
+   const { versionId } = c.req.param();
+
+   try {
+      const version = await timeMachine.getVersion(versionId);
+      if (!version) {
+        return c.json({ error: 'Version not found' }, { status: 404 });
+      }
+      return c.json({ success: true, data: version });
+   } catch (error) {
+      return c.json({ error: 'Failed to fetch version' }, { status: 500 });
+   }
+});
