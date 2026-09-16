@@ -9,7 +9,7 @@
     "python:check": "python3 -m py_compile main.py gateway/router.py auth/middleware.py tools/gst.py tools/payments.py tools/corporate.py tools/banking.py skills/web_search.py skills/doc_parser.py skills/database.py"
   },
   "dependencies": {
-    "@mcp/servers-contracts": "0.1.0",
-    "@mcp/servers-registry": "0.1.0"
+    "@mcp/servers-contracts": "workspace:*",
+    "@mcp/servers-registry": "workspace:*"
   }
 }
