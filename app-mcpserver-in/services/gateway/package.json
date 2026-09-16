@@ -8,8 +8,8 @@
     "compile": "tsc"
   },
   "dependencies": {
-    "@mcp/servers-contracts": "0.1.0",
-    "@mcp/servers-registry": "0.1.0",
+    "@mcp/servers-contracts": "workspace:*",
+    "@mcp/servers-registry": "workspace:*",
     "zod": "^3.23.8"
   }
 }

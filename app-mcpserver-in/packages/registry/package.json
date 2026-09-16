@@ -8,6 +8,6 @@
     "compile": "tsc"
   },
   "dependencies": {
-    "@mcp/servers-contracts": "0.1.0"
+    "@mcp/servers-contracts": "workspace:*"
   }
 }
